@@ -1,0 +1,694 @@
+<app-main-layout>
+  <div class="product-detail  w-100 pt-4">
+    <!-- row->col-8(col-5(product image) col-6 (product-info)) -->
+    <div class="row
+     d-flex justify-content-center align-items-start ">
+      <!-- col-8 of col 8 ,col-3----------------------------------- -->
+      <div class="col-lg-8 product-height p-1  col-11 my-2 ps-4 border rounded-3  overflow-hidden bg-white">
+        <div
+          class="row p-0 overflow-hidden d-flex justify-content-center justify-content-lg-around align-items-start flex-column flex-lg-row"
+        >
+          <!-- col-8-4 --------->
+          <div
+            class="col-lg-5   bg-white overflow-hidden p-2  product-img d-flex justify-content-center align-items-center"
+          >
+            <div class=" d-lg-none product-img-sm-size d-flex justify-content-center align-items-center" >
+<img src="{{produdctDetail?.itemOutputDto.imageUrl}}"  alt="product-image img-fluid">
+     </div>
+            <div class="d-none d-lg-flex justify-content-center align-items-center">
+              <lib-ngx-image-zoom
+                [thumbImage]="produdctDetail?.itemOutputDto.imageUrl"
+                [fullImage]="produdctDetail?.itemOutputDto.imageUrl"
+              ></lib-ngx-image-zoom>
+            </div>
+          </div>
+          <!-- col-8-6------------------- -->
+          <!-- product-info------------------------------------------------ -->
+          <div class="col-lg-6 p-2  bg-white product-info">
+            <div class="brand-info">
+              <img
+                *ngIf="produdctDetail?.brandOutputDto?.imageUrl"
+                class="img-fluid"
+                src="{{ produdctDetail?.brandOutputDto?.imageUrl }}"
+              />
+              <img
+                *ngIf="!produdctDetail?.brandOutputDto?.imageUrl"
+                class="img-fluid"
+                src="/assets/images/default.png"
+              />
+              <a
+                class="ms-2"
+               [routerLink]="(['/brand/brand-detail', produdctDetail?.brandOutputDto?.id])"
+                >{{ produdctDetail?.brandOutputDto?.title }}
+              </a>
+            </div>
+            <div class="product-name mt-2">
+              <h3 class="mb-3 align-self-center">
+                {{ produdctDetail?.itemOutputDto.title }}
+              </h3>
+            </div>
+            <!-- ----------star rate--------------------------------- -->
+            <div
+              class="d-flex justify-content-between align-items-center flex-column flex-xl-row justify-content-xl-start"
+            >
+              <span class="">میزان رضایت مشتریان از این محصول</span>
+              <ngx-star-rating
+                [disabled]="true"
+                [(ngModel)]="rating"
+              ></ngx-star-rating>
+            </div>
+            <!-- --------product-property-------------------------------------- -->
+            <div class="product-property mt-2">
+              <div
+                class="title d-flex justify-content-start align-items-center"
+              >
+                <div class=" col-2  title-text">مشخصات</div>
+                <div class=" col-10 px-2 title-hr"><hr /></div>
+              </div>
+              <div class="dimentions  row">
+                <div
+                  class="col-6 ms-3  d-flex flex-column justify-content-center align-items-start"
+                >
+                  <!-- <div
+                    class="volume w-100 d-flex justify-content-between align-items-center"
+                  >
+                    <div class="dimentions-title">حجم</div>
+                    <div class="dimentions-value">
+                      {{ produdctDetail?.itemOutputDto.unit?produdctDetail?.itemOutputDto.unit :'ثبت نشده' }} 
+                    </div>
+                  </div> -->
+
+                  <div
+                    class="weight w-100 d-flex justify-content-between align-items-center"
+                  >
+                    <div class="dimentions-title">وزن بسته بندی</div>
+                    <div class="dimentions-value">
+                      {{ produdctDetail?.itemOutputDto.weight  && produdctDetail?.itemOutputDto.weight!=='0' && produdctDetail?.itemOutputDto.weight!=='null' ?produdctDetail?.itemOutputDto.weight :'ثبت نشده' }}
+                     </div>
+                  </div>
+
+                  <div class="dimention w-100 d-flex justify-content-between align-items-center" >
+                    
+                    <div class="dimentions-title">ابعاد</div>
+                    <div
+                      class="dimentions-value "
+                    >
+                      {{ produdctDetail?.itemOutputDto.width && produdctDetail?.itemOutputDto.height ?produdctDetail?.itemOutputDto.width * produdctDetail?.itemOutputDto.height : 'ثبت نشده'}}  
+                    </div>
+                  </div>
+
+                  <div
+                    class="per w-100 d-flex justify-content-between align-items-center"
+                  >
+                    <div class="dimentions-title ">واحد</div>
+                    <div class="dimentions-value">  {{ produdctDetail?.itemOutputDto.unitEnumstr ? produdctDetail?.itemOutputDto.unitEnumstr :'ثبت نشده' }}</div>
+                  </div>
+
+                  <div
+                    class="count-in-per w-100 d-flex justify-content-between align-items-center"
+                  >
+                    <div class="dimentions-title">تعداد در واحد</div>
+                    <div class="dimentions-value">
+                      {{  produdctDetail?.itemOutputDto.valuePerUnit ?produdctDetail?.itemOutputDto.valuePerUnit.toLocaleString(
+                        "fa-IR"
+                      ) : 'ثبت نشده'
+                        
+                      }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="maintenance-conditions mt-2">
+              <div
+                class="title d-flex justify-content-start align-items-center"
+              >
+                <div class=" col-4 col-md-3  title-text">
+                  شرایط نگهداری
+                </div>
+                <div class="col-8 col-md-9  title-hr"><hr /></div>
+              </div>
+                {{produdctDetail?.itemOutputDto.maintenance!=='null' ? produdctDetail?.itemOutputDto.maintenance :''}}
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- col-3 of col 8,col-3 -->
+      <!-- -----------------price-info-------------------------------- -->
+      <div class="col-lg-3 product-height-brandInfo  py-lg-4 col-11 ps-4 bg-white price-info border rounded-3 m-2">
+        <!-- -----------------sell price---------------------------- -->
+        <div class="sell-price ">
+          <div class="sell-price-title my-2">
+            <img class="me-2" src="/assets/icons/arrow-price.svg" />
+            <span>قیمت فروش </span>
+          </div>
+          <div
+            class="sell-price-amount mx-auto px-2 d-flex justify-content-between align-items-center"
+          >
+            <del
+              class="old-price mx-2
+              {{produdctDetail?.itemOutputDto.hasDiscount?'visible':'invisible'}}"
+            >
+              {{
+                (produdctDetail?.itemOutputDto.oldPrice |roundUp).toLocaleString("fa-IR")
+              }}
+              <span class="">تومان</span></del>
+           
+            <div>  <span class="price me-2">
+              {{
+                (
+                  produdctDetail?.itemOutputDto.sellPrice | roundUp
+                ).toLocaleString("fa-IR")
+              }}
+            </span>
+            <span>تومان</span></div>
+           
+          </div>
+        </div>
+        <!--------------- consumer-price --------------------------------------------->
+        <div class="sell-price ">
+          <div class="sell-price-title my-2  " *ngIf="produdctDetail?.itemOutputDto.consumerPrice !== 1">
+            <img class="me-2" src="/assets/icons/arrow-price.svg" />
+            <span>قیمت مصرف کننده </span>
+          </div>
+
+
+          <div  *ngIf="produdctDetail?.itemOutputDto.consumerPrice > 10"
+            class=" sell-price-amount mx-auto  px-2 d-flex justify-content-end align-items-center">
+            <span class="price me-2">{{(produdctDetail?.itemOutputDto.consumerPrice|roundUp).toLocaleString('fa-IR')}} </span>
+            <span *ngIf="produdctDetail?.itemOutputDto.consumerPrice < 10"> فاقد قیمت</span>
+            <span>تومان</span>
+          </div>
+        </div>
+        <!-- number of order -->
+        <!-- <div class="No-order">
+          <div class="order-title my-2">
+            <img class="me-2" src="/assets/icons/arrow-price.svg" />
+            <span> تعداد سفارش </span>
+          </div>
+
+        
+          <div
+            class="number-order px-4 mx-auto d-flex justify-content-between align-items-center"
+          >
+            <div class="number ">
+              {{ numberOfOrder }}
+            </div>
+            <div
+              class="d-flex py-1 flex-column justify-content-start align-items-end"
+            >
+              <div class="inc-dec px-2 mb-1" (click)="increase()">+</div>
+              <div class="inc-dec px-2" (click)="decrease()">-</div>
+            </div>
+          </div>
+          <div class="count mt-2">
+            <span
+              >حداقل سفارش:
+              {{
+                produdctDetail?.itemOutputDto.minimuneOrderCount.toLocaleString(
+                  "fa-IR"
+                )
+              }}
+              / حداکثر سفارش:
+              {{
+                produdctDetail?.itemOutputDto.maximumOrderCount.toLocaleString(
+                  "fa-IR"
+                )
+              }}
+            </span>
+          </div>
+        </div> -->
+
+        <!-- <div
+          *ngIf="!produdctDetail?.itemOutputDto.isSellingStoped"
+          class="add-cart"
+          (click)="buyNow()"
+        >
+          هم اکنون سفارش دهید
+        </div> -->
+        <div
+        *ngIf="produdctDetail?.itemOutputDto.isSellingStoped"
+        class="add-cart my-5"
+        (click)="buyNow()"
+      >توقف فروش
+      </div>
+      <div
+      *ngIf="!produdctDetail?.itemOutputDto.isSellingStoped"
+      class="add-cart my-5"
+      (click)="buyNow()"
+    >
+      هم اکنون سفارش دهید
+    </div>
+        
+      </div>
+    </div>
+    <!--row col-8(two row)-> col-3(brand-info) ->supplier-product description-------------------------- -->
+    <!-- producers-product description------------------------------ -->
+    <div class="row  supplir-description    d-flex justify-content-center align-items-start">
+      <!-- col-8->two column  -->
+      <div class="col-lg-8 col-11   ">
+        <div
+          class="row p-0 d-flex flex-column justify-content-center align-items-center">
+          <!-- col-8 up -->
+          <div class="ps-4 bg-white supplier-container border rounded-3 supplir-height overflow-hidden mb-1">
+            <div class=" mt-4   d-flex justify-content-start align-items-center" >
+        
+              <div class="col-4 col-md-2  title-text ms-2">
+                تامین کنندگان
+              </div>
+              <div class="col-7 col-md-9  title-hr"><hr /></div>
+            </div>
+            <!-- no supplier ------------------------------------------------------------>
+            <div class="d-flex justify-content-center align-items-center py-3"
+              *ngIf="!supplierItems.length" >
+           
+              <i  class="fas fa-exclamation-triangle fa-lg my-2" > </i>
+              <h4 >
+          
+                برای این محصول تامین کننده وجود ندارد
+              </h4>
+            </div>
+            <!-- has supplier---------------- ---------------------------------------->
+          <perfect-scrollbar  *ngIf="supplierItems.length"  [config]="config"
+          (psScrollDown)="true">
+            <div class="row mx-auto supplier-budy d-flex justify-content-around align-items-center  overflow-hidden  "
+            *ngFor="let item of supplierItems;let i = index">
+             
+                <header class="product-name mb-2">
+                  <img  
+                  class=" d-xl-none"
+                  src="{{
+                    item.supplierPolicy.logoUrl
+                      ? item.supplierPolicy.logoUrl
+                      : 'assets/images/preview.png'
+                  }}"
+                />
+                  {{ item.itemDetails.itemTitle }}
+                 
+                     
+           
+                  <small *ngIf="item.itemDetails.requiredRoleCode"
+                    >( {{ "نیاز به کد نقش" }} )</small
+                  >
+                </header>
+                <!-- per supplier div -->
+                <div
+                  class="row g-primary {{
+                    supplierItems.length 
+                      ? 'border border-1'
+                      : null
+                  }} d-flex justify-content-around align-items-center my-2" >
+                  <div class="col-xl-1 d-none d-xl-block bg-white supplier-brand border rounded-3  d-flex justify-content-center align-items-center flex-column overflow-hidden">
+                    <div class="d-flex w-100 justify-content-center align-items-center flex-column">                    
+                      <img
+                        class=" "
+                        src="{{
+                          item.supplierPolicy.logoUrl
+                            ? item.supplierPolicy.logoUrl
+                            : 'assets/images/preview.png'
+                        }}"
+                      />
+                      <div class="brand-name ">
+                        {{ item.supplierPolicy.supplierTitle }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xl-3  col-md-4 py-2  d-flex justify-content-between align-items-center flex-column ">
+                 
+                    <!-- min-max-order row----------------------------------------------------- -->
+                    <div *ngIf="(item.supplierPolicy.isLimitByOrder )" 
+                      class="w-100  d-flex justify-content-between  align-items-center">
+                      <!-- min max order col-5->two row-col right -->
+                      <div  class=" min me-1  d-flex flex-column p-1 justify-content-center align-items-center border rounded-3" >
+                        <div class="min-title ">حداقل سفارش</div>
+                        
+                        <div class="min-value ">
+                          {{
+                            item.supplierPolicy.minimumOrderCount.toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          <span
+                          class="text-center" style=" color: #ff4b4b"> {{findUnitTitel(item.itemDetails.unit)}} </span>
+                        </div>
+                 
+                      </div>
+                   <!-- min max order col-5->two row col-left -->
+                      <div class="w-100 max d-flex  flex-column justify-content-center p-1  align-items-center border rounded-3" >
+                        <div class="max-title">حداکثر سفارش</div>
+                        <div class="max-value">
+                          {{
+                            item.supplierPolicy.maximumOrderCount.toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          <span
+                          class="text-center" style=" color: #ff4b4b"> {{findUnitTitel(item.itemDetails.unit)}} </span>
+                        </div>
+                        
+                      </div>
+                    </div>
+                      <!-- min-max-price----------------------------------------------------- -->
+                      <div  *ngIf="(item.supplierPolicy.isLimitByAmount )&& (!item.supplierPolicy.isLimitByOrder ) "
+
+                      class="w-100  d-flex justify-content-betweenisLimitByAmount
+                      align-items-center"
+                    >
+                      <div
+                        class=" min me-1 p-1  d-flex flex-column  justify-content-center align-items-center  border rounded-3"
+                      >
+                        <div class="min-title  ">حداقل قیمت خرید</div>
+                        <div class="min-value ">
+                          {{
+                            item.supplierPolicy.minimumOrderAmont.toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          تومان
+                        </div>
+                      </div>
+
+                      <div
+                        class="max p-1 d-flex flex-column justify-content-center  align-items-center border rounded-3"
+                      >
+                        <div class="max-title">حداکثر قیمت خرید</div>
+                        <div class="max-value">
+                          {{
+                            item.supplierPolicy.maximumOrderAmont.toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          تومان
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- sell-consumer-price----------------------------------------------->
+                    <div
+                      class=" w-100    border rounded-3 p-1 m-1  d-flex justify-content-between align-items-center">
+                      <div
+                        class="min d-flex flex-column justify-content-center align-items-center"
+                      >
+                        <div class="min-title ">
+                          {{item.itemDetails.isSupplierPrice ? 'قیمت تامین کننده' : 'قیمت فروش ' }}</div>
+                        <div class="min-value ">
+                          {{
+                            (item.itemDetails.sellPrice|roundUp).toLocaleString("fa-IR")
+                          }}
+                          تومان
+                        </div>
+                      </div>
+              
+                      <div
+                        class=" max d-flex flex-column justify-content-center align-items-center"
+                      >
+                        <div class="max-title">قیمت مصرف کننده</div>
+                        <div
+                          class="max-value"
+                          *ngIf="item.itemDetails.consumerPrice > 10"
+                        >
+                          {{
+                           ( item.itemDetails.consumerPrice|roundUp).toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          تومان
+                        </div>
+                        
+                      <div class="max-value" *ngIf="item.itemDetails.consumerPrice < 10"> فاقد قیمت</div>
+                      </div>
+                    </div>
+                    <!--  -->
+                  </div>
+                  <div *ngIf="(item.supplierPolicy.isLimitByAmount )&& (item.supplierPolicy.isLimitByOrder ) " class="col-xl-3 col-md-4 py-2 d-flex justify-content-between align-items-center flex-column"
+                  >
+                    <!-- min-max-price----------------------------------------------------- -->
+                    <div 
+
+                      class="w-100  m-1 d-flex justify-content-between
+                      align-items-center"
+                    >
+                      <div
+                        class=" min me-1 p-1  d-flex flex-column  justify-content-center align-items-center  border rounded-3"
+                      >
+                        <div class="min-title  ">حداقل قیمت خرید</div>
+                        <div class="min-value ">
+                          {{
+                            item.supplierPolicy.minimumOrderAmont.toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          تومان
+                        </div>
+                      </div>
+
+                      <div
+                        class="max p-1  d-flex flex-column justify-content-center  align-items-center border rounded-3"
+                      >
+                        <div class="max-title">حداکثر قیمت خرید</div>
+                        <div class="max-value">
+                          {{
+                            item.supplierPolicy.maximumOrderAmont.toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          تومان
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- dec-inc-number----------------------------------------------->
+                    <div class="dec-inc-number w-100   d-flex justify-content-center align-items-center"> 
+                      <app-count-up-down mode="rect"[maximumCount]="item.itemDetails.maximumOrderCount" class="w-100"
+                      [minimumCount]="item.itemDetails.minimuneOrderCount"
+                      (changeCount)="onChangeCount($event,item.itemDetails.minimuneOrderCount,item.itemDetails.maximumOrderCount,i)"
+                      [count]="item.itemDetails.minimuneOrderCount"></app-count-up-down>
+                      <!-- <div class="inc-dec px-2">+</div>
+                      <div class="counter">0</div>
+                      <div class="inc-dec px-2">-</div> -->
+                    </div>
+                    
+                  </div>
+                  <div *ngIf="(!item.supplierPolicy.isLimitByOrder ) " class="col-xl-3 col-md-4 py-2 d-flex justify-content-between align-items-center flex-column"
+                  >
+                    <!-- min-max-price----------------------------------------------------- -->
+                    <div 
+
+                      class="w-100  invisible m-1 d-flex justify-content-between
+                      align-items-center"
+                    >
+                      <div
+                        class=" min me-1 p-1  d-flex flex-column  justify-content-center align-items-center  border rounded-3"
+                      >
+                        <div class="min-title  ">حداقل قیمت خرید</div>
+                        <div class="min-value ">
+                          {{
+                            item.supplierPolicy.minimumOrderAmont.toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          تومان
+                        </div>
+                      </div>
+
+                      <div
+                        class="max p-1  d-flex flex-column justify-content-center  align-items-center border rounded-3"
+                      >
+                        <div class="max-title">حداکثر قیمت خرید</div>
+                        <div class="max-value">
+                          {{
+                            item.supplierPolicy.maximumOrderAmont.toLocaleString(
+                              "fa-IR"
+                            )
+                          }}
+                          تومان
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- dec-inc-number----------------------------------------------->
+                    <div class="dec-inc-number w-100 mb-2  d-flex justify-content-center align-items-center"> 
+                      <app-count-up-down mode="rect"[maximumCount]="item.itemDetails.maximumOrderCount" class="w-100"
+                      [minimumCount]="item.itemDetails.minimuneOrderCount"
+                      (changeCount)="onChangeCount($event,item.itemDetails.minimuneOrderCount,item.itemDetails.maximumOrderCount,i)"
+                      [count]="item.itemDetails.minimuneOrderCount"></app-count-up-down>
+                  
+                    </div>
+                    
+                  </div>
+                  <div class="col-xl-3 col-md-4   d-flex justify-content-center align-items-center flex-md-column">
+                      <div  class="conditions d-flex justify-content-center align-items-center mb-lg-1"   (click)="checkAuth(item)">                   
+                    
+                    سایر شرایط                  
+                    </div>
+                    <div class="add-to-cart d-flex justify-content-center align-items-center" (click)="addToCartNew(item)">
+                      افزودن به سبد خرید
+                    </div>
+                  </div>
+                </div>
+              <!-- </div> -->
+            </div>
+          </perfect-scrollbar>
+          </div>
+          <!-- col-8 down -->
+          <div class="border  bg-white rounded-3">
+            <div
+              class="title my-4 d-flex justify-content-start align-items-center"
+            >
+              <div class="col-4 col-md-2 title-text ms-2">
+                توضیحات محصول
+              </div>
+              <div class="col-7 col-md-9 title-hr"><hr /></div>
+            </div>
+
+           
+            <p
+          class="my-3 mx-2" >{{produdctDetail?.itemOutputDto.description != "null" ? produdctDetail?.itemOutputDto.description : ''}}
+        </p>
+          </div>
+        </div>
+
+        
+      </div>
+      <!-- col-3 brand-info--------------------------------------------------------- -->
+      <div class="col-lg-3 brandInfo-height col-11 ps-4 bg-white  border mx-2 rounded-3">
+        <div class="brand-info  p-2">
+          <img
+            *ngIf="produdctDetail?.brandOutputDto?.imageUrl"
+            class="img-fluid"
+            src="{{ produdctDetail?.brandOutputDto?.imageUrl }}"
+          />
+          <img
+            *ngIf="!produdctDetail?.brandOutputDto?.imageUrl"
+            class="img-fluid"
+            src="/assets/images/default.png"
+          />
+          <a
+            class="ms-2"
+            [routerLink]="(['/brand/brand-detail', produdctDetail?.brandOutputDto?.id])"
+            >{{ produdctDetail?.brandOutputDto?.title }}
+          </a>
+        </div>
+        <div class="product-name m-2">
+          <h3 class="mb-3 align-self-center">
+            {{ produdctDetail?.itemOutputDto.title }}
+          </h3>
+        </div>
+        <div class="brand-description m-2">
+          <p class="max-line">
+            {{produdctDetail?.brandOutputDto?.description === 'undefined' ? '' : produdctDetail?.brandOutputDto?.description }}
+          </p>
+          <div class="d-flex justify-content-center align-items-center">
+            <span class="m-2 more" [routerLink]="(['/brand/brand-detail', produdctDetail?.brandOutputDto?.id])"
+              >بیشتر بدانید </span>
+              
+              <img  class="m-2 more" src="/assets/images/login-register/return.svg"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- ------------------------ new-row related product large device------------ -->
+    <section class="d-none d-lg-block mt-5 bg-white  ">
+
+      <div class="row  d-flex justify-content-center align-items-center">
+      <div class=" px-2 border rounded-3 col-lg-12  col-11  flex-column d-flex justify-content-start align-items-center">
+        <header class=" m-3 align-self-start">
+          <span class="brand ">
+            <img src="{{produdctDetail?.brandOutputDto?.imageUrl}}">
+          <span class="other-product my-2 "> سایر محصولات </span> <span class="mx-1 brand-other">{{produdctDetail?.brandOutputDto?.title}}</span>
+      </span>
+        </header>
+  
+        
+          <swiper class="col-10 mx-auto" [config]="newProduct">
+            <div class="swiper-wrapper p-4 ">
+            <div class="swiper-slide"  *ngFor="let item of produdctDetail?.itemOutputDtos">
+       <!--  -->
+       <div class="item-bg d-flex justify-content-center align-items-center  ">
+        <a class=" px-4  d-flex flex-column justify-content-center align-items-center " [routerLink]="['/product-list/product-detail/',item.id , item.title]" (click)="goTop()">
+        <!-- -----------------------product image ----------------------------------- -->
+        <img *ngIf="item.imageUrl" src="{{item.imageUrl}}" class="img-fluid my-2"
+        onerror="this.src='/assets/images/default.png';" alt="{{item.imageUrl}}" >
+        <img *ngIf="!item.imageUrl" src="/assets/images/default.png" class="img-fluid my-2">
+    
+        <!-- -----------------------product title ----------------------------------- -->
+        <span class="item-title my-3">{{item.title }}</span>
+        <!-- ----------------------- price ----------------------------------- -->
+        <div class="d-flex justify-content-center align-items-center mb-3">
+     <!-- -----------------------product price ----------------------------------- -->
+     <span  class="item-price">{{((item.sellPrice | roundUp |getNumberWithComma).toLocaleString('fa-IR'))}} تومان</span>
+     <!-- -----------------------product price has discount ----------------------------------- -->
+      <span *ngIf="item.hasDiscount  && item.discountPercent>0"  class="discount-badge ms-2 d-flex justify-content-center align-items-center">%{{item.discountPercent}} تخفیف </span>
+    
+        </div>
+        <div class="consumer-price text-center my-2" *ngIf="item.consumerPrice > 10">قیمت مصرف کننده : {{((item.consumerPrice |roundUp |getNumberWithComma).toLocaleString('fa-IR'))}}  تومان</div>
+        <div class="consumer-price text-center" *ngIf="item.consumerPrice < 10">قیمت مصرف کننده : فاقد قیمت</div>
+        <p class="">حداقل سفارش: {{item.minimuneOrderCount.toLocaleString('fa-IR')}}
+          عدد</p>
+        <p class="">حداکثر سفارش: {{item.maximumOrderCount.toLocaleString('fa-IR')}}
+          عدد</p>
+          <div class="my-3 w-100  btn-cart ">
+            <app-btn-cart class="w-100" (click)="productDetail(item.id , item.title)" [BtnName]="'سفارش دهید'"></app-btn-cart>
+          </div>
+            </a>
+    </div>
+       
+       <!--  -->
+              </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+          </swiper>
+      </div>
+        </div>
+    
+    </section>
+    <!---------------------------------------new-row related product small device----------------------------------------------- -->
+    <section class=" mt-5 ps-4  d-lg-none small-device  pt-1">
+      <header class="text-right ">
+        <span class="brand">
+          <img src="{{produdctDetail?.brandOutputDto?.imageUrl}}">
+         سایر محصولات  <span class="mx-1">{{produdctDetail?.brandOutputDto?.title}}</span>
+    </span>
+      </header>
+      <div class="row ">
+  
+        <div class="d-flex justify-content-center align-self-center container-item-in-mobile " >
+  
+          <div class="item-bg  d-flex justify-content-center align-items-center m-3 "  *ngFor="let item of produdctDetail?.itemOutputDtos">
+            <a class="d-flex flex-column justify-content-center align-items-center  w-100 px-2"[routerLink]="['/product-list/product-detail/',item.id ,item.title]">
+                                                                                                            
+            <!-- -----------------------product image ----------------------------------- -->
+            <img *ngIf="item.imageUrl" src="{{item.imageUrl}}" class="img-fluid my-2"
+             onerror="this.src='/assets/images/default.png';" alt="{{item.imageUrl}}" >
+             <img *ngIf="!item.imageUrl" src="/assets/images/default.png" class="img-fluid my-2">
+        
+            <!-- -----------------------product title ----------------------------------- -->
+            <span class="item-title mb-3 ">{{item.title }}</span>
+            <!-- ----------------------- price ----------------------------------- -->
+            <div class="d-flex justify-content-center align-items-center mb-3">
+         <!-- -----------------------product price ----------------------------------- -->
+         <span  class="item-price">{{((item.sellPrice | roundUp ).toLocaleString('fa-IR'))}} تومان</span>
+         <!-- -----------------------product price has discount ----------------------------------- -->
+          <span *ngIf="item.hasDiscount  && item.discountPercent>0"  class="discount-badge ms-2 d-flex justify-content-center align-items-center">%{{item.discountPercent}} تخفیف </span>
+        
+            </div>
+            <div class="consumer-price text-center my-1" *ngIf="item.consumerPrice > 10">قیمت مصرف کننده : {{((item.consumerPrice |getNumberWithComma|roundUp ).toLocaleString('fa-IR'))}}  تومان</div>
+            <div class="consumer-price text-center" *ngIf="item.consumerPrice < 10">قیمت مصرف کننده : فاقد قیمت</div>
+            <p class="">حداقل سفارش: {{item.minimuneOrderCount.toLocaleString('fa-IR')}}
+              عدد</p>
+            <p class="">حداکثر سفارش: {{item.maximumOrderCount.toLocaleString('fa-IR')}}
+              عدد</p>
+              <div class="btn-cart">
+                <app-btn-cart (click)="productDetail(item.id,item.title)" [BtnName]="'سفارش دهید'"></app-btn-cart>
+              </div>
+                </a>
+        </div>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- ---------------------------------------------------------------------------------- -->
+</app-main-layout>
+

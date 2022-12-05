@@ -1,0 +1,221 @@
+<header class="header position-relative pb-0 mb-0 ms-3  ">
+  <div class="row  d-flex justify-content-start align-items-center">
+    <div class="col-lg-2 d-none d-lg-flex logo d-flex-center flex-column ">
+
+      <a routerLink="/home" class="mt-3 "><img src="/assets/icons/logo.png" alt="logo" class="img-fluid "></a>
+      <p class="mt-2 g-primary">مرجع تخصصی عمده فروشی کالا</p>
+
+    </div>
+    <div class="col-lg-9 ">
+      <div class="row d-flex-center flex-column-reverse flex-md-row mt-3 mt-md-0">
+        <div class="col-md-8 p-4 p-lg-0 search-box d-none d-md-block ">
+          <form [formGroup]="form">
+            <div class="search-product ">
+
+              <input formControlName="search" class="" type="text" placeholder="جستجوی محصولات  ..." />
+              <span class="search-icon">
+                <img src="/assets/icons/header/search.svg">
+              </span>
+              <ul class="result" *ngIf="isSearch">
+                <!-- <li *ngFor="let item of searchResult">
+              </li> -->
+                <span *ngIf="!searchResult.length">
+                  <ngx-spinner bdColor="transparent" size="medium" color="#FE3E3E">
+                  </ngx-spinner>
+                </span>
+                <a [routerLink]="'/product-list/product-info/'+form.controls.search.value">
+                  <!--                     (click)="goToProduct()"-->
+                  <span *ngIf="keyword">
+                    {{searchResult.length? 'مشاهده محصولات جستجو شده' : 'هیج کالایی با این عنوان یافت نشد'}}
+                    <span class="keyword">({{keyword}})</span>
+                  </span>
+                </a>
+              </ul>
+            </div>
+          </form>
+        </div>
+
+        <!------------------ location/profile/bascket -------------------------->
+        <div class="col-md-4 location-profile-bascket pb-2 ">
+          <div class="row d-flex  justify-content-center justify-content-md-start justify-content-lg-end">
+            <div class="col-1 d-flex  d-md-none justify-content-center align-items-center">
+                <img src="/assets/icons/header/menu.svg" (click)="showMenu()" width="160px">
+            </div>
+          <div class="menu-mobile  m-0 p-0"  *ngIf="isShowMenu" >
+            <div class="row h-100">
+              <div class="col-10  bg-white">
+<!-- level 0 -->
+<ul class="level-0">
+  <li *ngFor="let item of menuMobile " class="">
+    <a *ngIf="!item.levels" routerLink="{{item.link}}">
+      <span>{{item.title}}</span>
+    </a>
+    <a *ngIf="item.levels">
+      <div class="d-flex justify-content-between align-items-center">
+        <span [class.isClicked]="isClicked">{{item.title}} </span>
+        <span [class.rotate]="isClicked" [class.isClicked]="isClicked" (click)="isClicked=!isClicked" *ngIf="item.levels"> <i
+            class="fa fa-chevron-down" aria-hidden="true"></i></span>
+      </div>
+    </a>
+    <!-- level 1 -->
+    <ul class="level-1" *ngIf="isClicked">
+      <li *ngFor="let levelOne of item.levels">
+        <a>
+          <div class="d-flex justify-content-between align-items-center">
+            <span (click)="goToCategoryDetail(levelOne.id)"
+              [class.isClicked]="levelOne.isLevelOne">{{levelOne.categoryTitle}}</span>
+            <span [class.isClicked]="levelOne.isLevelOne"(click)="levelOne.isLevelOne = !levelOne.isLevelOne"
+              [class.rotate]="levelOne.isLevelOne" *ngIf="levelOne.children.length !== 0">
+              <i class="fa fa-chevron-down" aria-hidden="true"></i>
+            </span>
+          </div>
+        </a>
+        <!-- level 2 -->
+        <ul class="level-2" *ngIf="levelOne.isLevelOne" [class.show-sub-menu]="levelOne.isLevelOne">
+          <li *ngFor="let levelTwo of levelOne.children" class="px-3" style="height: 100%;">
+            <a>
+              <div class="d-flex justify-content-between align-items-center">
+                <span (click)="goToCategoryDetail(levelTwo.id)"
+                  [class.isClicked]="levelTwo.isLevelTwo">{{levelTwo.categoryTitle}}</span>
+                <span  (click)="levelTwo.isLevelTwo = !levelTwo.isLevelTwo"
+                  [class.rotate]="levelTwo.isLevelTwo" *ngIf="levelTwo.children.length !== 0">
+                  <i [class.isClicked]="levelTwo.isLevelTwo" class="fa fa-chevron-down" aria-hidden="true"></i>
+                </span>
+              </div>
+            </a>
+            <!-- level 3 -->
+            <ul class="level-3" *ngIf="levelTwo.isLevelTwo" [class.show-sub-menu]="levelTwo.isLevelTwo">
+              <li *ngFor="let levelThree of levelTwo.children" class="px-3">
+                <a>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span (click)="goToCategoryDetail(levelThree.id)">{{levelThree.categoryTitle}}</span>
+                    <i *ngIf="levelThree.children.length !== 0" class="fa fa-chevron-down"
+                      aria-hidden="true"></i>
+                  </div>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+              </div>
+              <div class="col-2 h-100 hide-menu " (click)="hideMenuFull()" >
+  
+              </div>
+            </div>
+          
+
+          </div>
+            <div class="col-1 d-flex  d-md-none  justify-content-center align-items-center" *ngIf="authService.isAuth">
+              <span class="pipe-line"></span>
+            </div>
+            <!-------------------------- location  icon------------------------>
+            <div class="col-1 d-none d-sm-flex justify-content-center align-items-center" *ngIf="authService.isAuth">
+              <span class="pipe-line"></span>
+            </div>
+            <div class="col-2 d-flex-center" (click)="showStoreLocation()" [class.active-location]="isShowLocation"
+              *ngIf="authService.isAuth">
+              <img src="/assets/icons/header/location.svg">
+            </div>
+            <div class="col-1 d-flex-center" *ngIf="authService.isAuth">
+              <span class="pipe-line "></span>
+            </div>
+            <!-------------------------- profile icon ---------------->
+            <!-- !authService.isAuth -->
+            <div class="col-11 row d-flex p-1 justify-content-end align-items-center "
+              *ngIf="!authService.isAuth">
+              <div  class="col-5 d-md-none col-sm-6 d-flex-center">
+                <a routerLink="/home" class="logo-in-mobile"><img src="/assets/icons/logo.png" alt="logo" class="img-fluid "></a>
+              </div>
+              <div class="col-7 col-sm-6 col-md-12 d-flex justify-content-start justify-content-md-center  justify-content-md-end  align-items-center">
+                <a [routerLink]="'/auth'" class="login-btn d-flex-center me-2">
+                    <span ><i class="fa fa-user me-3"></i></span>
+                    <span class="">ورود به حساب کاربری</span>
+                </a>
+              </div>
+            </div>
+            <!-- user-info -->
+            <div class="col-2 user-info " *ngIf="authService.isAuth">
+              <section class="user-is-login" (click)="showHideUser() ">
+                <img src="/assets/images/panel/icons/user.svg">
+                <i class="fa fa-caret-down ms-3"></i>
+              </section>
+              <ul class="items" *ngIf="isShowUser">
+                <a [routerLink]="'/user-panel'">
+                  <!--               (click)="goToPanel()"-->
+                  <li class="profile ">
+                    <figure>
+                      <img src="/assets/images/panel/icons/user-menu-drop-down.svg">
+                      <div>
+                        <span>{{currentUser.firstName + ' ' + currentUser.lastName}}</span>
+                        <span>{{currentUser.mobileNumber}}</span>
+                      </div>
+                    </figure>
+                    <img src="/assets/icons/header/arrow-left.svg">
+                  </li>
+                </a>
+                <li>
+                  <img src="/assets/images/panel/icons/5.svg">
+                  <a class="ms-2" routerLink="/factor/factor-list" routerLinkActive="active">فاکتور های پرداخت نشده</a>
+                </li>
+                <li>
+                  <img src="/assets/images/panel/icons/2.svg">
+                  <a class="ms-2" routerLink="/user-panel/order-list" routerLinkActive="active">سفارشات شما</a>
+                </li>
+                <li>
+                  <img src="/assets/images/panel/icons/logout.svg">
+                  <a class="ms-2" routerLink="/order" (click)="logout()">خروج</a>
+                </li>
+
+              </ul>
+            </div>
+
+            <div class="col-1 d-flex-center" *ngIf="authService.isAuth">
+              <span class="pipe-line"></span>
+            </div>
+            <!------------------------- cart shopping---------------------------->
+            <div class="col-2  d-flex-center" *ngIf="authService.isAuth">
+
+
+              <a [routerLink]="'/cart/'" class="d-flex-center">
+
+                <!--           (click)="goToCart()"-->
+                <span class="has-title" [class.fixed]="sticky">
+                  <span class="cart-count">{{cartCount.toLocaleString('fa-IR')}}</span>
+                  <img src="/assets/icons/header/cart.svg">
+                  <span class="cart-title ">سبد خرید</span>
+
+                </span>
+              </a>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="address-location" [class.fade-in]="isShowLocation" *ngIf="isShowLocation">
+    <span class="title">موقعیت مکانی: </span>
+    <div *ngIf="isStore">
+      <span *ngFor="let item of storeAddress" (click)="makeDefaultStoreAddress(item.id)"
+      >
+        <span  [ngClass]="setColorDeafult(item)">{{item.provinceName ? item.provinceName : ''}} منطقه {{item.zone}}</span>
+
+      </span>
+    </div>
+    <div *ngIf="!isStore">
+      <span *ngFor="let item of customerAddress" (click)="makeDefaultAddress(item.id)"
+        [ngStyle]="setColorDeafult(item.isDefault)">
+        <span>{{item.provinceName ? item.provinceName : ''}} {{item.zoneSplit}}</span>
+
+      </span>
+    </div>
+  </div>
+
+</header>
+<ngx-spinner></ngx-spinner>

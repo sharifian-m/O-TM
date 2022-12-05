@@ -1,0 +1,15 @@
+<div>
+     <div class="d-flex justify-content-between count" *ngIf="mode=='circle'" >
+          <span (click)="increment()" ><i class="fa fa-plus" aria-hidden="true" ></i></span>
+          <span class="count-font-size">{{count.toLocaleString('fa-IR')}}</span>
+          <ng-content></ng-content>
+          <span (click)="decrement()"><i class="fa fa-minus" aria-hidden="true"></i></span>
+
+     </div>
+     <div class="count-down" *ngIf="mode=='rect'">
+          <span class="plus" (click)="increment()">+</span>
+          <span class="count-font-size" >{{count.toLocaleString('fa-IR')}}</span>
+          <span class="mins" (click)="decrement()">-</span>
+
+     </div>
+</div>

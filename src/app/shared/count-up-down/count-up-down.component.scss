@@ -1,0 +1,58 @@
+@media screen and (min-width: 300px) and (max-width: 768px) {
+  .count-down {
+    margin: 8px 2px !important;
+  }
+}
+.count {
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 20px;
+  width: 150px;
+  border: 1px solid #ccc;
+}
+
+.fa {
+  cursor: pointer;
+  border: 2px solid #FE3E3E;
+  padding: 4px;
+  border-radius: 50%;
+  display: flex;
+  color: #FE3E3E;
+}
+
+.count-font-size {
+  font-family: iran_sans !important;
+  font-size: 18px !important;
+  font-weight: bold !important;
+
+}
+
+.count-down {
+  width: 100%;
+  height: 45px;
+  // margin: 0px;
+  // padding: 12px 13px 11px;
+  border-radius: 9px;
+  border: solid 1px #e9e9e9;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  .plus, .mins {
+    width: 30px;
+    height: 30px;
+    // padding: 4.9px 6.3px 6.9px 5.5px;
+    border-radius: 4px;
+    background-color: #e2e2e2;
+    color: #ff4b4b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+    user-select: none;
+    cursor: pointer;
+
+
+  }
+
+}

@@ -1,0 +1,53 @@
+<app-main-layout>
+
+        <!-- <app-login-register-modal (sendIsShow)="closeLogin($event)" [isShowLogin]="isShowLogin" *ngIf="isShowLogin">
+          <div class="close-icon-container"  ><img src="/assets/icons/close-line.svg" (click)="closeAuth()"  class="close-btn"></div>
+
+        </app-login-register-modal> -->
+    <div class="rtl">
+        <div class="container">
+          <div class="d-flex justify-content-center p-3 my-3 align-items-center"  *ngIf="!cartCrudService.cartData.length">
+            <img src="/assets/icons/basket.svg" class="basket-img">
+            <span>سبد خرید خالی است</span>
+
+          </div>
+
+<div class="row">
+
+
+    <div class="card company-item my-2 col-md-9" *ngFor="let item of companyItem;let i=index " >
+        <div class="card-body">
+
+            <div class="d-flex flex-wrap align-items-center">
+              <figure class="m-0"><img src="{{item.logoUrl}}"></figure>
+              <span >{{item.companyName}}</span>
+
+
+      </div>
+      <span *ngIf="item.isLimitByOrder" class=" d-flex my-1 text-danger">حداقل تعداد سفارش: {{item.minimumOrderCount}}</span>
+      <span *ngIf="item.isLimitByOrder" class=" d-flex my-1 text-danger">حداکثر تعداد  سفارش: {{item.maximumOrderCount }}</span>
+      <span *ngIf="item.isLimitByAmount" class=" d-flex my-1 price">حداقل مبلغ سفارش: {{(item.minimumOrderAmount)|getNumberWithComma }} تومان</span>
+      <span *ngIf="item.isLimitByAmount" class=" d-flex my-1 price">حداکثر مبلغ سفارش : {{(item.maximumOrderAmount)|getNumberWithComma  }} تومان</span>
+      <span class=" d-flex my-1 price">مبلغ کل : {{(item.totalAmount)|getNumberWithComma  }} تومان</span>
+      <div class="d-flex justify-content-end align-items-center">
+
+      <div class="login-btn mx-3" (click)="cartCompanyDetail(item)" >
+
+        <span>مشاهده محصولات انتخابی</span>
+    </div>
+    <i class="fa fa-check" *ngIf="checkValidTotalPrice(item)" aria-hidden="true"></i>
+    <i class="fa fa-exclamation-triangle" *ngIf="!checkValidTotalPrice(item)" aria-hidden="true"></i>
+</div>
+      </div>
+
+    </div>
+    <div class="card col-md-3 total-price" *ngIf="cartCrudService.cartData.length">
+        <span class="price my-1 d-flex justify-content-center ">قیمت نهایی : {{getNumberWithComma(totalPrice)}} تومان</span>
+        <button class="btn btn-danger btn-buy" (click)="buyerTotal()" > ادامه فرآیند خرید</button>
+      </div>
+    </div>
+    </div>
+</div>
+
+  <ngx-spinner></ngx-spinner>
+</app-main-layout>

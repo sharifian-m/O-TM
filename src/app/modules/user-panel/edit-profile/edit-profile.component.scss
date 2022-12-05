@@ -1,0 +1,184 @@
+:host{
+  width: 77%;
+}
+.container{
+    max-width: 100%;
+    margin: 0 auto;
+}
+.box-border{
+  background-color: #FFFFFF;
+  border-radius: 9px;
+  border: 1px solid #efefef;
+  box-shadow: 0px 0px 2px #ccc;
+}
+.img-national{
+    width: 100px;
+    height: auto;
+}
+.info{
+    h3{
+        color: #FF4B4B;
+        font-size: 16px;
+    }
+    p{
+        color: #585858;
+        font-size: 14px;
+    }
+}
+.title{
+  // font-family: 'iran_sans';
+  padding: 13px;
+  border-radius: 5px;
+}
+.form-group{
+  width: 306px;
+}
+input[type='text'],textarea{
+  border-radius: 9px;
+  font-size: 14px;
+  height: 52px;
+  width: 100%;
+}
+input:focus,textarea:focus,select:focus{
+ outline: none;
+ box-shadow: none;
+}
+.btn-accept{
+  background-color: #FE3E3E;
+  margin: 5px;
+  color: white;
+  border-radius: 9px;
+  width: 327px;
+  height: 52px;
+  font-size: 14px;
+}
+.btn-cancel{
+  background-color: #d8284e;
+  margin: 5px;
+  color: white;
+  border-radius: 8px;
+  padding: 7px 10px;
+  width: 12%;
+
+}
+.form-group.privacy{
+  display: flex;
+  align-items: center;
+label{
+  font-size: 14px;
+  margin: 0px 10px;
+}
+}
+#privacy{
+  width: 8%;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+.form-check{
+  font-size: 15px;
+}
+.fa-map-marker{
+  font-size: 20px;
+  cursor: pointer;
+}
+.doc{
+  background-color: #F6F6F6;
+  display: flex;
+  border-radius: 9px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 13px;
+  margin: 10px;
+  width:150px;
+  height: 150px;
+  color: #A4A4A4;
+  flex-direction: column;
+  justify-content: center;
+}
+button{
+  outline: 0px;
+}
+.fa-check-square{
+  color: #0b9c60;
+}
+.v-hidden{
+ visibility: hidden;
+}
+.is-store{
+          white-space: nowrap;
+}
+select{
+  border-radius: 10px;
+}
+.border{
+  border: 1px solid #E6E6E6;
+  width: 100%;
+  .under-line{
+      border: 1px solid #EB5454;
+  display: block;
+  width: 107px;
+  position: absolute;
+  margin: 0px 10px;
+  }
+}
+
+.radio {
+  position: relative;
+  cursor: pointer;
+  line-height: 20px;
+  font-size: 14px;
+  margin: 15px;
+}
+.radio .label {
+  position: relative;
+  display: block;
+  float: left;
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #c8ccd4;
+  border-radius: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+.radio .label:after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: #FF4B4B;
+  transform: scale(0);
+  transition: all 0.2s ease;
+  opacity: 0.08;
+  pointer-events: none;
+}
+.radio:hover .label:after {
+  transform: scale(3.6);
+}
+input[type="radio"]:checked + .label {
+  border-color: #FF4B4B;
+}
+input[type="radio"]:checked + .label:after {
+  transform: scale(1);
+  transition: all 0.2s cubic-bezier(0.35, 0.9, 0.4, 0.9);
+  opacity: 1;
+}
+
+.hidden {
+  display: none;
+}
+@media screen and (max-width:576px){
+  :host{
+    width: 100%;
+  }
+.btn-accept,.btn-cancel{
+    width: 40%;
+}
+.form-group{
+  width: 90%;
+  margin: inherit auto;
+}
+}

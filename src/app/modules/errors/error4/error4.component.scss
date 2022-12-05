@@ -1,0 +1,73 @@
+.bgi-size-cover {
+  background-size: cover;
+}
+
+.bgi-position-center {
+  background-position: 50%;
+}
+
+.bgi-position-center {
+  background-position: 50%;
+}
+
+.bgi-no-repeat {
+  background-repeat: no-repeat;
+}
+.d-flex {
+  display: flex!important;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+.flex-row-fluid {
+  flex: 1 auto;
+
+
+  min-width: 0;
+}
+
+body, html {
+  height: 100%;
+}
+
+.bg {
+
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.font-weight-boldest {
+  font-weight: 700;
+  font-family: iran_sans!important;
+}
+
+.text-dark-75 {
+  color: #3f4254!important;
+}
+.p-10 {
+  padding: 2.5rem!important;
+}
+@media (min-width: 576px){
+  .p-sm-30 {
+    padding: 7.5rem!important;
+  }
+}
+
+.font-size-h3 {
+  font-size: 1.5rem!important;
+}
+
+.text-muted {
+  color: #6a6a6c !important;
+}
+
+.font-weight-normal {
+  font-weight: 400!important;
+}
+
+.text-link{
+  color: #8f8fdc !important;
+}

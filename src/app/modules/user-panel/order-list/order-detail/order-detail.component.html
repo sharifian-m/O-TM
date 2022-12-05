@@ -1,0 +1,245 @@
+<div class="rtl">
+    <div class="card factor-desktop">
+      <div class="card-header">
+        <h2 class="title">فاکتور {{factorNumber}}</h2>
+        <span class="under-line"></span>
+      </div>
+
+      <div class="card-body factor-desktop">
+        <div class="card my-3 factor-item">
+          <div class="card-header">
+            <figure>
+              <span class="mx-1">اقلام فاکتور </span>
+            </figure>
+          </div>
+          <div class="card-body factor-desktop" *ngFor="let item of factorItems ">
+            <div class="items">
+              <div class="rigth-items">
+                <figure>
+                  <img src="{{item.itemImage}}">
+                </figure>
+                <section class="mx-2">
+                  <span class="my-2">{{item.itemTitle ? item.itemTitle : item.itemName}}</span>
+                  <div class="d-flex ">
+                    <div class="count-cart">
+                      <span> {{item.count.toLocaleString('fa-IR')}} </span>
+                      <span>{{item.itemUnit}}</span>
+
+                    </div>
+                    <span class="sell-price">
+                                    <span class="price">قیمت هر واحد  {{item.itemUnit.toLocaleString('fa-IR')}}</span>
+                                    <span>{{item.itemSellPrice * item.itemValuePerUnit.toLocaleString('fa-IR')}}
+                                      تومان</span>
+                                 </span>
+                  </div>
+
+                </section>
+
+              </div>
+
+              <div class="total-price">
+
+                <span class="price" style="margin-bottom: 3px">{{item.totalAmount.toLocaleString('fa-IR') }} تومان<span *ngIf="item.discountPercent != 0"  class="offer mx-1">{{item.discountPercent.toLocaleString('fa-IR') }} </span></span>
+                <div class="actions mx-1 my-1">
+                  <button class="btn btn-dark" (click)="goToProductDetail(item.itemId)">مشاهده محصول</button>
+                  <!-- <span class="delete mx-1" (click)="deleteBasket(item.id)">
+                        <img src="/assets/icons/cart/delete.svg">
+                  </span> -->
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="card factor-desktop factor-detail">
+          <div class="card-header">
+            جزئیات فاکتور
+          </div>
+          <div class="card-body">
+            <ul>
+              <li>
+                        <span>
+                             وضعیت سفارش
+                        </span>
+                <span>
+                           {{findTitel(orderState)}}
+                       </span>
+              </li>
+              <li>
+                       <span>
+                             تامین کننده
+                       </span>
+                <span>
+                         {{ fetchFactorWithItem.supplier?.supplierTitle}}
+                      </span>
+              </li>
+              <li>
+                       <span>
+                         مجموع کالاها
+                       </span>
+                <span>
+                        {{fetchFactorWithItem.totalItemsCount?.toLocaleString('fa-IR')}}
+                      </span>
+              </li>
+              <li>
+                       <span>
+                       مبلغ کل
+                       </span>
+                <span>
+                       {{fetchFactorWithItem.totalAmountWithoutDiscount?.toLocaleString('fa-IR')}} تومان
+                      </span>
+              </li>
+              <li>
+                       <span>
+                       مبلغ تخفیف
+                       </span>
+                <span>
+                       {{fetchFactorWithItem.totalDiscount?.toLocaleString('fa-IR')}} تومان
+                      </span>
+              </li>
+              <li *ngIf="fetchFactorWithItem.offerFactor?.offerAmount !== null">
+                       <span>
+                       عنوان کد تخفیف
+                       </span>
+                <span>
+                       {{fetchFactorWithItem.offerFactor.offer.title}}
+                      </span>
+              </li>
+              <li *ngIf="fetchFactorWithItem.offerFactor?.offerAmount !== null">
+                       <span>
+                       مبلغ کد تخفیف
+                       </span>
+                <span>
+                       {{fetchFactorWithItem.offerFactor?.offerAmount?.toLocaleString('fa-IR')}} تومان
+                      </span>
+              </li>
+              <li *ngIf="fetchFactorWithItem.description !== null">
+                       <span>
+                       توضیحات محصول
+                       </span>
+                <span>
+                       {{fetchFactorWithItem.description}}
+                      </span>
+              </li>
+              <li>
+                       <span>
+ مبلغ نهایی
+                       </span>
+                <span>
+   {{fetchFactorWithItem.totalItemAmounts?.toLocaleString('fa-IR')}} تومان                      </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  <div class="card my-2 factor-mobile d-flex flex-row">
+    <ul class="d-flex flex-column py-4" *ngFor="let item of factorItems ">
+      <li>
+        <figure>
+          <img src="{{item.itemImage}}">
+        </figure>
+      </li>
+      <li class="my-2">{{item.itemTitle ? item.itemTitle : item.itemName}}</li>
+      <li> {{item.count.toLocaleString('fa-IR')}} </li>
+      <li>{{item.itemUnit}}</li>
+
+      <li class="price">قیمت هر واحد  {{item.itemUnit.toLocaleString('fa-IR')}}</li>
+      <li>{{item.itemSellPrice * item.itemValuePerUnit.toLocaleString('fa-IR')}}
+        تومان</li>
+
+      <li class="price" style="margin-bottom: 3px">{{item.totalAmount.toLocaleString('fa-IR') }} تومان<span *ngIf="item.discountPercent != 0"  class="offer mx-1">{{item.discountPercent.toLocaleString('fa-IR') }} </span></li>
+      <li>
+        <button class="btn btn-dark" (click)="goToProductDetail(item.itemId ,item.title)">مشاهده محصول</button>
+        <!-- <span class="delete mx-1" (click)="deleteBasket(item.id)">
+              <img src="/assets/icons/cart/delete.svg">
+        </span> -->
+      </li>
+
+
+    </ul>
+  </div>
+  <div class="card factor-mobile factor-detail">
+    <div class="card-header">
+      جزئیات فاکتور
+    </div>
+    <div class="card-body">
+      <ul>
+        <li>
+                        <span>
+                             وضعیت سفارش
+                        </span>
+          <span>
+                           {{findTitel(orderState)}}
+                       </span>
+        </li>
+        <li>
+                       <span>
+                             تامین کننده
+                       </span>
+          <span>
+                         {{ fetchFactorWithItem.supplier?.supplierTitle}}
+                      </span>
+        </li>
+        <li>
+                       <span>
+                         مجموع کالاها
+                       </span>
+          <span>
+                        {{fetchFactorWithItem.totalItemsCount?.toLocaleString('fa-IR')}}
+                      </span>
+        </li>
+        <li>
+                       <span>
+                       مبلغ کل
+                       </span>
+          <span>
+                       {{fetchFactorWithItem.totalAmountWithoutDiscount?.toLocaleString('fa-IR')}} تومان
+                      </span>
+        </li>
+        <li>
+                       <span>
+                       مبلغ تخفیف
+                       </span>
+          <span>
+                       {{fetchFactorWithItem.totalDiscount?.toLocaleString('fa-IR')}} تومان
+                      </span>
+        </li>
+        <li *ngIf="fetchFactorWithItem.offerFactor?.offerAmount !== null">
+                       <span>
+                       عنوان کد تخفیف
+                       </span>
+          <span>
+                       {{fetchFactorWithItem.offerFactor.offer.title}}
+                      </span>
+        </li>
+        <li *ngIf="fetchFactorWithItem.offerFactor?.offerAmount !== null">
+                       <span>
+                       مبلغ کد تخفیف
+                       </span>
+          <span>
+                       {{fetchFactorWithItem.offerFactor?.offerAmount?.toLocaleString('fa-IR')}} تومان
+                      </span>
+        </li>
+        <li *ngIf="fetchFactorWithItem.description !== null">
+                       <span>
+                       توضیحات محصول
+                       </span>
+          <span>
+                       {{fetchFactorWithItem.description}}
+                      </span>
+        </li>
+        <li>
+                       <span>
+ مبلغ نهایی
+                       </span>
+          <span>
+   {{fetchFactorWithItem.totalItemAmounts?.toLocaleString('fa-IR')}} تومان                      </span>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>
+
+
+<ngx-spinner></ngx-spinner>

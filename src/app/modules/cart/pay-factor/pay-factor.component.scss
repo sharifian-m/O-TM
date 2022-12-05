@@ -1,0 +1,202 @@
+.factor-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F6F6F6;
+    padding: 7px;
+}
+.creditSaleDuration {
+  display: flex;
+  padding-right: 20px;
+  font-weight: bold;
+  flex-direction: column;
+  align-items: center;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}
+.offerCode {
+  height: 47px;
+  padding: 5px;
+  border: 1px solid #6c757d;
+  opacity: 1;
+  width: 120px;
+  border-radius: 5px;
+}
+.border{
+    color: #FE3E3E!important;
+    border: 1px solid #FE3E3E!important;
+    img{
+        filter: grayscale(53%) brightness(194%) sepia(127%) hue-rotate(
+            -50deg) saturate(620%) contrast(1.8);
+
+
+    }
+}
+.card{
+    .card-header{
+        img{
+
+                filter: grayscale(53%) brightness(194%) sepia(127%) hue-rotate(
+                    -50deg) saturate(620%) contrast(1.8);
+
+
+
+        }
+    }
+    .card-body{
+        .brand-name{
+            display: flex;
+            align-items: center;
+            span{
+                white-space: nowrap;
+                display: block;
+            }
+         .hr{
+             border: 1px solid #E6E6E6;
+             width: 95%;
+             display: block;
+             margin-right: 10px;
+         }
+    }
+        table{
+            width: 100%;
+            margin: 40px auto;
+            th{
+                text-align: center;
+            }
+            tr{
+                border-bottom: 1px solid #E6E6E6;
+               td{
+                   padding: 10px;
+                   text-align: center;
+               }
+            }
+
+        }
+        .rules{
+            display: flex;
+            align-items: center;
+            background-color: #F6F6F6;
+            padding: 9px;
+            width: 100%;
+            margin: 10px auto;
+            p{
+                margin: 0px 8px;
+            }
+        }
+        .success{
+            display: flex;
+            align-items: center;
+            background-color: #E5FFEC;
+            padding: 9px;
+            width: 100%;
+            margin: 10px auto;
+            p{
+                margin: 0px 8px;
+                color: #17B47E;
+            }
+        }
+        .error{
+            display: flex;
+            align-items: center;
+            background-color: #FFE1E1;
+            padding: 9px;
+            width: 100%;
+            margin: 10px auto;
+            p{
+                margin: 0px 8px;
+                color: #FE3E3E;
+            }
+        }
+    }
+    .control{
+       display: flex;
+       justify-content: flex-end;
+       button{
+           margin: 10px;
+       }
+    }
+}
+.pay-btn{
+    display: flex;
+    justify-content: center;
+    button{
+        margin: 7px;
+        padding: 10px 20px;
+    }
+
+}
+.pay-type{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px auto;
+    ul{
+        display: flex;
+        align-items: center;
+    }
+    li{
+        display: flex;
+        flex-direction: column;
+        margin: auto 10px ;
+        align-items: center;
+        border: 1px solid #515151;
+        border-radius: 8px;
+        padding: 9px;
+        width: 160px;
+        height: 160px;
+        cursor: pointer;
+        transition: all 300ms linear;
+        justify-content: center;
+      &:hover {
+        box-shadow: 0px 0px 9px #afaeae;
+        font-weight: bolder;
+        transform:  translateY(10px);
+        transform:  scale(1.01);
+        border: 1px solid #c40808 !important;
+      }
+
+    }
+
+}
+.mobile-item{
+    display: none;
+
+}
+.card-header.basket{
+    svg{
+        display: none;
+    }
+   }
+@media screen and (max-width:576px){
+    .card-header.basket{
+        svg{
+            display: inline-block;
+        }
+       }
+    .mobile-item{
+        display: block;
+        li{
+            span{
+                display: flex;
+                justify-content: space-between;
+                margin: 10px 0px;
+            }
+        }
+    }
+    table,.factor-info{
+        display: none;
+    }
+    .control{
+       flex-direction: column;
+       align-items: center;
+       button{
+           width: 90%;
+           margin: 6px;
+       }
+    }
+   }
+

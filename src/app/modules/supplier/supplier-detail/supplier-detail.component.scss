@@ -1,0 +1,208 @@
+@mixin priceName {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 10px;
+  margin: auto;
+  display: block;
+  text-align: center;
+  // font-family: 'iran_sans_bold';
+  font-family: 'byekan-bold';
+  font-size: 13px;
+}
+
+.p-name {
+  @include priceName;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.show-offer {
+  padding: 1px 5px 1px 5px;
+  border-radius: 12px;
+  background-color: #ff4b4b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: normal !important;
+  font-family: iran_sans !important;
+}
+
+.supplier-img {
+  width: 100%;
+  height: 333px;
+  background-repeat: no-repeat;
+  // background-image: url('/assets/images/supplier.svg');
+}
+
+.supplier-logo {
+  position: relative;
+  // top: -60px;
+  figure {
+    width: 119px;
+    height: 119px;
+    background-color: #ffff;
+    padding: 5px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 8px #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 97px;
+      height: 73px;
+    }
+  }
+}
+
+.supplier-description {
+  margin-top: -40px;
+
+  h2 {
+    color: #FF4B4B;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  p {
+    color: #2A2A2A;
+    font-size: 15px;
+  }
+}
+
+.old-price {
+  text-decoration: line-through;
+  color: #c0c2c5;
+}
+
+.card {
+  border-radius: 9px;
+
+  .card-header {
+    text-align: center;
+    background-color: #fff;
+    padding: 8px;
+
+    h2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      font-size: 17px;
+    }
+  }
+
+  .under-line {
+    border: 1px solid #EB5454;
+    display: block;
+    width: 220px;
+    position: relative;
+    margin: 0px auto;
+    top: 9px;
+  }
+}
+
+.categorty-list, .offer-list, .new-product li {
+  //   background-color: #efefef;
+  position: relative;
+  border-radius: 10px;
+  cursor: pointer;
+  //   height: 270px;
+  figure {
+    padding: 10px;
+    background-color: #fff;
+    text-align: center;
+    border-radius: 9px;
+    margin: 15px;
+
+  }
+
+  img {
+    width: 68px;
+    height: 73px;
+  }
+
+  .name {
+    @include priceName;
+
+
+  }
+}
+
+
+.new-product {
+  width: 100%;
+
+  li {
+    background-color: unset !important;
+  }
+
+  figure {
+    //background-color: unset !important;
+  }
+
+  img {
+    width: 116px !important;
+    height: 145px !important;
+  }
+
+  span {
+    display: flex;
+    justify-content: center;
+    font-size: 14px;
+    margin: 10px 0px;
+  }
+
+  ul {
+    display: flex;
+
+    li {
+      list-style: none;
+
+      .price {
+        @include priceName;
+        color: #FF6E6E;
+        font-size: 18px;
+      }
+
+
+    }
+
+  }
+}
+
+.consumer-price {
+  color: #C9C9C9;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media screen and (max-width: 576px) {
+  .container {
+    overflow: unset;
+  }
+  .supplier-img {
+    background-size: contain;
+    height: 100px;
+  }
+  .bg-white {
+    padding: 0px !important;
+  }
+}
+.selling-stop{
+  position: absolute;
+  top: 13px;
+  left: 5px;
+  background-color: #ec3d7e;
+  color: #fff;
+  padding: 4px;
+  transform: rotate(
+      -45deg
+  );
+}
+

@@ -1,0 +1,189 @@
+<div class="rtl">
+  <div class="container">
+    <button *ngIf="isShowMap" style="float: right" type="button" class="close m-0 p-0" aria-label="Close"
+            (click)="showHideMap()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="card">
+      <div class="card-header">
+        <h2 class="title">ثبت فروشگاه جدید </h2>
+        <span class="under-line"></span>
+      </div>
+
+      <div class="card-body">
+
+        <form [formGroup]="storeGroup">
+
+          <div class="my-3 p-3">
+            <div class="row">
+              <div class="form-group d-flex align-items-center col-md-6">
+                <span class="text-danger mx-1">*</span><input type="text" placeholder="نام فروشگاه  "
+                                                              class="form-control" formControlName="storeTitle">
+
+              </div>
+              <div class="form-group  d-flex align-items-center col-md-6">
+                <span class="text-danger mx-1 v-hidden">*</span>
+                <select class="form-control" formControlName="consumerType">
+                  <option *ngFor="let consumerType of consumerTypes "
+                          [value]="consumerType.value">{{consumerType.displayText}}</option>
+                </select>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="form-group d-flex align-items-center col-md-6">
+                <span class="text-danger mx-1 v-hidden">*</span><input type="text" placeholder="شماره جواز فعالیت  "
+                                                                       class="form-control"
+                                                                       formControlName="businessLicenseOfficialNewspaper">
+
+              </div>
+              <div class="form-group d-flex align-items-center col-md-3">
+                <span class="text-danger mx-1">*</span>
+                <select class="form-control" formControlName="provinceId">
+                  <option value="" disabled selected>استان</option>
+                  <option *ngFor="let item of provinces " [value]="item.value">{{item.displayText}}</option>
+                </select>
+              </div>
+              <div class="form-group d-flex align-items-center col-md-3">
+                <span class="text-danger mx-1">*</span>
+                <select (click)="checkSelectProvinceStore()" class="form-control" formControlName="townShipId">
+                  <option *ngFor="let item of towns " [value]="item.value">{{item.displayText}}</option>
+                </select>
+              </div>
+
+
+            </div>
+            <div class="row">
+              <div class="form-group d-flex align-items-center col-md-12">
+                <span class="text-danger mx-1">*</span> <input type="text" placeholder="آدرس کامل پستی "
+                                                               class="form-control" formControlName="storeAddress">
+
+              </div>
+            </div>
+            <div class="row ">
+              <div class="form-group d-flex align-items-center col-md-3">
+                <span class="text-danger  mx-1">*</span><input type="text" maxlength="10" numbersOnly
+                                                               placeholder="کد پستی " class="form-control"
+                                                               formControlName="postalCode">
+
+              </div>
+              <div class="form-group d-flex align-items-center col-md-3" *ngIf="isShowArea">
+                <span class="text-danger mx-1 v-hidden">*</span><input type="text" numbersOnly
+                                                                       placeholder="متراژ {{userTypeActivity}} "
+                                                                       class="form-control" formControlName="storeArea">
+
+              </div>
+              <div class="form-group d-flex align-items-center col-md-3">
+                <span class="text-danger mx-1">*</span><input type="text" maxlength="11" numbersOnly
+                                                              placeholder="تلفن {{userTypeActivity}}  "
+                                                              class="form-control" formControlName="storePhoneNumber">
+
+              </div>
+
+              <div class="form-group align-items-center d-flex col-md-3">
+                <span class="text-danger mx-1 ">*</span>
+                <!-- <span class="text-danger mx-1 v-hidden">*</span><input type="text" placeholder="ملکی / استیجاری " class="form-control" formControlName="lease"  numbersOnly > -->
+                <!-- <span class="text-danger mx-1 ">*</span> -->
+                <label class="mx-2">منطقه</label>
+                <select class="form-control" formControlName="zone">
+                  <option
+                    *ngFor="let region of regions" [value]="region.value"
+                  >{{region.displayText}}</option>
+                </select>
+
+              </div>
+
+            </div>
+            <div class="row">
+
+
+            </div>
+            <div class="row align-items-center">
+              <div class="form-group col-md-3 mx-1 align-items-center">
+                <input type="text" placeholder="لوکیشن" class="form-control" style="display: none;">
+                                <span (click)="showHideMap()" class="map-location">
+                                    <img src="/assets/images/panel/icons/map.svg">
+
+                                    موقعیت مکانی
+                               </span>
+                <i *ngIf="latStore && langStore" class="fa fa-check-square mx-1" aria-hidden="true"></i>
+                <app-map-dialog (click)="showHideMap()" [isShow]="isShowMap"
+                                (sendLocation)="getLocation($event)"></app-map-dialog>
+
+              </div>
+              <div class="col-md-2 mx-2">
+                <span class="mx-2">تصویر روی کارت ملی </span>
+                <div class="align-items-center" (click)="UploadNationalCardFrontImage.click()">
+                  <img class="doc align-items-center"
+                       src="{{nationalCardFrontImageSrc ? nationalCardFrontImageSrc : '/assets/images/login-register/upload.svg'}}">
+                  <!--      <span *ngIf="nationalCardFrontImage" class="mx-1">{{nationalCardFrontImage}}</span>-->
+
+                </div>
+                <input style="display: none;" #UploadNationalCardFrontImage type="file" name="profile"
+                       (change)="onFileUploadNationalCardFrontImageSelect($event)"/>
+              </div>
+              <div class="col-md-2 mx-2">
+                <span class="mx-2"> تصویر پشت کار ملی</span>
+                <div class="align-items-center" (click)="UploadNationalCardBehindImage.click()">
+                  <img class="doc align-items-center"
+                       src="{{nationalCardBehindImageSrc ? nationalCardBehindImageSrc : '/assets/images/login-register/upload.svg'}}">
+                  <!--           <span *ngIf="nationalCardBehindImage" class="mx-1">{{nationalCardBehindImage}}</span>-->
+                </div>
+                <input style="display: none;" #UploadNationalCardBehindImage type="file" name="profile"
+                       (change)="onFilUploadNationalCardBehindImageSelect($event)"/>
+              </div>
+              <div class="col-md-2 mx-2">
+                <span class="mx-2">بارگذاری جواز فعالیت</span>
+                <div class="align-items-center" (click)="uploadStoreDocument.click()">
+                  <img class="doc align-items-center"
+                       src="{{storeDocumentImageSrc ? storeDocumentImageSrc : '/assets/images/login-register/upload.svg'}}">
+                  <!--          <span *ngIf="uploadStoreDocumentName" class="mx-1">{{uploadStoreDocumentName}}</span>-->
+                </div>
+
+                <input style="display: none;" #uploadStoreDocument type="file" name="profile"
+                       (change)="onFilUploadUploadStoreDocumentSelect($event)"/>
+
+              </div>
+              <div class="col-md-2 mx-2"><span (click)="uploadBusinessLicense.click()">
+         <span class="mx-2">بارگذاری سند یا اجاره نامه</span>
+                <div class="align-items-center">
+          <img class="doc align-items-center"
+               src="{{businessLicenseImageSrc ? businessLicenseImageSrc : '/assets/images/login-register/upload.svg'}}">
+                                  <!--              <span *ngIf="uploadBusinessLicenseName" class="mx-1">{{uploadBusinessLicenseName}}</span>-->
+
+         </div>
+     </span>
+                <input style="display: none;" #uploadBusinessLicense type="file" name="profile"
+                       (change)="onFilUploadUploaduploadBusinessLicenseSelect($event)"/>
+
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="form-group col-md-12">
+                <textarea class="form-control" rows="4" placeholder="توضیحات "
+                          formControlName="storeDescription"></textarea>
+              </div>
+
+            </div>
+          </div>
+          <div>
+            <button class=" btn-accept " (click)="registerStore()">
+              <span>ثبت فروشگاه</span>
+
+            </button>
+            <!-- <button   class="btn-cancel  " (click)="onReset()">
+                <span>انصراف</span>
+
+            </button>  -->
+          </div>
+        </form>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+<ngx-spinner></ngx-spinner>
+

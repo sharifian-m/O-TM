@@ -1,0 +1,344 @@
+<app-main-layout>
+  <div class="body-container" >
+  <div class="row">
+    <div class="col-lg-9 p-3">
+      <ngb-carousel *ngIf="slider" class="w-100 ">
+        <ng-template ngbSlide *ngFor="let item of slider">
+          <div class="picsum-img-wrapper">
+            <a [routerLink]="'../brand/brand-detail/'+item.brandId"> 
+                 <img   src="{{item.imageUrl}}"  alt="{{item.ownerCompany}}"
+                 onerror="this.src='/assets/images/default.png';" alt="{{item.ownerCompany}}"> 
+            </a>
+          </div>
+
+        </ng-template>
+      </ngb-carousel>
+    </div>
+    <div
+      class="col-lg-3 beside-carousel mt-4 d-flex flex-column flex-md-row flex-lg-column  justify-content-md-around justify-content-center align-items-start">
+
+      <div class="liara overflow-hidden align-self-center">
+        <!-- <figure> -->
+        <img class="img-fluid"
+          src="{{'https://617f8635c8c2160018093aed.iran.liara.space/image/banners/260-178-2.png'}}" onerror="this.src='/assets/images/default.png';" >
+        <!-- </figure> -->
+      </div> 
+      <div class="support align-self-center ">
+        <h3 class="support-text" style="font-weight: bold">
+          <img class="me-3" src="/assets/images/service/2.svg" onerror="this.src='/assets/images/default.png';" >پشتیبانی 24 ساعته
+        </h3>
+        <div class="phone text-center">
+       
+          <a href="tel:۰۹۳۰۰۰۱۷۰۰۰">۰۹۳۰۰۰۱۷۰۰۰</a>
+          <span> - </span>
+          <a href="tel:۰۹۳۰۰۰۱۸۰۰۰">۰۹۳۰۰۰۱۸۰۰۰</a>
+        </div>
+
+      </div>
+   
+
+    </div>
+  </div>
+  <!-- -----------------------------brands ------------------------------------------------------------------>
+  <div class="container brand-container  mt-4">
+    <header class="text-center ">
+      <h3>برندها</h3>
+      <span class="under-line"></span>
+    </header>
+  </div>
+  <div class="row brands mt-3 px-4">
+    <swiper class="brand-item mx-4"  [config]="brandConfig">
+      <ul class="swiper-wrapper">
+        <li *ngFor="let item of firstRowBrands" class="swiper-slide brand-list">
+          <!--                (click)="brandDetail(item.id)"-->
+          <a [routerLink]="'../brand/brand-detail/'+item.id">
+
+            <figure class="text-center  {{item.isWaitingForProduct ? 'opacity0' :'opacity1'}}">
+              <img *ngIf="item.imageUrl" src="{{item.imageUrl}}" onerror="this.src='/assets/images/default.png';"  class="img-fluid">
+              <span class="text-center  {{item.isWaitingForProduct ? 'opacity0' :'opacity1'}}">{{item.title}}</span>
+            </figure>
+            <span *ngIf="item.isWaitingForProduct" class="is-waiting-for-product"> در حال بار گذاری محصولات</span>
+
+
+          </a>
+        </li>
+      </ul>
+      <div class="swiper-button-next" style="margin-top: 50px;"></div>
+      <div class="swiper-button-prev" style="margin-top: 50px;"></div>
+    </swiper>
+    <swiper class="brand-item"  [config]="brandConfig">
+      <ul class="swiper-wrapper">
+        <li *ngFor="let item of secondRowBrands" class="swiper-slide brand-list">
+          <!--                (click)="brandDetail(item.id)"-->
+          <a [routerLink]="'../brand/brand-detail/'+item.id">
+
+            <figure class="text-center  {{item.isWaitingForProduct ? 'opacity0' :'opacity1'}}">
+              <img *ngIf="item.imageUrl" src="{{item.imageUrl}}" onerror="this.src='/assets/images/default.png';"  class="img-fluid">
+              <span class="text-center  {{item.isWaitingForProduct ? 'opacity0' :'opacity1'}}">{{item.title}}</span>
+            </figure>
+            <span *ngIf="item.isWaitingForProduct" class="is-waiting-for-product"> در حال بار گذاری محصولات</span>
+
+
+          </a>
+        </li>
+      </ul>
+    </swiper>
+  </div>
+
+  <!-- -----------------------------products-categories-in-All-devices ------------------------------------------------------>
+
+  <section class=" my-5">
+    <div class="row">
+      <header class="text-center mb-5">
+        <h3>دسته بندی محصولات</h3>
+        <span class="under-line"></span>
+      </header>
+      <div class="container-mobile  d-flex justify-content-start  justify-content-md-center align-items-center ">
+        <a *ngFor="let item of mainCategories" [routerLink]="'/product-list/product-category/'+item.id">
+          <ng-container *ngIf="item.parentId==0" class=" ">
+
+            <div class="container-mobile-item   d-flex justify-content-center align-items-center flex-column">
+              <img class="" *ngIf="item.categoryIcon" src="{{item.categoryIcon}} " onerror="this.src='/assets/images/default.png';"  class="img-fluid">
+          
+              <span class="name ">{{item.categoryName}}</span>
+            </div>
+          </ng-container>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!-- -----------------------------Amazing offers-in-large-devices ------------------------------------------------------>
+  <section class="d-none d-lg-block ">
+
+    <div class="row offers d-flex justify-content-start align-items-center">
+      <div class="col-3 d-none d-md-flex  flex-column title">
+        <img class="align-self-center ps-2" src="/assets/images/offer/offer.svg" onerror="this.src='/assets/images/default.png';" class="img-fluid">
+        <h3 class="align-self-center">پیشنهادات </h3>
+        <h3 class="align-self-center">شگفت انگیز</h3>
+      </div>
+      <div class="col-9">
+        <swiper class="offer" [config]="offerCategoty">
+          <div class="swiper-wrapper ps-4">
+            <div class="offer-list swiper-slide  " *ngFor="let item of awsomeOffer">
+              <!----------------------------- <ITEMS> -------------------------------------->
+              <a class=" d-flex justify-content-start align-items-center flex-column " [routerLink]="['../product-list/product-detail/', item.id ,item.title]">
+
+                <!-- image -->
+                <img *ngIf="item.imageUrl" src="{{item.imageUrl}}" class="img-fluid align-self-center p-2">
+                 <img *ngIf="!item.imageUrl" src="/assets/images/default.png" class="img-fluid align-self-center p-2">
+                <!-- titlefooter -->
+                <div class="product-title align-self-start ps-3">{{item.title}}</div>
+                <!-- price NoDiscount -->
+                <div   class="price align-self-start ps-3 ">
+                  {{(item.sellPrice|roundUp).toLocaleString('fa-IR') }}
+                  <span class="toman">تومان</span> 
+                </div>
+                <!-- price hasDiscount -->
+      
+                <div  class=" {{item.hasDiscount && item.discountPercent>0?'visible' :'invisible'}} old-price  align-self-start ps-3">
+                  <del>{{(item.oldPrice|roundUp).toLocaleString('fa-IR')}}</del>
+                  <span class="toman me-2 ms-1">تومان</span> 
+                  <span *ngIf="item.hasDiscount && item.discountPercent>0" class="discount-price mx-1">
+                    ( تخفیف %{{item.discountPercent}} ) </span>
+                </div>
+               
+                  <!-- <div class=" consumer-price text-center" *ngIf="item.consumerPrice > 10">قیمت مصرف کننده : {{item.consumerPrice.toLocaleString('fa-IR')}}  تومان</div>
+                  <div class=" consumer-price text-center" *ngIf="item.consumerPrice < 10">قیمت مصرف کننده : فاقد قیمت</div> -->
+  
+                  <app-btn-cart class="mt-2 w-100" (click)="productDetail(item.id ,item.title)" [BtnName]="'سفارش دهید'"></app-btn-cart>
+              
+                <div  *ngIf="item.hasDiscount && item.discountPercent>0 && showDiscountInfo"  class="text-center currentTime d-flex justify-content-center align-items-center mt-2 ">
+                  
+                    
+                  {{Remainingtime(item.discountEndDate)}}<span *ngIf="remainingDay">روز</span> 
+               
+                  
+                      <i class="fa-regular fa-clock ms-2"></i>
+                    <div  *ngIf="showCounter" >
+                      <countdown  class="mx-2" #cd [config]="{ leftTime: remainingSecond, format: 'hh:mm:ss'}"></countdown>
+                    </div>
+                      
+
+                      </div>   
+                             
+              </a>
+
+            </div>
+
+
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </swiper>
+      </div>
+    </div>
+
+
+  </section>
+
+  <!-- -----------------------------Amazing offers-in-small-devices ------------------------------------------------------>
+  <section class=" mt-5 d-lg-none small-device ">
+    <header class="text-center mb-5">
+      <h3> پیشنهادات شگفت انگیز</h3>
+      <span class="under-line"></span>
+    </header>
+    <div class="row  container-item-mobile">
+
+      <div class=" offer-list-mobile my-3 mx-1  d-flex justify-content-center align-self-center"
+        *ngFor="let item of awsomeOffer">
+
+        <a class=" d-flex flex-column justify-content-start align-self-center" [routerLink]="['../product-list/product-detail/'+item.id, item.title]">
+
+          <!----------------------------------------- image ------------------------------>
+
+          <img *ngIf="item.imageUrl" src="{{item.imageUrl}}" class="img-fluid align-self-center"  onerror="this.src='/assets/images/default.png';" alt="{{item.title}}">
+          <img *ngIf="!item.imageUrl" src="/assets/images/default.png" class="img-fluid ">
+          <!------------------------------- title ---------------------------->
+
+          <div class="product-title my-3 align-self-start" >{{item.title}}</div>
+
+          <!------------------------------- price don't has Discount ---------------------------->
+
+          <div class="price mb-2 align-self-start">
+            {{(item.sellPrice|roundUp).toLocaleString('fa-IR') }} <span class="toman">تومان</span></div>
+          <!-------------------------- price hasDiscount ------------------------------>
+
+          <div *ngIf="item.hasDiscount  && item.discountPercent>0" class="discount-price  align-self-start ">
+            <del> {{(item.oldPrice|roundUp).toLocaleString('fa-IR') }} </del>
+            <span class="toman me-2 ms-1">تومان</span> 
+            <span *ngIf="item.hasDiscount  && item.discountPercent>0" class="mx-1">
+              ( تخفیف %{{item.discountPercent}} ) </span>
+          </div>
+          <!-------------------------- order button ------------------------------>
+          <div class="mt-3 mx-auto btn-cart  ">
+            <app-btn-cart (click)="productDetail(item.id ,item.title)" [BtnName]="'سفارش دهید'"></app-btn-cart>
+          </div>
+          <!-------------------------- time ------------------------------>
+         <div class="text-center currentTime d-flex justify-content-center align-items-center mt-2">
+                <span> {{now |date :'hh:mm:ss'}}</span>
+                    <i class="fa-regular fa-clock ms-2"></i>            
+                    </div>
+        </a>
+      </div>
+    </div>
+  </section>
+  <!--------------------------------------- banner----------------------------------------------- -->
+  <div class="mt-3">
+    <div>
+      <figure>
+        <img src="/assets/banner/1088-204.png"  onerror="this.src='/assets/images/default.png';" class="w-100">
+      </figure>
+    </div>
+  </div>
+
+   <!---------------------------------------most-discounts-large-devics----------------------------------------------- -->
+
+  <section class="d-none d-lg-block ">
+
+    <div class="row  d-flex justify-content-center align-items-center">
+      <header class="text-center mb-5">
+        <h3> پرتخفیف ترین ها </h3>
+        <span class="under-line"></span>
+      </header>
+<!-- 
+      <div class="row "> -->
+        <swiper class="most-discounts col-10" [config]="offerCategoty">
+          <div class="swiper-wrapper p-4">
+            <div class="swiper-slide" *ngFor="let item of mostDiscountItem">
+              <app-items [item]="item"></app-items>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </swiper>
+      </div>
+    <!-- </div> -->
+  </section>
+  <!---------------------------------------most-discounts-small-devics----------------------------------------------- -->
+  <section class=" mt-5 d-lg-none small-device ">
+    <header class="text-center mb-5">
+     <h3 > پرتخفیف ترین ها </h3>
+      <span class="under-line"></span>
+    </header>
+    <div class="row container-item-in-mobile p-3">
+
+      <div class="d-flex justify-content-between align-self-center" >
+
+        <app-items [item]="item" *ngFor="let item of mostDiscountItem"></app-items>
+      </div>
+    </div>
+  </section>
+   <!---------------------------------------newest-product-large-devics----------------------------------------------- -->
+
+   <!-- <section class="d-none d-lg-block mt-5 ">
+
+    <div class="row  d-flex justify-content-center align-items-center">
+      <header class="text-center mb-5">
+        <h3>جدید ترین محصولات</h3>
+        <span class="under-line"></span>
+      </header>
+
+      
+        <swiper class="most-discounts col-10" [config]="offerCategoty">
+          <div class="swiper-wrapper p-4">
+            <div class="swiper-slide m-0  d-flex justify-content-center align-items-center" *ngFor="let item of newProductItem">
+              <app-items [item]="item"></app-items>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </swiper>
+      </div>
+  
+  </section> -->
+  <!--------------------------------------- newest products-product-small-devics----------------------------------------------- -->
+  <!-- <section class=" mt-5 d-lg-none small-device ">
+    <header class="text-center mb-5">
+     <h3 >جدید ترین محصولات</h3>
+      <span class="under-line"></span>
+    </header>
+    <div class="row container-item-in-mobile  p-3">
+ 
+      <div class="d-flex justify-content-between align-self-center " >
+        <app-items [item]="item" *ngFor="let item of newProductItem"></app-items>
+      </div>
+    </div>
+  </section> -->
+   <!--------------------------------------- best selling products-product-large-devics----------------------------------------------- -->
+
+   <section class="d-none d-lg-block mt-5 ">
+
+    <div class="row d-flex justify-content-center align-items-center">
+      <header class="text-center mb-5">
+        <h3>  پرفروش ترین محصولات</h3>
+        <span class="under-line"></span>
+      </header>
+
+      <!-- <div class="row  "> -->
+        <swiper class="most-discounts col-10" [config]="offerCategoty">
+          <div class="swiper-wrapper p-4">
+            <div class="swiper-slide" *ngFor="let item of bestSellingItem">
+              <app-items [item]="item"></app-items>
+            </div>
+          </div>
+          <div class="swiper-button-next"></div>
+          <div class="swiper-button-prev"></div>
+        </swiper>
+      </div>
+    <!-- </div> -->
+  </section>
+  <!---------------------------------------bestselling-product-small-devics----------------------------------------------- -->
+  <section class=" mt-5 d-lg-none small-device ">
+    <header class="text-center mb-5">
+     <h3 >  پرفروش ترین محصولات</h3>
+      <span class="under-line"></span>
+    </header>
+    <div class="row container-item-in-mobile">
+
+      <div class="d-flex justify-content-between align-self-center" >
+        <app-items [item]="item" *ngFor="let item of bestSellingItem"></app-items>
+      </div>
+    </div>
+  </section>
+</div>
+</app-main-layout>

@@ -1,0 +1,108 @@
+<div class="rtl">
+    <div class="container">
+       <div class="card">
+         <div class="card-header">
+            <h2 class="title">آدرس های من  </h2>
+            <span class="under-line"></span>
+        </div>
+
+           <div class="card-body">
+               <button class="btn btn-outline-danger" (click)="goToAddAddress()">
+                   <img src="/assets/images/panel/icons/add.svg">
+                   <span>اضافه کردن آدرس جدید</span>
+
+               </button>
+              <table class="table" >
+                   <tr>
+                        <th>
+                             ردیف
+                        </th>
+                        <th>
+                     عنوان
+                    </th>
+                    <th>
+                    استان
+                    </th>
+                    <th>
+                     شهر
+                    </th>
+                    <th>
+                    منطقه
+                               </th>
+                     <th>
+               آدرس کامل پستی
+                      </th>
+                      <th>
+                        موقعیت مکانی
+                        </th>
+
+                   </tr>
+                   <tr *ngFor="let item of customerAddress;let i=index">
+                    <td>{{i+1}}</td>
+              <td>{{item.homeTitle}}</td>
+              <td>{{item.provinceName}}</td>
+              <td>{{item.townshipName}}</td>
+              <td>{{item.zoneSplit}}</td>
+              <td>{{item.address}}</td>
+
+              <td>
+                <button class="btn btn-success mx-2" (click)="mapShow(item)">
+                    <img src="/assets/images/panel/icons/location.svg">
+                    <span class="mx-2">نقشه</span>
+                </button>
+              </td>
+
+                   </tr>
+                <tr *ngIf="!customerAddress.length">
+                  <td colspan="7">
+
+                    <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+                  </td>
+                </tr>
+              </table>
+              <div class="mobile-device">
+              <ul>
+                <li *ngFor="let item of customerAddress ">
+                  <div class="header">
+                      <span>
+                        عنوان
+                      </span>
+                      <span>
+                         استان
+                      </span>
+                      <span>
+                        شهر
+                      </span>
+                      <span>
+                       منطقه
+                      </span>
+                      <span>
+                        آدرس کامل پستی
+                      </span>
+                  </div>
+                  <div class="content">
+                    <span>{{item.homeTitle}}</span>
+                    <span>{{item.provinceName}} </span>
+                    <span>{{item.townshipName}}</span>
+                   <span> {{item.zoneSplit}}</span>
+                   <span> {{item.address}}</span>
+                    <span class="store-detail">
+                    <button class="btn btn-success mx-2" (click)="mapShow(item)">
+                      <img src="/assets/images/panel/icons/location.svg">
+                      <span class="mx-2">نقشه</span>
+                    </button>
+                  </span>
+                  </div>
+                </li>
+                <h4 *ngIf="!customerAddress.length" class="text-center no_item pd-4">موردی وجود ندارد</h4>
+              </ul>
+            </div>
+           </div>
+
+
+        </div>
+     </div>
+        </div>
+<ngx-spinner></ngx-spinner>
+

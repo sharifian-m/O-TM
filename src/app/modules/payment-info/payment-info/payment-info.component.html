@@ -1,0 +1,26 @@
+<app-main-layout>
+<div class="rtl">
+    <div class="container py-3">
+          <div class="content" >
+            <figure>
+                  <img src="/assets/icons/logo.png">
+            </figure>
+            <div class="header">
+                  <h3>{{fullName}} عزیز</h3>
+                  <span *ngIf="isSuccess">پرداخت شما با موفقیت انجام شد</span>
+                  <span class="text-danger" *ngIf="!isSuccess">پرداخت شما با خطا مواجه شد</span>
+             </div>
+             <ng-container *ngIf="isSuccess">
+                <h3>رسید پرداخت آنلاین</h3>
+                <span class="amount">{{(amount.toLocaleString('fa-IR'))|getNumberWithComma}} تومان</span>
+                <p>از طریق کارت بانکی پرداخت شده است</p>
+                <span>اعتبار شما :<span class="payed">{{(amount.toLocaleString('fa-IR'))|getNumberWithComma}} تومان</span></span>
+                <div class="d-flex justify-content-center my-2">
+              <button class="btn btn-success" (click)="goToOrder()">مشاهده سفارشات</button>
+            </div>
+            </ng-container>
+          </div>
+          
+</div>
+</div>
+</app-main-layout>

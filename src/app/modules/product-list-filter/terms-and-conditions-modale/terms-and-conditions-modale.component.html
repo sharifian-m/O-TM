@@ -1,0 +1,293 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    <h6> شرایط و ضوابط</h6>
+
+  </h4>
+
+  <span class="fa fa-times" (click)="close()"></span>
+</div>
+
+<div class="modal-body">
+
+
+  <div class=" rounded  p-2 ">
+    <div class="row ">
+      <div class="col col-md-6 col-sm-6 d-flex ">
+
+        <h6 class="text-danger">
+          قوانین
+        </h6>
+        <h6 class="px-1 ">
+          {{supplierItems.supplierPolicy.supplierTitle ? supplierItems.supplierPolicy.supplierTitle : supplierItems.factory.factoryTitle }}
+        </h6>
+
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex">
+      </div>
+    </div>
+    <hr style="border-top: 1px dotted rgb(0 0 0 / 35%);margin-bottom: 5px ; width: 120px">
+    <div class="row d-flex" *ngIf="supplierItems.supplierPolicy.isLimitByAmount">
+
+      <div class="col col-md-6 col-sm-6  d-flex  ">
+        <strong class="">
+          حداقل مبلغ خرید :
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong class=" mx-1">
+          {{supplierItems.supplierPolicy.minimumOrderAmont.toLocaleString('fa-IR')}}
+        </strong>
+      </div>
+
+    </div>
+    <div class="row d-flex" *ngIf="supplierItems.supplierPolicy.isLimitByAmount">
+      <div class="col col-md-6 col-sm-6 d-flex">
+        <strong class="">
+          حداکثر مبلغ خرید :
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex">
+        <strong class=" mx-1">
+          {{supplierItems.supplierPolicy.maximumOrderAmont.toLocaleString('fa-IR')}}
+        </strong>
+      </div>
+
+    </div>
+
+    <div class="row " *ngIf="supplierItems.supplierPolicy.isLimitByOrder">
+
+      <div class="col col-md-6 col-sm-6 d-flex">
+        <strong class="">
+          حداقل مقدار خرید :
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex">
+        <strong class=" mx-1">
+          {{supplierItems.supplierPolicy.minimumOrderCount.toLocaleString('fa-IR')}}
+        </strong>
+      </div>
+
+    </div>
+    <div class="row d-flex" *ngIf="supplierItems.supplierPolicy.isLimitByOrder">
+      <div class="col col-md-6 col-sm-6 d-flex">
+        <strong class="">
+          حداکثر مقدار خرید :
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex">
+        <strong class=" mx-1">
+          {{supplierItems.supplierPolicy.maximumOrderCount.toLocaleString('fa-IR')}}
+        </strong>
+      </div>
+
+    </div>
+    <div class="row" *ngIf="supplierItems.supplierPolicy.mandatoryNationalCode">
+
+      <div class="col col-md-10 col-sm-10 d-flex">
+        <strong class="">
+          جهت تایید سفارش از برند {{supplierItems.supplierPolicy.supplierTitle }}، احراز هویت و ارائه کد ملی الزامی هست
+        </strong>
+      </div>
+      <div class="col col-md-2 col-sm-2 d-flex">
+        <button class="btn btn-danger" (click)="mandatoryNationalCode()"> احراز هویت</button>
+      </div>
+
+
+    </div>
+  </div>
+  <hr style="border-top: 1px solid rgb(0 0 0 / 30%);margin-bottom: 5px">
+  <div class=" rounded  p-2 mt-1">
+    <div class="row ">
+      <div class="col col-md-6 col-sm-6 d-flex ">
+
+
+             <span class="location-store active-location-show" [class.active-location]="true">
+     <img src="/assets/icons/header/location.svg">
+               </span>
+        <h6 style="color: #0b2e13">
+          مناطق تحت پوشش
+        </h6>
+
+
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex">
+        <strong>تهران</strong>
+      </div>
+    </div>
+
+
+  </div>
+  <hr style="border-top: 1px solid rgb(0 0 0 / 30%);margin-bottom: 5px">
+  <div class=" rounded  p-2 mt-1">
+    <div class="row ">
+      <div class="col col-md-6 col-sm-6 d-flex ">
+
+        <h6 style="color: #0b2e13">
+          نوع پرداخت
+        </h6>
+
+
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.sellType == 1 ? 'اعتباری' : 'نقدی' }}
+        </strong>
+      </div>
+    </div>
+
+
+  </div>
+  <hr style="border-top: 1px solid rgb(0 0 0 / 30%);margin-bottom: 5px">
+  <div class=" rounded  p-2 mt-1">
+    <div class="row ">
+      <div class="col col-md-6 col-sm-6 d-flex ">
+
+        <h6 style="color: #0b2e13">
+          قوانین عمومی
+        </h6>
+
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex">
+      </div>
+    </div>
+    <hr style="border-top: 1px dotted rgb(0 0 0 / 35%);margin-bottom: 5px ; width: 90px">
+    <div class="row">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          حداقل تعداد سفارش
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.minimuneOrderCount.toLocaleString('fa-IR')}}
+        </strong>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          حداکثر تعداد سفارش
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.maximumOrderCount.toLocaleString('fa-IR')}}
+        </strong>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          واحد اندازه گیری
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{unitTitle}}
+        </strong>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          تعداد در هر واحد
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.minimuneOrderCount.toLocaleString('fa-IR')}}
+        </strong>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          زمان تحویل
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.timeToArriveDesc ? supplierItems.itemDetails.timeToArriveDesc : ''}}
+        </strong>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          شرایط ویژه فروش
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.specialTermsOfSale ? supplierItems.itemDetails.specialTermsOfSale : ''}}
+        </strong>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          آیا مرجوعی دارد ؟
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.hasReferenceConditions ? 'دارد' : ' ندارد'}}
+        </strong>
+      </div>
+
+    </div>
+    <hr>
+    <div class="row" *ngIf="supplierItems.itemDetails.hasReferenceConditions">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          شرایط مرجوعی
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.referenceConditions}}
+        </strong>
+      </div>
+
+    </div>
+    <hr *ngIf="supplierItems.itemDetails.hasReferenceConditions">
+    <div class="row">
+
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          ارسال فوری
+        </strong>
+      </div>
+      <div class="col col-md-6 col-sm-6 d-flex ">
+        <strong style="color: #0b2e13">
+          {{supplierItems.itemDetails.hasInstantDelivery ? 'دارد' : 'ندارد'}}
+        </strong>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+

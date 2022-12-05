@@ -1,0 +1,43 @@
+h1,h2,h3,h4,h5,h6,p,label{
+  font-family: 'iran_sans' !important;
+}
+.col-md-6{
+  margin-top: 1.5px;
+  margin-bottom: 1px;
+}
+.location-store{
+  border: 1px solid #DEDEDE;
+  border-radius: 9px;
+  padding: 2px 4px;
+  margin: 1px;
+  cursor: pointer;
+  display: none;
+}
+
+.active-location{
+  background-color: #ff4b4b!important;
+  img{
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(160%) contrast(102%)!important;
+
+  }
+
+}
+
+hr {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  border: 0;
+  border-top: 1px dashed rgb(0 0 0 / 25%);
+}
+:host {
+  display: contents;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .active-location {
+    display: block;
+  }
+}
+
+

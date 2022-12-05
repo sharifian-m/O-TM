@@ -1,0 +1,4 @@
+<div class="map" *ngIf="isShow"
+     leaflet
+     [leafletOptions]="options" (leafletClick)="setLaLng($event)">
+</div>

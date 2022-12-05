@@ -1,0 +1,212 @@
+<app-main-layout>
+<div class="rtl">
+<div class="container  mt-4">
+ 
+  <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>ایجاد شده</a>
+      <ng-template ngbNavContent>
+        <div class="container py-4">
+          <span class="title mt-3">
+              سفارشات
+       
+            </span>
+           <table class="table mt-2">
+                <tr>
+                     <th>ردیف</th>
+                     <th>شماره سفارش</th>
+                     <th>شماره فاکتور</th>
+                     <th>تاریخ سفارش</th>
+                     <th>تعداد اقلام</th>
+                     <th>مبلغ نهایی</th>
+                     <th>مشاهده جزئیات سفارش</th>
+                    
+                </tr>
+                <tr *ngFor="let item of order1 ;let i=index" >
+                     <td>{{i+1}}</td>
+                     <td>{{item.orderNumber}}</td>
+                     <td>{{item.factorNumber}}</td>
+                     <td>{{item.persianOrderDate}}</td>
+                     <td>{{item.itemsInOrder}}</td>
+                     <td>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+                     <td>
+                         <i class="fa fa-eye" (click)="factorDetail(item.id,item.factorNumber)"></i>
+                     </td>
+                </tr>
+  
+           </table>
+           <ngb-pagination [collectionSize]="order1.length" [pageSize]="4" [maxSize]="5" [rotate]="true" [(page)]="page" [boundaryLinks]="true" aria-label="Default pagination" class="d-flex justify-content-end pagination-rounded-flat pagination-success"></ngb-pagination>
+       </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2">
+      <a ngbNavLink>در انتظار تایید</a>
+      <ng-template ngbNavContent>
+        <div class="container py-4">
+          <span class="title mt-3">
+              سفارشات
+       
+            </span>
+           <table class="table mt-2">
+                <tr>
+                     <th>ردیف</th>
+                     <th>شماره سفارش</th>
+                     <th>شماره فاکتور</th>
+                     <th>تاریخ سفارش</th>
+                     <th>تعداد اقلام</th>
+                     <th>مبلغ نهایی</th>
+                    
+                </tr>
+                <tr *ngFor="let item of order2 ;let i=index" >
+                     <td>{{i+1}}</td>
+                     <td>{{item.orderNumber}}</td>
+                     <td>{{item.factorNumber}}</td>
+                     <td>{{item.persianOrderDate}}</td>
+                     <td>{{item.totalItemsCount}}</td>
+                     <td>{{item.totalOrderAmount}}</td>
+                     
+                </tr>
+  
+           </table>
+           <ngb-pagination [collectionSize]="order2.length" [pageSize]="4" [maxSize]="5" [rotate]="true" [(page)]="page" [boundaryLinks]="true" aria-label="Default pagination" class="d-flex justify-content-end pagination-rounded-flat pagination-success"></ngb-pagination>
+       </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="3">
+      <a ngbNavLink>در راه</a>
+      <ng-template ngbNavContent>
+        <div class="container py-4">
+          <span class="title mt-3">
+              سفارشات
+       
+            </span>
+           <table class="table mt-2">
+                <tr>
+                     <th>ردیف</th>
+                     <th>شماره سفارش</th>
+                     <th>شماره فاکتور</th>
+                     <th>تاریخ سفارش</th>
+                     <th>تعداد اقلام</th>
+                     <th>مبلغ نهایی</th>
+                    
+                </tr>
+                <tr *ngFor="let item of order3 ;let i=index" >
+                     <td>{{i+1}}</td>
+                     <td>{{item.orderNumber}}</td>
+                     <td>{{item.factorNumber}}</td>
+                     <td>{{item.persianOrderDate}}</td>
+                     <td>{{item.totalItemsCount}}</td>
+                     <td>{{item.totalOrderAmount}}</td>
+                     
+                </tr>
+  
+           </table>
+           <ngb-pagination [collectionSize]="order3.length" [pageSize]="4" [maxSize]="5" [rotate]="true" [(page)]="page" [boundaryLinks]="true" aria-label="Default pagination" class="d-flex justify-content-end pagination-rounded-flat pagination-success"></ngb-pagination>
+       </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="4">
+      <a ngbNavLink>تحویل شده</a>
+      <ng-template ngbNavContent>
+        <div class="container py-4">
+          <span class="title mt-3">
+              سفارشات
+       
+            </span>
+           <table class="table mt-2">
+                <tr>
+                     <th>ردیف</th>
+                     <th>شماره سفارش</th>
+                     <th>شماره فاکتور</th>
+                     <th>تاریخ سفارش</th>
+                     <th>تعداد اقلام</th>
+                     <th>مبلغ نهایی</th>
+                    
+                </tr>
+                <tr *ngFor="let item of order4 ;let i=index" >
+                     <td>{{i+1}}</td>
+                     <td>{{item.orderNumber}}</td>
+                     <td>{{item.factorNumber}}</td>
+                     <td>{{item.persianOrderDate}}</td>
+                     <td>{{item.totalItemsCount}}</td>
+                     <td>{{item.totalOrderAmount}}</td>
+                     
+                </tr>
+  
+           </table>
+           <ngb-pagination [collectionSize]="order4.length" [pageSize]="4" [maxSize]="5" [rotate]="true" [(page)]="page" [boundaryLinks]="true" aria-label="Default pagination" class="d-flex justify-content-end pagination-rounded-flat pagination-success"></ngb-pagination>
+       </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="5">
+      <a ngbNavLink>لغو شده</a>
+      <ng-template ngbNavContent>
+        <div class="container py-4">
+          <span class="title mt-3">
+              سفارشات
+       
+            </span>
+           <table class="table mt-2">
+                <tr>
+                     <th>ردیف</th>
+                     <th>شماره سفارش</th>
+                     <th>شماره فاکتور</th>
+                     <th>تاریخ سفارش</th>
+                     <th>تعداد اقلام</th>
+                     <th>مبلغ نهایی</th>
+                    
+                </tr>
+                <tr *ngFor="let item of order5 ;let i=index" >
+                     <td>{{i+1}}</td>
+                     <td>{{item.orderNumber}}</td>
+                     <td>{{item.factorNumber}}</td>
+                     <td>{{item.persianOrderDate}}</td>
+                     <td>{{item.totalItemsCount}}</td>
+                     <td>{{item.totalOrderAmount}}</td>
+                     
+                </tr>
+  
+           </table>
+           <ngb-pagination [collectionSize]="order5.length" [pageSize]="4" [maxSize]="5" [rotate]="true" [(page)]="page" [boundaryLinks]="true" aria-label="Default pagination" class="d-flex justify-content-end pagination-rounded-flat pagination-success"></ngb-pagination>
+       </div>
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="6">
+      <a ngbNavLink>مرجوعی</a>
+      <ng-template ngbNavContent>
+        <div class="container py-4">
+          <span class="title mt-3">
+              سفارشات
+       
+            </span>
+           <table class="table mt-2">
+                <tr>
+                     <th>ردیف</th>
+                     <th>شماره سفارش</th>
+                     <th>شماره فاکتور</th>
+                     <th>تاریخ سفارش</th>
+                     <th>تعداد اقلام</th>
+                     <th>مبلغ نهایی</th>
+                    
+                </tr>
+                <tr *ngFor="let item of order6 ;let i=index" >
+                     <td>{{i+1}}</td>
+                     <td>{{item.orderNumber}}</td>
+                     <td>{{item.factorNumber}}</td>
+                     <td>{{item.persianOrderDate}}</td>
+                     <td>{{item.totalItemsCount}}</td>
+                     <td>{{item.totalOrderAmount}}</td>
+                     
+                </tr>
+  
+           </table>
+           <ngb-pagination [collectionSize]="order6.length" [pageSize]="4" [maxSize]="5" [rotate]="true" [(page)]="page" [boundaryLinks]="true" aria-label="Default pagination" class="d-flex justify-content-end pagination-rounded-flat pagination-success"></ngb-pagination>
+       </div>
+      </ng-template>
+    </li>
+  </ul>
+  
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+</div>
+</div>
+</app-main-layout>

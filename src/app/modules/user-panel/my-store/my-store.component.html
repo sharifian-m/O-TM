@@ -1,0 +1,129 @@
+<div class="rtl">
+    <div class="container">
+       <div class="card">
+         <div class="card-header">
+            <h2 class="title">فروشگاه های من </h2>
+            <span class="under-line"></span>
+        </div>
+
+           <div class="card-body">
+               <button class="btn btn-outline-danger" (click)="goToAddStore()">
+                   <img src="/assets/images/panel/icons/add.svg">
+                   <span>اضافه کردن فروشگاه جدید</span>
+
+               </button>
+              <table class="table" >
+                   <tr>
+                        <th>
+                             ردیف
+                        </th>
+                    <th>
+                      عنوان فروشگاه
+                    </th>
+                    <th>
+                      نوع فروشگاه
+                    </th>
+
+                     <th>
+                   وضعیت
+                      </th>
+                     <th>
+                       ویرایش
+                     </th>
+                   </tr>
+                   <tr *ngFor="let item of stores;let i=index">
+                    <td>{{i+1}}</td>
+              <td>{{item.storeTitle}}</td>
+              <td>
+                  <span *ngIf="item.consumerType==0">سوپر مارکت</span>
+                  <span *ngIf="item.consumerType==1">هایپر مارکت</span>
+                  <span *ngIf="item.consumerType==2">فروشگاه زنجیره ای</span>
+                  <span *ngIf="item.consumerType==3">هتل</span>
+                  <span *ngIf="item.consumerType==4">رستوران</span>
+                  <span *ngIf="item.consumerType==5">کافی شاپ</span>
+                  <span *ngIf="item.consumerType==6">تالار</span>
+                  <span *ngIf="item.consumerType==7">مجموعه ورزشی</span>
+                  <span *ngIf="item.consumerType==8">آشپز خانه و کترینگ</span>
+                  <span *ngIf="item.consumerType==9">بیمارستان</span>
+                  <span *ngIf="item.consumerType==10">سالن همایش</span>
+                  <span *ngIf="item.consumerType==11">مجموعه تفریحی</span>
+                  <span *ngIf="item.consumerType==12">تعاونی</span>
+                  <span *ngIf="item.consumerType==13">شخصی</span>
+                  <span *ngIf="item.consumerType==14">سازمان / ارگان</span>
+
+              </td>
+              <td>
+                  <span class="text-success" *ngIf="item.authState=='Active';else deactive">فعال</span>
+                  <ng-template #deactive>
+                        <span class="text-danger">غیر فعال</span>
+                  </ng-template>
+                </td>
+                     <td class="py-1">
+                       <button class="edit rounded mx-2" (click)="uploadDocuments(item)">ویرایش</button>
+                     </td>
+                   </tr>
+                <tr *ngIf="!stores.length">
+                  <td colspan="7">
+
+                    <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+                  </td>
+                </tr>
+              </table>
+              <div class="mobile-device">
+              <ul>
+                <li *ngFor="let item of stores ">
+                  <div class="header">
+                      <span>
+                          عنوان فروشگاه
+                      </span>
+                      <span>
+                           نوع فروشگاه
+                      </span>
+                      <span>
+                         وضعیت
+                      </span>
+                    <span>
+                      ویرایش
+                    </span>
+                  </div>
+                  <div class="content">
+                    <span>{{item.storeTitle}} </span>
+                    <span>
+                        <span *ngIf="item.consumerType==0">سوپر مارکت</span>
+                        <span *ngIf="item.consumerType==1">هایپر مارکت</span>
+                        <span *ngIf="item.consumerType==2">فروشگاه زنجیره ای</span>
+                        <span *ngIf="item.consumerType==3">هتل</span>
+                        <span *ngIf="item.consumerType==4">رستوران</span>
+                        <span *ngIf="item.consumerType==5">کافی شاپ</span>
+                        <span *ngIf="item.consumerType==6">تالار</span>
+                        <span *ngIf="item.consumerType==7">مجموعه ورزشی</span>
+                        <span *ngIf="item.consumerType==8">آشپز خانه و کترینگ</span>
+                        <span *ngIf="item.consumerType==9">بیمارستان</span>
+                        <span *ngIf="item.consumerType==10">سالن همایش</span>
+                        <span *ngIf="item.consumerType==11">مجموعه تفریحی</span>
+                        <span *ngIf="item.consumerType==12">تعاونی</span>
+                        <span *ngIf="item.consumerType==13">شخصی</span>
+                        <span *ngIf="item.consumerType==14">سازمان / ارگان</span>
+
+                    </span>
+                    <span>
+                        <span class="text-success" *ngIf="item.authState=='Active';else deactive">فعال</span>
+                        <ng-template #deactive>
+                              <span class="text-danger">غیر فعال</span>
+                        </ng-template>
+                      </span>
+                    <span> <button class="btn btn-primary mx-2" (click)="uploadDocuments(item)">ویرایش</button></span>
+                  </div>
+
+                </li>
+                <h4 *ngIf="!stores.length" class="text-center no_item pd-4">موردی وجود ندارد</h4>
+              </ul>
+            </div>
+           </div>
+
+
+        </div>
+     </div>
+        </div>
+<ngx-spinner></ngx-spinner>

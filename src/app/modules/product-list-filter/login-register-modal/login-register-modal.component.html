@@ -1,0 +1,76 @@
+
+<div class="rtl bg-image" *ngIf="isShowLogin">
+  <div class="container py-5" >
+      <div class="login">
+        <ng-content></ng-content>
+            <figure>
+                 <img src="/assets/icons/logo.png">
+            </figure>
+            <div class="title-line">
+                <h2>ثبت نام / ورود</h2>
+            </div>
+            <form class="mt-5 w-100" [formGroup]="form">
+
+                <ng-container *ngIf="!isSendSms">
+
+                 <div class="form-group phone-number">
+
+                      <input placeholder="شماره موبایل خود را وارد کنید" formControlName="mobileNumber" type="text" class="form-control phone" numbersOnly maxlength="11" id="phone">
+                 </div>
+
+
+                <div class="d-flex justify-content-center">
+                  <button [disabled]="form.invalid" class="btn-login  " (click)="preRegister()">
+                      <span>ورود به اتامین</span>
+
+                  </button>
+                </div>
+                <div class="form-group privacy col-md-12">
+                  <label for="privacy" >با ورود و یا ثبت نام در OTamin شما <a routerLink="/rules">شرایط و قوانین</a> استفاده از سرویس های سایت OTamin و  <a routerLink="/privacy">حریم خصوصی</a> آن را می‌پذیرید.</label>
+              </div>
+              </ng-container>
+              <ng-container *ngIf="isSendSms">
+                  <div class="form-group code">
+                        <span class="d-block text-center">کد پیامک شده به شماره <span class="phone"> {{form.controls.mobileNumber.value}} </span> را وارد کنید</span>
+                      <input  formControlName="code"  type="text" class="form-control code" numbersOnly maxlength="4" id="phone">
+                 </div>
+                 <ngx-recaptcha2 #captchaElem *ngIf="isShowCapcha"
+              [siteKey]="'6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI
+
+              '"
+              (reset)="handleReset()"
+              (expire)="handleExpire()"
+              (load)="handleLoad()"
+              (success)="handleSuccess($event)"
+              [useGlobalDomain]="true"
+              [size]="'Normal'"
+              [theme]="'Light'"
+              [type]="'Image'"
+              >
+            </ngx-recaptcha2>
+                 <div class="d-flex my-3 justify-content-center">
+                  <button [disabled]="form.invalid"  class="btn-login  " (click)="validateSmsCode()">
+                      <span>تایید</span>
+
+                  </button>
+                </div>
+                 <div class="d-flex flex-column justify-content-center align-items-center">
+                 <button class="timer" [disabled]="!resetTimer"  (click)="reSendCode()">
+                  <span class="d-flex align-items-center">
+                  <span >  ارسال مجدد کد تایید پس از </span>
+                 <countdown class="mx-2" #cd [config]="{ leftTime: 120, format: 'mm:ss' }" (event)="countDownHandler($event)"></countdown>
+
+
+                  </span>
+
+              </button>
+                 <span class="change-phone" (click)="changePhone()"><span>تغییر شماره</span><img src="/assets/images/login-register/return.svg"></span>
+            </div>
+
+              </ng-container>
+
+            </form>
+      </div>
+  </div>
+  </div>
+

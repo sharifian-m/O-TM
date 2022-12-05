@@ -1,0 +1,48 @@
+
+@import "styleMeta.css";
+@font-face {
+  font-family: lalezarz;
+  src: url('webfonts/Lalezar-Regular.ttf');
+}
+
+@font-face {
+  font-family: gandom;
+  src: url('webfonts/gandom.ttf');
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: lalezarz !important;
+}
+
+p,
+ul,
+li {
+  font-family: gandom !important;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  font-family: iran_sans !important;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  font-family: iran_sans !important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  font-family: iran_sans !important;
+}
+:-moz-placeholder { /* Firefox 18- */
+  font-family: iran_sans !important;
+}
+
+.site-header-inner {
+  float: left;
+}
+
+.button-block,
+.footer-copyright {
+  font-family: gandom !Important;
+}
+

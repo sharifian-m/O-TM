@@ -1,0 +1,101 @@
+@media screen and (min-width:769px) {
+.item-bg{
+    cursor: pointer;
+    background-color: #ffffff;
+    width: 220px !important;
+    border-radius: 9px;
+    height: 300px;
+    border: solid 1px #f7f2f2;
+    -webkit-box-shadow: -1.5px 0 4px 0 rgb(0 0 0 / 15%);
+  box-shadow: -1.5px 0 4px 0 rgb(0 0 0 / 15%);
+  
+    img {
+        width:150px;
+        height:150px;
+      }
+      .item-title {
+        font-family: 'byekan-bold';
+        font-size: 17px;
+        text-align: center;
+        // font-weight: 600;
+        color:#585858;
+        width: 150px;
+        white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    
+      }
+      .item-price{
+        font-family: 'byekan-bold';
+        font-size: 20px;
+        color: #FF6E6E;
+      }
+      .toman{
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .discount-badge{
+        width:83px;
+        height: 27px;
+        font-size: 14px;
+        border-radius: 25px;
+        background-color: #ee4444;
+        color: #ffffff;
+      }
+      .consumer-price {
+        width: 170px;
+        white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+        color: #afaeae;
+        font-size: 14px;
+      }
+}}
+@media screen and (max-width:768px) {
+.item-bg{
+    cursor: pointer;
+    background-color: #ffffff;
+    width: 180px !important;
+    border-radius: 9px;
+    height: 250px;
+    border: solid 1px #f5f1f1;
+    -webkit-box-shadow: -1.5px 0 4px 0 rgb(0 0 0 / 15%);
+    box-shadow: -1.5px 0 4px 0 rgb(0 0 0 / 15%);
+    img {
+        width:100px;
+        height:100px;
+      }
+      .item-title {
+        font-family: 'byekan-bold';
+        font-size: 16px;
+        // font-weight: 600;
+        color:#585858;
+        width: 150px;
+        white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    
+    
+      }
+      .item-price{
+        font-family: 'byekan-bold';
+        font-size: 15px;
+        color: #FF6E6E;
+      }
+      .discount-badge{
+        width:83px;
+        height: 27px;
+        font-size: 14px;
+        border-radius: 25px;
+        background-color: #ee4444;
+        color: #ffffff;
+      }
+      .consumer-price {
+        color: #afaeae;
+        font-size: 12px;
+        width: 150px;
+        white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      }
+}}

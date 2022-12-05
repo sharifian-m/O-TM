@@ -1,0 +1,109 @@
+
+<div class="rtl">
+    <div class="container">
+      <app-map-dialog [isShow]="isShowMap" (sendLocation)="getLocation($event)"></app-map-dialog>
+
+       <div class="card">
+         <div class="card-header">
+            <h2 class="title">ثبت آدرس  جدید </h2>
+            <span class="under-line"></span>
+        </div>
+
+           <div class="card-body">
+
+            <form [formGroup]="customerAddressGroup" >
+
+          <div class="row">
+               <div class="form-group d-flex align-items-center p-0 col-md-6">
+                    <span class="text-danger mx-1">*</span><input type="text" placeholder="عنوان آدرس  " class="form-control" formControlName="homeTitle" >
+
+               </div>
+               <div class="form-group d-flex align-items-center col-md-3">
+                <span class="text-danger mx-1">*</span>
+                <select class="form-control" formControlName="provinceId" >
+                     <option value="" disabled selected>استان</option>
+                     <option  *ngFor="let item of provinces "  [value]="item.value">{{item.displayText}}</option>
+                </select>
+                </div>
+                <div class="form-group d-flex align-items-center col-md-3">
+                    <span class="text-danger mx-1">*</span>
+                    <select (click)="checkSelectProvinceStore()" class="form-control" formControlName="townShipId" >
+                         <option  *ngFor="let item of towns "  [value]="item.value">{{item.displayText}}</option>
+                    </select>
+                    </div>
+          </div>
+
+         <div class="row">
+          <div class="form-group d-flex align-items-center col-md-9">
+               <span class="text-danger mx-1">*</span> <input type="text" placeholder="آدرس کامل پستی " class="form-control" formControlName="address">
+
+           </div>
+           <div class="form-group d-flex align-items-center col-md-3">
+            <!-- <span class="text-danger mx-1 v-hidden">*</span><input type="text" placeholder="ملکی / استیجاری " class="form-control" formControlName="lease"  numbersOnly > -->
+            <span class="text-danger mx-1 ">*</span>
+            <label class="mx-1">منطقه</label>
+            <select class="form-control" formControlName="zone">
+              <option
+                *ngFor="let region of regions" [value]="region.value"
+              >{{region.displayText}}</option>
+            </select>
+
+         </div>
+         </div>
+            <div class="row ">
+                <div class="form-group d-flex align-items-center col-md-4">
+                    <span class="text-danger mx-1">*</span> <input type="text" placeholder="خیابان " class="form-control" formControlName="area">
+
+                </div>
+               <div class="form-group d-flex align-items-center col-md-4">
+                    <span class="text-danger mx-1">*</span><input type="text" numbersOnly placeholder="طبقه" class="form-control" formControlName="flowr">
+
+               </div>
+
+               <div class="form-group d-flex align-items-center col-md-4">
+                <span class="text-danger mx-1">*</span> <input type="text" numbersOnly placeholder="واحد " class="form-control" formControlName="unit">
+
+            </div>
+
+     </div>
+     <div class="row ">
+
+       <div class="form-group d-flex align-items-center col-md-4">
+            <span class="text-danger mx-1">*</span><input type="text" numbersOnly placeholder="کد پستی" class="form-control" formControlName="postalCode">
+
+       </div>
+       <div class="form-group d-flex align-items-center col-md-4">
+        <span class="text-danger mx-1">*</span> <input type="text" placeholder="پلاک " class="form-control" formControlName="plaque">
+
+    </div>
+       <div class="form-group col-md-3 mx-3 d-flex align-items-center">
+        <input type="text" placeholder="لوکیشن" class="form-control" style="display: none;" >
+        <span (click)="showHideMap()" class="map-location">
+             <img src="/assets/images/panel/icons/map.svg">
+
+             موقعیت مکانی
+        </span>
+        <i *ngIf="latStore && langStore" class="fa fa-check-square mx-1" aria-hidden="true"></i>
+   </div>
+</div>
+ <div>
+     <button class=" btn-accept " (click)="addAddress()">
+         <span>ثبت آدرس</span>
+
+     </button>
+     <!-- <button   class="btn-cancel  " (click)="onReset()">
+         <span>انصراف</span>
+
+     </button>  -->
+ </div>
+</form>
+
+           </div>
+
+
+        </div>
+     </div>
+        </div>
+<ngx-spinner></ngx-spinner>
+
+

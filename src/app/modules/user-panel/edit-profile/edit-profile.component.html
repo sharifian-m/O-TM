@@ -1,0 +1,377 @@
+<div class="container ">
+
+  <app-map-dialog [isShow]="isShowMap" (sendLocation)="getLocation($event)"></app-map-dialog>
+
+  <form [formGroup]="customerInfoGroup" class="box-border">
+    <div class="d-flex flex-column">
+             <span class="title ">
+                  اطلاعات شخصی
+             </span>
+      <div class="border">
+        <div class="under-line"></div>
+      </div>
+    </div>
+
+    <div class="row m-3 ">
+      <div class="form-group d-flex justify-content-center align-items-center col-md-3">
+        <span class="text-danger mx-1">*</span>
+        <input type="text" placeholder="نام " formControlName="firstName" class="form-control mb-1">
+
+      </div>
+      <div class="form-group col-md-3 d-flex align-items-center ">
+        <span class="text-danger mx-1">*</span><input type="text" placeholder="نام خانوادگی " formControlName="lastName"
+                                                      class="form-control  mb-1">
+
+      </div>
+      <div class="form-group col-md-3 d-flex align-items-center ">
+        <span class="text-danger mx-1 invisible">*</span>
+        <input type="text" placeholder="کد ملی " formControlName="nationalCode" class="form-control  mb-1" numbersOnly>
+
+      </div>
+      <div class="form-group col-md-3 d-flex align-items-center ">
+        <span class="text-danger mx-1 invisible">*</span>
+        <input type="text" placeholder="کد نقش " formControlName="roleCode" class="form-control">
+
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-3 d-flex align-items-center" style="margin-right: 1.5rem">
+        <span class="text-danger mx-1">*</span>
+        <div class="cntr">
+          <label class="radio">
+            <input disabled checked="checked" type="radio" name="isLegal" id="opt1" [value]="false" class="hidden"
+                   formControlName="isLegal"/>
+            <span class="label"></span>حقیقی
+          </label>
+        </div>
+        <div class="cntr">
+          <label class="radio">
+            <input disabled checked="checked" type="radio" name="isLegal" id="opt2" [value]="true" class="hidden"
+                   formControlName="isLegal"/>
+            <span class="label"></span>حقوقی
+          </label>
+        </div>
+        <!-- <div class="form-check">
+             <label class="form-check-label">
+               <input type="radio" class="form-check-input" [value]="true"  formControlName="isLegal"  name="isLegal">حقیقی
+             </label>
+             <label class="form-check-label">
+                  <input type="radio" class="form-check-input" [value]="false" formControlName="isLegal" name="isLegal">حقوقی
+                </label>
+           </div> -->
+
+      </div>
+
+        <div class="col-md-2 mx-3">
+          <span class="mx-3">تصویر کارت ملی </span>
+          <div class="align-items-center" (click)="UploadNationalCardFrontImage.click()">
+            <img class="doc align-items-center"
+                 src="{{nationalCodeImageUrl ? nationalCodeImageUrl : '/assets/images/login-register/upload.svg'}}">
+
+            <!--                       <span *ngIf="nationalCardFrontImage" class="mx-1"></span>-->
+
+          </div>
+          <input style="display: none;" #UploadNationalCardFrontImage type="file" name="profile"
+                 (change)="onFileUploadNationalCardImageSelect($event)"/>
+        </div>
+        <figure>
+          <!--          <img class="img-national" [src]="nationalCodeImageUrl">-->
+        </figure>
+      <div class="form-group d-flex align-items-center col-md-6">
+        <span class="text-danger mx-1 v-hidden">*</span> <input type="text" placeholder="آدرس "
+                                                                formControlName="address" class="form-control">
+
+      </div>
+      </div>
+    <div class="row my-3">
+
+      <div [ngStyle]="{'display':isStore==1?'flex':'none'}" class="form-group  align-items-center col-md-4">
+        <span class="text-danger mx-1 v-hidden">*</span>
+        <ng-select class="w-100 mx-2" [items]="userTypes"
+                   bindLabel="label"
+                   (change)="onChangeUserType($event)"
+        >
+        </ng-select>
+
+      </div>
+      <div *ngIf="isStore==2" class="form-group mx-2 d-flex align-items-center col-md-3">
+        <span class="text-danger mx-1 v-hidden">*</span>
+        <select class="form-control">
+          <option *ngFor="let item of factoryTypes" [value]="item.value">{{item.label}}</option>
+        </select>
+
+      </div>
+    </div>
+    <div class="text-right">
+      <button [disabled]="loading" class=" btn-accept my-3 " (click)="editProfile()">
+        <span>ثبت اطلاعات</span>
+
+      </button>
+      <!-- <button   class="btn-cancel  " (click)="onReset()">
+          <span>انصراف</span>
+
+      </button>  -->
+    </div>
+  </form>
+
+  <ng-container>
+
+    <!-- <form [formGroup]="storeGroup" class="box-border my-3" >
+       <div class="d-flex flex-column ">
+            <span class="title ">
+                 {{userTypeActivity}}
+
+            </span>
+            <div class="border">
+                 <div class="under-line"></div>
+            </div>
+        </div>
+<div class="my-3 p-3">
+
+   <div class="row ">
+       <div class="form-group d-flex align-items-center col-md-3">
+            <span class="text-danger mx-1">*</span><input type="text" placeholder="نام {{userTypeActivity}} " class="form-control" formControlName="storeTitle" >
+
+       </div>
+   <div class="form-group d-flex align-items-center col-md-3">
+       <span class="text-danger mx-1">*</span><input type="text" numbersOnly placeholder="تلفن {{userTypeActivity}}  " class="form-control" formControlName="storePhoneNumber">
+
+  </div>
+  <div class="form-group d-flex align-items-center col-md-3">
+       <span class="text-danger mx-1">*</span><input type="text" placeholder="شماره جواز فعالیت  " class="form-control" formControlName="businessLicenseOfficialNewspaper"  >
+
+</div>
+<div class="form-group d-flex align-items-center col-md-3" *ngIf="isShowArea">
+  <span class="text-danger mx-1 v-hidden">*</span><input type="text" numbersOnly placeholder="متراژ {{userTypeActivity}} " class="form-control" formControlName="storeArea" >
+
+</div>
+<div class="form-group d-flex align-items-center col-md-3">
+<span class="text-danger mx-1 v-hidden">*</span><input type="text" placeholder="ملکی / استیجاری " class="form-control" formControlName="lease"  numbersOnly >
+<span class="text-danger mx-1 ">*</span>
+<label class="mx-1">منطقه</label>
+<select class="form-control" formControlName="zone">
+  <option   value="1">1</option>
+  <option   value="2">2</option>
+  <option   value="3">3</option>
+  <option   value="4">4</option>
+  <option   value="5">5</option>
+  <option   value="6">6</option>
+  <option   value="7">7</option>
+  <option   value="8">8</option>
+  <option   value="9">9</option>
+  <option   value="10">10</option>
+  <option   value="11">11</option>
+  <option   value="12">12</option>
+  <option   value="13">13</option>
+  <option   value="14">14</option>
+  <option   value="15">15</option>
+  <option   value="16">16</option>
+  <option   value="17">17</option>
+  <option   value="18">18</option>
+  <option   value="19">19</option>
+  <option   value="20">20</option>
+  <option   value="21">21</option>
+  <option   value="22">22</option>
+</select>
+
+</div>
+<div class="form-group d-flex align-items-center col-md-3">
+<span class="text-danger v-hidden mx-1">*</span><input type="text" maxlength="10" numbersOnly placeholder="کد پستی " class="form-control" formControlName="postalCode">
+
+</div>
+<div class="form-group col-md-3 mx-3 d-flex align-items-center">
+<input type="text" placeholder="لوکیشن" class="form-control" style="display: none;" >
+<span (click)="showHideMap()">موقعیت <i class="fa fa-map-marker" aria-hidden="true" ></i></span>
+<i *ngIf="latStore && langStore" class="fa fa-check-square mx-1" aria-hidden="true"></i>
+</div>
+</div>
+<div class="row">
+<div class="form-group d-flex align-items-center col-md-6">
+  <span class="text-danger mx-1">*</span> <input type="text" placeholder="آدرس  " class="form-control" formControlName="storeAddress">
+
+</div>
+<span><span class="doc d-flex align-items-center" (click)="UploadNationalCardFrontImage.click()">
+  <img src="/assets/images/login-register/upload.svg">
+  <span class="mx-3">بارگذاری عکس روی کارت ملی </span>
+
+<span *ngIf="nationalCardFrontImage" class="mx-1">{{nationalCardFrontImage}}</span>
+
+</span>
+<input style="display: none;" #UploadNationalCardFrontImage type="file" name="profile" (change)="onFileUploadNationalCardFrontImageSelect($event)"  />
+</span>
+<span><span class="doc d-flex align-items-center" (click)="UploadNationalCardBehindImage.click()" >
+  <img src="/assets/images/login-register/upload.svg">
+  <span class="mx-3"> بارگذاری عکس پشت کارت ملی</span>
+  <span *ngIf="nationalCardBehindImage" class="mx-1">{{nationalCardBehindImage}}</span>
+</span>
+<input style="display: none;" #UploadNationalCardBehindImage type="file" name="profile" (change)="onFilUploadNationalCardBehindImageSelect($event)"  />
+</span>
+
+</div>
+
+<div class="row">
+<div class="form-group col-md-6">
+<textarea class="form-control" rows="4" placeholder="توضیحات " formControlName="storeDescription" ></textarea>
+</div>
+<span><span class="doc d-flex align-items-center" (click)="uploadStoreDocument.click()" >
+  <img src="/assets/images/login-register/upload.svg">
+
+  <span class="text-danger mx-3">*</span><span class="mx-1">بارگذاری جواز فعالیت</span>
+  <span *ngIf="uploadStoreDocumentName" class="mx-1">{{uploadStoreDocumentName}}</span>
+</span>
+
+<input style="display: none;" #uploadStoreDocument type="file" name="profile" (change)="onFilUploadUploadStoreDocumentSelect($event)"  />
+
+</span>
+<span><span (click)="uploadBusinessLicense.click()" >
+ <span class="doc d-flex align-items-center">
+  <img src="/assets/images/login-register/upload.svg">
+      <span class="mx-3">بارگذاری سند یا اجاره نامه</span>
+      <span *ngIf="uploadBusinessLicenseName" class="mx-1">{{uploadBusinessLicenseName}}</span>
+
+ </span>
+</span>
+<input style="display: none;" #uploadBusinessLicense type="file" name="profile" (change)="onFilUploadUploaduploadBusinessLicenseSelect($event)"  />
+
+</span>
+</div>
+</div>
+<qr-code [value]="qr"></qr-code>
+
+<div class="text-right">
+<button [disabled]="loading"   class=" btn-accept my-3 " (click)="editStore()">
+<span>ثبت اطلاعات</span>
+
+</button>
+
+</div>
+</form> -->
+  </ng-container>
+  <!-- <ng-container >
+     <form [formGroup]="factoryeGroup" class="box-border">
+          <div class="d-flex flex-column">
+               <span class="title ">
+                   تامین کننده
+               </span>
+               <div class="border">
+                    <div class="under-line"></div>
+               </div>
+           </div>
+           <div class="my-3 p-3">
+    <div class="row">
+        <div class="form-group d-flex align-items-center col-md-3">
+          <span class="text-danger mx-1">*</span><input type="text" placeholder=" نام برند  " class="form-control" formControlName="factoryTitle" >
+
+        </div>
+    <div class="form-group d-flex align-items-center col-md-3">
+     <span class="text-danger mx-1">*</span><input type="text" numbersOnly placeholder="تلفن   " class="form-control" formControlName="phoneNumber">
+
+   </div>
+   <div class="form-group d-flex align-items-center col-md-3">
+     <span class="text-danger mx-1 v-hidden">*</span><input type="text" placeholder="آدرس ایمیل  " class="form-control" formControlName="emailAddress" >
+
+  </div>
+
+  <div class="form-group  d-flex align-items-center col-md-3">
+     <span class="text-danger v-hidden mx-1">*</span><input type="text" maxlength="10" numbersOnly placeholder="کد پستی " class="form-control" formControlName="postalCode">
+
+  </div>
+  </div>
+  <div class="row">
+  <div class="form-group d-flex align-items-center col-md-6">
+     <span class="text-danger mx-1">*</span><input type="text" placeholder="آدرس دفتر مرکزی  " class="form-control" formControlName="address">
+
+  </div>
+  <div class="form-group d-flex align-items-center col-md-6">
+     <span class="text-danger mx-1 v-hidden">*</span><input type="text" placeholder="آدرس کارخانه  " class="form-control" formControlName="companyAddress">
+
+  </div>
+  <div class="form-group col-md-3 mx-3 d-flex align-items-center">
+  <input type="text" placeholder="لوکیشن" class="form-control" style="display: none;" >
+  <span (click)="showHideMap()">موقعیت <i class="fa fa-map-marker" aria-hidden="true" ></i></span>
+  <i *ngIf="latFactory && langFactory" class="fa fa-check-square mx-1" aria-hidden="true"></i>
+
+  </div>
+
+  </div>
+  <div class="row">
+
+  </div>
+  <div class="row">
+     <div class="form-group d-flex align-items-center col-md-6">
+        <input type="text" placeholder="آدرس انبار  " class="form-control" formControlName="warehouseAddress">
+
+      </div>
+
+      <span (click)="UploadWarrantyLicenseFile.click()">
+          <span class="doc d-flex align-items-center">
+               <img src="/assets/images/login-register/upload.svg">
+          <span class="mx-3"> بارگذاری پروانه بهره برداری</span>
+          <span *ngIf="uploadWarrantyLicenseFileName" class="mx-1">{{uploadWarrantyLicenseFileName}}</span>
+     </span>
+     <input style="display: none;" #UploadWarrantyLicenseFile type="file" name="profile" (change)="onFileUploadWarrantyLicenseFileSelect($event)"  />
+     </span>
+     <span (click)="UploadHealthLicenseFile.click()" >
+          <span class="doc d-flex align-items-center">
+               <img src="/assets/images/login-register/upload.svg">
+         <span class="mx-3">بارگذاری مجوز بهداشت</span>
+         <span *ngIf="uploadHealthLicenseFileName" class="mx-1">{{uploadHealthLicenseFileName}}</span>
+
+     </span>
+     <input style="display: none;" #UploadHealthLicenseFile type="file" name="profile" (change)="onFileUploadHealthLicenseFileSelect($event)"  />
+
+  </span>
+
+  </div>
+  <div class="row">
+     <div class="form-group col-md-6">
+          <textarea  class="form-control"  placeholder="توضیحات محصول" formControlName="factoryDescription"  ></textarea>
+          </div>
+     <span (click)="UploadOperationLicenseFile.click()" >
+          <span class="doc d-flex align-items-center">
+          <span class="text-danger mx-1">*</span>
+          <img src="/assets/images/login-register/upload.svg">
+         <span class="mx-3">بارگذاری مجوز فعالیت</span>
+         <span *ngIf="uploadOperationLicenseFileName" class="mx-1">{{uploadOperationLicenseFileName}}</span>
+     </span>
+     <input style="display: none;" #UploadOperationLicenseFile type="file" name="profile" (change)="onFileUploadOperationLicenseFileSelect($event)"  />
+
+     </span>
+     <span (click)="UploadStandardBadgeFile.click()">
+          <span class="doc d-flex align-items-center">
+           <img src="/assets/images/login-register/upload.svg">
+          <span class="mx-3">بارگزاری نشان استاندارد</span>
+         <span *ngIf="uploadStandardBadgeFileName" class="mx-1">{{uploadStandardBadgeFileName}}</span>
+
+
+      </span>
+      <input style="display: none;" #UploadStandardBadgeFile type="file" name="profile" (change)="onFileUploadStandardBadgeFileSelect($event)"  />
+
+      </span>
+
+  </div>
+  <div class="p-0 d-flex col-md-12 justify-content-end">
+     <span (click)="UploadLogoFile.click()">
+         <span class="doc  d-flex align-items-center">
+              <img src="/assets/images/login-register/upload.svg">
+         <span class="mx-3"> بارگذاری لوگو</span>
+         <span *ngIf="uploadLogoFileName" class="mx-1">{{uploadLogoFileName}}</span>
+    </span>
+    <input style="display: none;" #UploadLogoFile type="file" name="profile" (change)="onFileUploadLogoFile($event)"  />
+    </span>
+    </div>
+  </div>
+  <div class="text-right">
+      <button [disabled]="loading"   class=" btn-accept " (click)="editFactory()">
+          <span>ثبت اطلاعات</span>
+
+      </button>
+
+  </div>
+  </form>
+  </ng-container>-->
+
+</div>
+
+
+<ngx-spinner></ngx-spinner>

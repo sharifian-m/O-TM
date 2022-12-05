@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <!-- <button type="button" class="close" aria-label="Close" >
+    <span aria-hidden="true">&times;</span>
+  </button> -->
+<!--  <span class="fa fa-times" (click)="close()"></span>-->
+  <img src="/assets/images/wrong_icon.svg">
+  <h4 class="modal-title" id="modal-basic-title">
+    <span class="text-danger">خرید ناموفق</span>
+  </h4>
+</div>
+<div class="modal-body">
+  <p>قیمت این محصول تغییر کرده است. برای سفارش مجدد اقدام نمایید.</p>
+  <!--  <input type="text" class="form-control">-->
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" (click)="close(true)" >انصراف</button>
+  <button type="button" class="btn btn-danger" (click)="cancelFactor()">لغو فاکتور</button>
+</div>
+

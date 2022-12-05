@@ -1,0 +1,140 @@
+<div class="row d-flex justify-content-between align-items-start">
+
+    <div *ngIf="!currentUser" class="mx-auto d-flex align-items-center my-4" >
+      <img src="/assets/icons/header/cart.svg" class="mx-2">
+      <h4 style="color: #780d0d87;text-align: center ;margin-bottom: 0rem; font-family: 'byekan-bold' !important;" >لطفا وارد حساب کاربری خود شوید </h4>
+
+    </div>
+
+
+     <div *ngIf="currentUser && showCompanyItem" class="mx-auto d-flex align-items-center my-4" >
+          <img src="/assets/icons/header/cart.svg" class="mx-2">
+       <h4 style="color: #780d0d87;text-align: center ;margin-bottom: 0rem; font-family: 'byekan-bold' !important;" > سبد خرید شما خالی است </h4>
+
+     </div>
+
+
+    <div class="col-lg-9">
+      <div class="card   my-3" *ngIf=" currentUser &&  !showCompanyItem">
+        <div class="card-header basket">
+            <img src="/assets/icons/cart/1.svg">
+             <span class="mx-1">   سبد خرید</span>
+  
+  
+            </div>
+  
+        <div class="card-body">
+          <ul class="company-product">
+               <div class="card my-3" *ngFor="let item of cartItems ">
+                    <div class="card-header" >
+                       <figure>
+                            <img src="{{item.supplierLogoUrl ? item.supplierLogoUrl : 'assets/images/preview.png'}}">
+                            <span class="mx-1">محصولات {{item.supplierName}}</span>
+                       </figure>
+                    </div>
+                    <div class="card-body">
+                          <div class="items" *ngFor="let data of item.items ;let i=index ">
+                               <div class="rigth-items">
+                               <figure>
+                                    <img src="{{data.supplierItem.itemImageUrl}}">
+                               </figure>
+                               <section class="mx-2">
+                                    <span class="my-2 itemTitle">{{data.supplierItem.itemTitle}}</span>
+                                    <div class="my-2">
+                                      <app-count-up-down [maximumCount]="data.supplierItem.maximumOrderCount " [minimumCount]="data.supplierItem.minimuneOrderCount" (changeCount)="onChangeCount($event,data.supplierItem.minimuneOrderCount,data.supplierItem.maximumOrderCount,data.supplierItem.sellPrice,data.supplierItem.totalPrice,i,data,item)" [count]="data.count">
+  
+                                        <span> {{findUnitTitel(data.supplierItem.unit)}} </span>
+  
+                                      </app-count-up-down>
+  
+                                    </div>
+                               </section>
+                               <span class="price">
+                                  <span class="d-flex">قیمت هر واحد
+  
+                                   <span> {{findUnitTitel(data.supplierItem.unit)}} </span>
+  
+                                  </span>
+                                  <span class="sell-price">
+  
+                                     {{((data.supplierItem.sellPrice*data.supplierItem.valuePerUnit)|getNumberWithComma).toLocaleString('fa-IR')}} تومان
+                                  </span>
+                             </span>
+                           </div>
+                            <small *ngIf="data.supplierItem.requiredRoleCode" class=" text-center" style="color: #FF4B4B ;font-weight: bold;min-width: 100px">
+                              کد نقش برای خرید این کالا الزامی میباشد
+                            </small>
+                            <small *ngIf="!data.supplierItem.requiredRoleCode" class=" text-center" style="color: #FF4B4B ;font-weight: bold;min-width: 100px">
+                             &nbsp;
+                            </small>
+                             <div class="total-price">
+  
+                                   <div class="actions ">
+                                     <span class="price mb-1">{{((data.supplierItem.sellPrice*data.supplierItem.valuePerUnit*data.count).toLocaleString('fa-IR'))|getNumberWithComma }}  تومان</span>
+  
+                                     <button class="btn btn-dark seeDetailes"  (click)="goToProductDetail(data.itemId,data.count)">مشاهده جزئیات</button>
+  
+                                   </div>
+                               <div class="actions mx-1">
+                                 <span *ngIf="data.supplierItem.hasDiscount" class="offer mb-1"> {{data.supplierItem.discountPercent.toLocaleString('fa-IR')}} %</span>
+                                 <span *ngIf="!data.supplierItem.hasDiscount" style="    margin-bottom: 10px!important;">    &nbsp;</span>
+  
+                                 <span class="delete mx-1" (click)="deleteBasket(data.cartId)">
+                                               <img src="/assets/icons/cart/delete.svg">
+                                         </span>
+                               </div>
+                             </div>
+  
+                          </div>
+  
+  
+                    </div>
+               </div>
+          </ul>
+        </div>
+  <!--      <button class="next btn-mobile" (click)="nextStep()">ادامه</button>-->
+     </div>
+    </div>
+   <div class="col-lg-3">
+    <div class="cart-status  " *ngIf=" currentUser && !showCompanyItem">
+      <div class="card my-3" >
+            <div class="card-header">
+                 <img src="/assets/icons/cart/cart-status.svg">
+                  <span>وضعیت سبد خرید</span>
+            </div>
+            <div class="card-body">
+                  <ul *ngIf="cartItems.length">
+                       <li>
+                            <span>برند ها </span>
+                            <span>{{cartItems.length.toLocaleString('fa-IR')}}<span class="mx-1">
+                                برند
+                            </span></span>
+                       </li>
+                       <li>
+                          <span>مجموع کالا ها  </span>
+                          <span>{{totalCount.toLocaleString('fa-IR')}}</span>
+                       </li>
+                       <li>
+                          <span>مبلغ سفارش  </span>
+                          <span>{{((totalPrice |getNumberWithComma).toLocaleString('fa-IR')) }} تومان</span>
+                       </li>
+                       <!-- <li>
+                          <span>تخفیف  </span>
+                          <span>{{getNumberWithComma(4685488) }} تومان</span>
+                       </li> -->
+                       <div class="underline"></div>
+                       <li>
+                          <span>مبلغ کل:  </span>
+                          <span class="total-price">{{((totalPrice |getNumberWithComma).toLocaleString('fa-IR')) }} تومان</span>
+                       </li>
+                       <button class="next" (click)="nextStep()">ادامه</button>
+                  </ul>
+            </div>
+      </div>
+</div>
+   </div>
+  </div>
+
+
+
+<ngx-spinner></ngx-spinner>

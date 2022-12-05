@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title" id="modal-basic-title">
+    <span>حذف آیتم انتخابی</span>
+  </h4>
+  <!-- <button type="button" class="close" aria-label="Close" >
+    <span aria-hidden="true">&times;</span>
+  </button> -->
+  <span class="fa fa-times" (click)="close()"></span>
+</div>
+<div class="modal-body">
+  <p>آیا از حذف آیتم انتخابی اطمینان دارید؟</p>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-primary" (click)="close(true)" >بلی</button>
+  <button type="button" class="btn btn-outline-warning" (click)="close(false)" >خیر</button>
+</div>
+
+
+
+
+

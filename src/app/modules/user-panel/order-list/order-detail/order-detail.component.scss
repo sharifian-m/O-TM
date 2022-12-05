@@ -1,0 +1,131 @@
+:host{
+    width: 77%;
+}
+.card{
+    border-radius: 9px;
+    .card-header{
+        background-color: #fff;
+        padding: 8px;
+        h2{
+            display: flex;
+            align-items: center;
+            margin: auto;
+            font-size: 16px;
+            padding: 10px;
+
+        }
+    }
+    p{
+        font-size: 16px;
+        color: #707070;
+    }
+    .under-line{
+        border: 1px solid #EB5454;
+        display: block;
+        width: 170px;
+        position: relative;
+        top: 9px;
+    }
+}
+.card.factor-item{
+     background-color: #F6F6F6;
+    .card-header{
+     background-color: #F6F6F6;
+
+            img{
+
+                    filter: unset
+
+
+
+            }
+        figure{
+            margin: 0px;
+             img{
+                 width: 80px;
+                 height: 80px;
+             }
+        }
+    }
+    .count-cart{
+        background-color: #fff;
+        border-radius: 12px;
+        padding: 5px 25px;
+        box-shadow: 0px 0px 2px #ccc;
+        margin-top: 10px;
+    }
+    .card-body{
+        .items{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px;
+            .rigth-items{
+                display: flex;
+                align-items: center;
+                img{
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+            .price{
+              color: #FF6E6E;
+            }
+            .sell-price{
+                color: #515151;
+                display: flex;
+                flex-direction: column;
+                margin-right: 10px;
+            }
+            .delete{
+                background-color: #FF6E6E;
+                padding: 7px 12px;
+                border-radius: 8px;
+            }
+        }
+
+    }
+}
+.card.factor-detail{
+    .card-header{
+        background-color: #F6F6F6;
+    }
+    li{
+        display: flex;
+        justify-content: space-between;
+        margin: 10px auto;
+        &:last-child{
+            border-top: 1px solid #efefef;
+            padding: 10px 0px;
+        }
+    }
+}
+
+.offer{
+  background-color: red;
+  padding: 2px 12px 2px 12px;
+  font-size: 13px;
+  color: #fff;
+  border-radius: 24px;
+}
+.factor-mobile{
+  display: none!important;
+  width: 310px;
+  ul {
+    padding: 20px;
+  }
+  ul li img {
+    width: 200px;
+  }
+}
+//.factor-desktop{
+//  display: flex!important;
+//}
+@media screen and (max-width:576px){
+  .factor-mobile{
+    display: flex!important;
+  }
+  .factor-desktop{
+    display: none!important;
+  }
+}

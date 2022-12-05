@@ -1,0 +1,98 @@
+<app-main-layout>
+    <div class="rtl">
+        <div class="container col-md-10 py-3">
+            <div class="card py-3">
+                
+                <div class="card-header">
+                    <h2>دانلود اپلیکیشن اُتامین </h2>
+                    <span class="under-line"></span>
+                </div>
+
+                <div class="card-body">
+
+                    <p class="text-center">شما میتوانید اپلیکیشن های اُتامین را از طریق راه های زیر دریافت کنید </p>
+                    
+                    <ul class="apps">
+                        <li>
+                            <figure>
+                                <img src="/assets/icons/apps/direct.svg">
+                                <span>دانلود مستقیم</span>
+                            </figure>
+                            <div>
+
+                                <button class="btn-direct" (click)="downloadApp('0')">
+                                    اپلیکیشن اُتامین
+                                </button>
+                                <button class="btn-direct" (click)="downloadApp('1')">
+                                    اپلیکیشن مارکتر
+                                </button>
+
+                            </div>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="/assets/icons/apps/bazar.svg">
+
+                            </figure>
+                            <p>برای دانلود از طریق بازار بر روی دکمه های زیر کلیک کنید</p>
+                            <div>
+                                <a href="https://cafebazaar.ir/app/ir.otamin.app" target="_blank">
+
+                                    <button class="btn-bazar">
+                                        اپلیکیشن اُتامین
+                                    </button>
+                                </a>
+                                <a href="https://cafebazaar.ir/app/ir.otamin.marketer" target="_blank">
+                                    <button class="btn-bazar">
+                                        اپلیکیشن مارکتر
+                                    </button>
+                                </a>
+                            </div>
+                        </li>
+                        <li>
+                            <figure>
+                                <img src="/assets/icons/apps/mayket.svg">
+
+                            </figure>
+                            <p>برای دانلود از طریق مایکت بر روی دکمه های زیر کلیک کنید</p>
+                            <div>
+                                <a href="https://myket.ir/app/ir.otamin.app" target="_blank">
+                                    <button class="btn-mayket">
+                                        اپلیکیشن اُتامین
+                                    </button>
+                                </a>
+                                <a href="https://myket.ir/app/ir.otamin.marketer" target="_blank">
+                                    <button class="btn-mayket">
+                                        اپلیکیشن مارکتر
+                                    </button>
+                                </a>
+                            </div>
+                        </li>
+
+                        <li>
+                            <figure>
+                                <b><p>سیستم عامل های دیگر</p></b>
+                            </figure>
+                            <p>برای دانلود نسخه وب برای کاربران <b>ios</b> و ویندوز از لینک های زیر استفاده کنید</p>
+                            <div>
+                                <a href="https://app.otamin.ir" target="_blank">
+                                    <button class="btn-direct">
+                                        نسخه وب اپ
+                                    </button>
+                                </a>
+                                <a href="#" target="_blank">
+                                    <button class="btn-direct">
+                                        نسخه ویندوز (به زودی)
+                                    </button>
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</app-main-layout>

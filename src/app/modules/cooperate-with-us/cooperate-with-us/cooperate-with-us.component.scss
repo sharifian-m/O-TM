@@ -1,0 +1,38 @@
+
+  .under-line-1{
+    border: 1px solid #EB5454;
+    display: block;
+    width: 70px;
+    position: relative;
+    margin: 0px auto;
+    top: 9px;
+  }
+  .borderButtom{
+    position: relative; 
+    .under-line{
+        border: 1px solid #EB5454;
+        display: block;
+        width: 70px;
+        position: absolute;
+        margin: 0;
+        top:-1px;
+        right: 0px;
+      }
+  }
+ 
+  .bg-gry {
+    background-color: #f5f4f4;
+  }
+  .sendInfo-title{
+    
+    font-size: 18px;
+  }.btn-accept {
+    background-color: #FE3E3E;
+    margin: 5px;
+    color: white;
+    border-radius: 9px;
+    width: 150px;
+    height: 52px;
+    font-size: 14px;
+  }
+ 

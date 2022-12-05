@@ -1,0 +1,89 @@
+.card{
+    border-radius: 9px;
+    .card-header{
+        text-align: center;
+        background-color: #fff;
+        padding: 8px;
+        h2{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto;
+            font-size: 17px;
+        }
+    }
+    p{
+        font-size: 16px;
+        color: #707070;
+    }
+    .under-line{
+        border: 1px solid #EB5454;
+        display: block;
+        width: 160px;
+        position: relative;
+        margin: 0px auto;
+        top: 9px;
+    }
+    .apps{
+        
+        li{
+            background-color: #F8F8F8;
+            padding: 17px 10px;
+            border-radius: 9px;
+            margin: 20px auto;
+            text-align: center;
+            figure{
+                span{
+                    color: #707070;
+                    margin-right: 7px;
+                }
+            }
+            div{
+                display: flex;
+                justify-content: center;
+                margin: auto;
+                flex-wrap: wrap;
+            
+            }
+            .btn-direct{
+                background-color: #FE3E3E;
+                color: white;
+                border-radius: 9px;
+                padding: 7px 10px;
+                font-size: 14px;
+                width: 352px;
+                height: 52px;
+                margin: 7px 10px;
+              
+            }
+            .btn-bazar{
+                background-image: linear-gradient(to right,#00B57A , #48e269);
+                color: white;
+                border-radius: 9px;
+                padding: 7px 10px;
+                font-size: 14px;
+                width: 352px;
+                height: 52px;
+                margin: 7px 10px;
+            }
+            .btn-mayket{
+                background-color: #00B0FE;
+                color: white;
+                border-radius: 9px;
+                padding: 7px 10px;
+                font-size: 14px;
+                width: 352px;
+                height: 52px;
+                margin: 7px 10px;
+            }
+        }
+    }
+}
+@media screen and (max-width:576px){
+    a{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+    }
+    
+}

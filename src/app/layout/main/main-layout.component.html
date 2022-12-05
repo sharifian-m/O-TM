@@ -1,0 +1,83 @@
+<div class="top-header d-lg-flex flex-row-reverse align-items-center d-none justify-content-start ">
+
+   <div class="me-5 ">
+      <a href="tel:۰۲۱-۲۲۳۶۰۴۳۹">
+         ۰۹۳۰۰۰۱۷۰۰۰
+         -
+         ۰۲۱-۲۲۳۶۰۴۳۹</a>
+      <a href="tel:۰۲۱-۲۲۳۶۰۴۳۹" class="ms-2"><img src="/assets/icons/header/phone.svg"></a>
+   </div>
+
+   
+   <span class="pipe-line mx-2"></span>
+
+   <div class=" ">
+      <a class="me-2" href="mailto:info@otamin.ir">info@otamin.ir</a>
+      <a href="mailto:info@otamin.ir" class=""><img src="/assets/icons/header/email.svg"></a>
+
+   </div>
+
+   <span class="pipe-line mx-2"></span>
+
+   <div class="ms-2">
+      <a href="https://www.instagram.com/otamin.ir/">otamin.ir</a>
+      <a href="https://www.instagram.com/otamin.ir/" class="ms-2"><img src="/assets/icons/header/insta.svg"></a>
+   </div>
+</div>
+
+<div class="bg-white place "  [class.sticky]="sticky" >
+  
+   <app-header ></app-header>
+   <app-nav ></app-nav>
+</div>
+<div class="bg-white bread-crumb rtl" *ngIf="hasBreadCrumb">
+
+   <span class="mx-1">اینجا هستید: </span>
+   <a routerLink="/home">صفحه اصلی</a>
+   <img src="/assets/images/arrow-bread-crumb.svg">
+   <xng-breadcrumb *ngIf="generalService.isLoadData" [separator]="iconTemplate"></xng-breadcrumb>
+   <ng-template #iconTemplate>
+      <img src="/assets/images/arrow-bread-crumb.svg">
+   </ng-template>
+</div>
+<div class="carousel-section  ">
+   <!-- <span class="top-move" (click)="topMove()" [class.show-top-arrow]="showTopArrow">
+        <i class="fa fa-chevron-up"></i>
+    </span> -->
+   <ng-content></ng-content>
+
+</div>
+<div class="bg-gray">
+   <div class="container ">
+      <div class="row justify-content-center">
+         <ul class="service">
+            <li>
+               <figure><img src="/assets/images/service/1.svg"></figure>
+               <span>تحویل اکسپرس</span>
+            </li>
+            <li>
+               <figure><img src="/assets/images/service/2.svg"></figure>
+               <span>پشتیبانی 24 ساعته</span>
+
+            </li>
+            <li>
+               <figure><img src="/assets/images/service/3.svg"></figure>
+               <span>پرداخت در محل</span>
+
+            </li>
+            <li>
+               <figure><img src="/assets/images/service/4.svg"></figure>
+               <span>ضمانت کالا</span>
+
+            </li>
+            <li>
+               <figure><img src="/assets/images/service/5.svg"></figure>
+               <span>اصل بودن کالا
+               </span>
+
+            </li>
+         </ul>
+      </div>
+   </div>
+</div>
+<app-footer></app-footer>

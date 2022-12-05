@@ -1,0 +1,144 @@
+<app-main-layout>
+
+  <div class="rtl">
+
+    <div *ngIf="model">
+      <div class="bg-white ">
+        <!-- <div class="brand-img"  >
+
+
+        </div> -->
+        <div class="container pt-4">
+          <div class="row justify-content-center brand-logo">
+            <figure><img src="{{brandInfo?.imageUrl}}">
+
+
+            </figure>
+
+          </div>
+        </div>
+        <div class="container brand-description p-3" *ngIf="brandInfo">
+          <h2>{{brandInfo?.title}}</h2>
+          <p *ngIf="brandInfo?.description !== 'undefined'">
+            {{brandInfo?.description}}
+
+          </p>
+        </div>
+
+      </div>
+      <!-- <div class="container category-brand my-3">
+       <div class="card">
+           <div class="card-header">
+               <h2>دسته بندی محصولات سحر خیز</h2>
+               <span class="under-line"></span>
+           </div>
+           <div class="card-body">
+               <ul class="cat-name">
+                    <li  >زعفران</li>
+                    <li >زرشک</li>
+                    <li >تزئینات غذا</li>
+                    <li >ادویه و چاشنی</li>
+                    <li >قند و نبات</li>
+                    <li >سبزی خشک</li>
+                    <li >آجیل و خشکبار</li>
+               </ul>
+
+     </div>
+          </div>
+      </div> -->
+      <div class="container">
+        <div class="card py-3">
+          <div *ngIf="bestSellingItem.length" class="card-header"><h2>{{brandInfo.title}}</h2><span class="under-line"></span></div>
+              <div *ngIf="!bestSellingItem.length" style="display: flex;
+    flex-direction: column;
+    height: 300px;
+    align-items: center;
+    justify-content: center;">
+                <i class="fas fa-exclamation-triangle fa-lg my-2" style="color: red"></i>
+                <h4 style="color: #780d0d87;text-align: center ; font-family: 'byekan-bold' !important;">برای این برند
+                  محصولی وجود ندارد </h4>
+              </div>
+
+              <div *ngIf="bestSellingItem.length" class="new-product">
+                <ul style="flex-wrap: wrap;">
+                  <li class="col-md-3" *ngFor="let item of bestSellingItem | paginate: { itemsPerPage: 16,currentPage: q,totalItems : totalItems}">
+                    <!--                    (click)="productDetail(item.id)"-->
+                    <a [routerLink]="['../../../product-list/product-detail/',item.id ,item.title]">
+                   
+                      <figure>
+                        <img *ngIf="item.imageUrl" src="{{item.imageUrl}}">
+                        <img *ngIf="!item.imageUrl" src="/assets/images/default.png">
+                        <p class="p-name text-center mb-3" style="text-align: right;">{{item.title}}</p>
+                        <span class="price" style=" display: flex; flex-direction: row;  align-items: center;height: 34px">{{(item.sellPrice.toLocaleString('fa-IR'))|getNumberWithComma}} تومان<span
+                          *ngIf="item.hasDiscount  && item.discountPercent>0" class="text-center show-offer mx-1">  %{{item.discountPercent}}
+                          تخفیف  </span></span>
+                        <span *ngIf="item.hasDiscount  && item.discountPercent>0" class="old-price">{{item.oldPrice.toLocaleString('fa-IR')}}
+                          تومان</span>
+                        <span *ngIf="!item.hasDiscount" class="" style="height: 18px"> &nbsp;
+                            </span>
+                        <span
+                          class="d-block consumer-price" *ngIf="item.consumerPrice > 10">قیمت مصرف کننده : {{(item.consumerPrice.toLocaleString('fa-IR'))|getNumberWithComma}}
+                          تومان</span>
+                        <span class="d-block consumer-price" *ngIf="item.consumerPrice < 10">قیمت مصرف کننده : فاقد قیمت</span>
+                        <span class="order  ">حداقل سفارش: {{item.minimuneOrderCount.toLocaleString('fa-IR')}}
+                          عدد</span>
+                        <span class="order ">حداکثر سفارش: {{item.maximumOrderCount.toLocaleString('fa-IR')}} عدد</span>
+                        <app-btn-cart (click)="productDetail(item.id)" [BtnName]="'سفارش دهید'"></app-btn-cart>
+
+                      </figure>
+                      <span class="selling-stop" *ngIf="item.isSellingStoped">توقف فروش</span>
+                    </a>
+                  </li>
+
+
+                </ul>
+                <pagination-controls *ngIf="totalItems" class="d-flex justify-content-center"
+                                     (pageChange)="pageChanged($event)"
+                                     previousLabel="صفحه قبل"
+                                     directionLinks="true"
+                                     autoHide="true"
+                                     responsive="true"
+                                     nextLabel="صفحه بعد"></pagination-controls>
+<!--                <div class="swiper-button-next"></div>-->
+<!--                <div class="swiper-button-prev"></div>-->
+              </div>
+
+      <!-- <div class="container category-brand my-3">
+          <div class="card">
+              <div class="card-header">
+                  <h2>جدید ترین محصولات سحر خیز </h2>
+                  <span class="under-line"></span>
+              </div>
+              <div class="card-body">
+                  <div class="container">
+                  <div class="row">
+                      <swiper class="new-product" [config]="newProduct">
+                          <ul class="swiper-wrapper">
+                              <li class="swiper-slide" *ngFor="let item of bestSellingItem">
+                                <figure>
+                                <img   *ngIf="item.imageUrl" src="{{'https://api.otamin.ir'+item.imageUrl}}" >
+                          <img *ngIf="!item.imageUrl" src="/assets/images/default.png">
+                                 <span class="p-name">{{item.title}}</span>
+                                 <span class="price">{{getNumberWithComma(item.sellPrice)}} تومان</span>
+                                 <span class="d-block consumer-price" >قیمت مصرف کننده : {{getNumberWithComma(item.consumerPrice)}}  تومان</span>
+                                 <span class="order  ">حداقل سفارش: {{item.minimuneOrderCount}} عدد</span>
+                                 <span class="order ">حداکثر سفارش: {{item.maximumOrderCount}} عدد</span>
+                                </figure>
+                              </li>
+                          </ul>
+                          <div class="swiper-button-next"></div>
+                          <div class="swiper-button-prev"></div>
+                      </swiper>
+
+                  </div>
+                  </div>
+
+        </div>
+             </div>
+          </div> -->
+      </div>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+</app-main-layout>

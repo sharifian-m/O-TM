@@ -1,0 +1,236 @@
+
+.box-number{
+    display: flex;
+    width: 36px;
+    height:36px ;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+     color: #fff;
+}
+.card-body {
+  padding: 0;
+}
+.card{
+    h2{
+        color: #ff4b4b;
+        text-align: center;
+        font-size: 18px;
+        padding: 20px;
+    }
+    .description{
+        background-color: #FBFBFB;
+        color: #484848;
+        padding: 10px;
+        font-size: 16px;
+        width: 80%;
+        margin: auto;
+    }
+    .steps{
+        width: 888px;
+        margin: 50px auto;
+        a{
+            color:#ff4b4b ;
+        }
+        .left-side{
+            img.rotate{
+                transform: rotate(180deg);
+
+            }
+            .title{
+                span{
+                    direction: ltr;
+                }
+            }
+        }
+        section{
+            display: flex;
+            align-items: center;
+            p{
+                color: #484848;
+                font-size: 20px;
+            }
+
+            .underline{
+               border: 1px  dashed #1A8496;
+               width: 300px;
+               display: block;
+            }
+            .title{
+                display: flex;
+                align-items: center;
+                width: 78%;
+              span.item{
+                  display: flex;
+                  align-items: center;
+                width: 70%;
+                white-space: nowrap;
+                font-weight: bold
+
+              }
+
+                span.number1{
+                        @extend .box-number;
+                        background-color: #1A8496;
+
+
+                }
+                img{
+                    width: 200px;
+                }
+            }
+            .confirm{
+                width: 65%!important;
+            }
+        .final{
+            margin-top: -12px
+        }
+            span.number2{
+                @extend .box-number;
+                background-color: #A9C370;
+
+        }
+        span.number3{
+            @extend .box-number;
+            background-color: #F5AE3B;
+
+    }
+    span.number4{
+        @extend .box-number;
+        background-color: #CC4E3D;
+
+}
+span.number5{
+    @extend .box-number;
+    background-color: #42BBFF;
+
+}
+span.number6{
+    @extend .box-number;
+    background-color: #94A4B5;
+
+}
+
+        }
+        .box{
+         position: relative;
+         margin-top: -10px;
+         .icon{
+             position: absolute;
+             width: 40px;
+             top: 25%;
+             right: 35%;
+
+         }
+        }
+
+    }
+}
+.desktop{
+    display: block;
+}
+.mobile{
+    display: none;
+}
+.final .icon{
+    right: 35%!important;
+    top:42%!important
+}
+@media screen and (max-width:576px){
+   .box{
+       display: none;
+   }
+   .title{
+    width:20%!important;
+   }
+section{
+   flex-wrap: wrap;
+   flex-direction: column;
+   align-items: unset!important;
+   p{
+       width: 30%;
+   }
+}
+.left-side{
+    flex-direction: row-reverse!important;
+}
+.desktop{
+    display: none;
+}
+.mobile{
+    display: block;
+}
+span.item{
+ width: unset!important;
+
+}
+.title{
+    justify-content: center;
+}
+.step1{
+    justify-content: center;
+    width: 800px!important;
+    margin: auto;
+    img{
+        width: 97px;
+        transform: rotate(
+    -90deg);
+        height: 30px;
+        margin: 34px 42px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+}
+@media screen and (min-width:576px) and (max-width:768px){
+    .box{
+        display: none;
+    }
+    .title{
+     width:20%!important;
+    }
+ section{
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center!important;
+    p{
+        width: 30%;
+    }
+ }
+ .left-side{
+     flex-direction: row-reverse!important;
+ }
+ .desktop{
+     display: none;
+ }
+ .mobile{
+     display: block;
+ }
+ span.item{
+  width: unset!important;
+
+ }
+ .title{
+     justify-content: center;
+ }
+ .step1{
+     justify-content: center;
+     width: 100%!important;
+     margin: auto;
+     img{
+         width: 97px;
+         transform: rotate(
+     -90deg);
+         height: 30px;
+         margin: 34px 42px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+     }
+ }
+ .steps{
+    width: 100%!important;
+  }
+}

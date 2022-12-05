@@ -1,0 +1,206 @@
+<div class="row">
+  <div class="card w-100 my-3" *ngIf="companyItem">
+    <div class="card-header basket">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18.685" height="18.687" viewBox="0 0 18.685 18.687">
+        <g id="shopping-basket" transform="translate(-3.555 -3.555)">
+          <g id="Group_6" data-name="Group 6" transform="translate(3.555 3.555)">
+            <path id="Path_7" data-name="Path 7"
+                  d="M29.128,18.151a1.993,1.993,0,0,0-1.567-.793H26.184C26.054,13.826,23.5,11,20.368,11s-5.686,2.826-5.816,6.357H13.175a1.993,1.993,0,0,0-1.567.793,2.833,2.833,0,0,0-.507,2.391l1.651,7.277a2.237,2.237,0,0,0,2.075,1.869H25.905a2.233,2.233,0,0,0,2.075-1.869l1.655-7.277A2.833,2.833,0,0,0,29.128,18.151Zm-8.76-5.595c2.273,0,4.134,2.128,4.256,4.8H16.112C16.234,14.688,18.1,12.556,20.368,12.556Zm7.749,7.639-1.651,7.28c-.084.374-.324.656-.557.656H14.827c-.233,0-.473-.282-.557-.656l-1.651-7.28c-.088-.385-.141-1.281.557-1.281H27.561C28.312,18.913,28.205,19.81,28.117,20.195Z"
+                  transform="translate(-11.025 -11)" fill="#ff4b4b"/>
+            <path id="Path_8" data-name="Path 8"
+                  d="M135.078,259.1a.776.776,0,0,0-.778.778v4.863a.778.778,0,0,0,1.556,0v-4.863A.776.776,0,0,0,135.078,259.1Z"
+                  transform="translate(-129.599 -249.638)" fill="#ff4b4b"/>
+            <path id="Path_9" data-name="Path 9"
+                  d="M233.978,259.1a.776.776,0,0,0-.778.778v4.863a.778.778,0,0,0,1.556,0v-4.863A.781.781,0,0,0,233.978,259.1Z"
+                  transform="translate(-224.727 -249.638)" fill="#ff4b4b"/>
+            <path id="Path_10" data-name="Path 10"
+                  d="M332.778,259.1a.776.776,0,0,0-.778.778v4.863a.778.778,0,1,0,1.556,0v-4.863A.779.779,0,0,0,332.778,259.1Z"
+                  transform="translate(-319.759 -249.638)" fill="#ff4b4b"/>
+          </g>
+        </g>
+      </svg>
+
+      <span class="mx-1"> تایید سبد خرید</span>
+    </div>
+    <div class="card-body" *ngFor="let item of companyItem">
+      <div class="brand-name">
+        <img src="{{item.supplierLogoUrl}}">
+        <span>{{item.supplierName}}</span>
+        <div class="hr"></div>
+      </div>
+      <table>
+
+        <tr>
+          <th>
+            ردیف
+          </th>
+          <th>
+            اقلام
+          </th>
+          <th>
+            تعداد
+          </th>
+          <th>
+            قیمت هر واحد
+          </th>
+          <th>
+            مبلغ کل
+          </th>
+          <th>
+            تخفیف
+          </th>
+          <th>
+            مبلغ نهایی
+          </th>
+        </tr>
+        <tr *ngFor="let data of item.items;let i=index">
+          <td>
+            {{i + 1}}
+          </td>
+          <td>
+            {{data.supplierItem.itemTitle}}
+          </td>
+          <td>
+            {{data.count}}
+          </td>
+          <td>
+            {{(((data.supplierItem.sellPrice * data.supplierItem.valuePerUnit)|getNumberWithComma).toLocaleString('fa-IR'))}}
+            تومان
+          </td>
+          <td>
+            {{data.totalAmountWithoutDiscount.toLocaleString('fa-IR')}}                  تومان
+          </td>
+          <td>
+            {{data.discountAmount.toLocaleString('fa-IR')}}            تومان
+          </td>
+          <td>
+            {{data.totalAmount.toLocaleString('fa-IR')}}                  تومان
+          </td>
+
+
+        </tr>
+
+      </table>
+      <div class="mobile-item">
+        <ul>
+          <li *ngFor="let data of item.items;let i=index">
+
+                  <span>
+                    <span> اقلام</span>
+                    <span>{{data.supplierItem.itemTitle}}</span>
+                  </span>
+            <span>
+                    <span> تعداد</span>
+                    <span>{{data.count}}</span>
+                  </span>
+            <span>
+                    <span> قیمت هر واحد</span>
+                    <span> {{(((data.supplierItem.sellPrice * data.supplierItem.valuePerUnit)|getNumberWithComma).toLocaleString('fa-IR'))}}
+                      تومان</span>
+                  </span>
+            <span>
+                    <span>   مبلغ کل</span>
+                    <span>{{data.totalAmountWithoutDiscount.toLocaleString('fa-IR')}}  تومان</span>
+                  </span>
+            <span>
+                    <span> تخفیف</span>
+                    <span> {{data.discountAmount.toLocaleString('fa-IR')}}  تومان</span>
+                  </span>
+            <span>
+                    <span>   مبلغ نهایی </span>
+                      <span>{{data.totalAmount.toLocaleString('fa-IR')}}  تومان</span>
+                  </span>
+
+
+          </li>
+        </ul>
+      </div>
+      <ng-container *ngIf="item.isLimitByAmount">
+        <div class="rules">
+          <img src="/assets/icons/cart/rules.svg">
+          <p>لطفا توجه فرمایید که حداقل خرید
+            از {{item.supplierName}}  {{((item.minimumOrderAmount |getNumberWithComma).toLocaleString('fa-IR'))}} تومان و
+            حداکثر خرید {{((item.maximumOrderAmount |getNumberWithComma).toLocaleString('fa-IR'))}} تومان است</p>
+        </div>
+        <div class="success"
+             *ngIf="item.totalAmount<=item.maximumOrderAmount && item.totalAmount >=item.minimumOrderAmount; else invalid  ">
+          <img src="/assets/icons/cart/success.svg">
+          <p>
+            مبلغ خرید شما کافی ست
+          </p>
+        </div>
+
+        <ng-template #invalid>
+          <div class="error">
+            <img src="/assets/icons/cart/error.svg">
+            <p>
+              مبلغ خرید شما کافی نیست، لطفا میزان حداقل خرید را لحاظ قرار دهید
+            </p>
+          </div>
+        </ng-template>
+      </ng-container>
+      <ng-container *ngIf="item.isLimitByOrder">
+        <div class="rules">
+          <img src="/assets/icons/cart/rules.svg">
+          <p>لطفا توجه فرمایید که حداقل تعداد خرید از {{item.supplierName}}  {{item.minimumOrderCount}}   <span
+            *ngIf="item.unit==0">گرم</span>
+
+            و حداکثر تعداد خرید {{item.maximumOrderCount}}
+
+            است</p>
+        </div>
+        <div class="success"
+             *ngIf="item.cartItemCount<=item.maximumOrderCount && item.cartItemCount >=item.minimumOrderCount; else invalid  ">
+          <img src="/assets/icons/cart/success.svg">
+          <p>
+            تعداد خرید شما کافی است
+          </p>
+        </div>
+
+        <ng-template #invalid>
+          <div class="error">
+            <img src="/assets/icons/cart/error.svg">
+            <p>
+              تعداد خرید شما کافی نیست لطفا حداقل تعداد سفارش رو لحاظ قرار دهید
+            </p>
+          </div>
+        </ng-template>
+      </ng-container>
+
+      <ng-container *ngIf="item.mandatoryNationalCode && !isUserHasNationalCode">
+        <div class="error">
+          <p>لطفا اطلاعات کد ملی را از قسمت <a [routerLink]="'/user-panel/edit-profile'">ویرایش پروفایل</a> تکمیل نمایید
+          </p>
+        </div>
+      </ng-container>
+<ng-container *ngIf="shareCustomService.nextStepDisabled">
+        <div class="error">
+          <img src="/assets/icons/cart/error.svg">
+          <p>لطفا اطلاعات جواز کسب را از قسمت <a [routerLink]="'/user-panel/my-store'">فروشگاه های من</a> تکمیل نمایید
+
+        </div>
+</ng-container>
+      <!-- <div class="rules">
+          <img src="/assets/icons/cart/rules.svg">
+          <p>لطفا توجه فرمایید که حداقل خرید از سحر خیز  ۲۶.۰۰۰.۰۰۰ تومان و  حداکثر  خرید ۱۰۰.۰۰۰.۰۰۰ تومان است</p>
+     </div>
+     <div class="error">
+      <img src="/assets/icons/cart/error.svg">
+      <p>
+          مبلغ خرید شما کافی نیست، لطفا میزان حداقل خرید را لحاظ قرار دهید
+      </p>
+ </div> -->
+
+
+    </div>
+    <div class="control">
+      <button class="back" (click)="prevStep()">
+        مشاهده و ویرایش سبد خرید
+      </button>
+      <button [disabled]="shareCustomService.nextStepDisabled" class="next" (click)="nextStep()">
+        تایید و صدور فاکتور
+      </button>
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+

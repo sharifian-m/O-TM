@@ -1,0 +1,39 @@
+
+    <div class="modal-header d-flex justify-content-between">
+      <h5 class="modal-title" id="modal-basic-title">نوع پرداخت</h5>
+      <button  type="button" class="close m-0 p-0" aria-label="Close" (click)="close()" >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="pay-btn row d-flex" style="flex-direction: column">
+        <div *ngIf="item.factorState === 0" class="d-flex col-sm-12">
+          <input type="text" class="offerCode" placeholder="وارد کردن کد تخفیف" [(ngModel)]="this.offerCode">
+          <button  *ngIf="item.offerFactor?.factorAmount === null" class="btn btn-primary" (click)="applyOfferToFactor(item)" style="margin: 0px 10px;">اعمال</button>
+          <button *ngIf="item.offerFactor?.factorAmount !== null" class="btn btn-danger" (click)="deleteOfferFromFactor(item)" style="margin: 0px 10px;">حذف</button>
+        </div>
+<!--      <form>-->
+<!--        <div class="formGroup">-->
+<!--             <select class="form-control" [(ngModel)]="paymentSelect" name="payment">-->
+<!--                  <option *ngFor="let item of paymentType" [value]="item.value">{{item.displayText}}</option>-->
+<!--             </select>-->
+<!--        </div>-->
+
+<!--      </form>-->
+        <div class="pay-type">
+          <ul class="d-flex">
+            <li *ngFor="let item of paymentType" class="d-flex" (click)="selectPayType(item)" [class.disabled]="item.isSupported === false">
+              <img src="{{item.icon}}">
+              <span>
+                       {{item.title}}
+                    </span>
+            </li>
+          </ul>
+        </div>
+        <p *ngIf="creditSaleDuration !== null" class="creditSaleDuration">{{creditSaleDuration}}2 ماهه با ضمانت الکی 2 ماهه با ضمانت الکی 2 ماهه با ضمانت الکی 2 ماهه با ضمانت الکی </p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="save()">پرداخت</button>
+    </div>
+    </div>
+<ngx-spinner></ngx-spinner>

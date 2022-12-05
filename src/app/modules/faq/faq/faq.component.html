@@ -1,0 +1,41 @@
+<app-main-layout>
+    <div class="rtl">
+        <div class="container col-md-10 py-3 ">
+           <div class="card py-3">
+                 <div class="card-header">
+                     <h2>سوالات متداول</h2>
+                     <span class="under-line"></span>
+                 </div>
+                 <div class="card-body">
+                     <p>
+                        در این صفحه سوالات متداول  اُتامین  و دیگر محصولات و خدمات شاتل پیش روی شما قرار دارد. اگر پرسشِ بی‌پاسخی درباره‌ی یکی از محصولات یا خدمات
+                        اُتامین  یا هر یک از موضوعاتی که در این صفحه مشاهده می‌فرمایید، در ذهن دارید، می‌توانید روی موضوع مورد نظر کلیک کنید تا متداول‌ترین پرسش‌های
+                        .مطرح شده از سوی کاربران را به همراه پاسخ‌های آن‌ها مشاهده کنید. ممکن است پرسش شما نیز مشابه یکی از این پرسش‌‌های متداول باشد
+                     </p>
+                    <ul>
+                        <li *ngFor="let item of  faq;let i=index" (click)="showHide(i)" >
+                            <h2 class="question">
+                                <span *ngIf="item.active"><img src="/assets/icons/list/minus.svg"></span>
+                                <span *ngIf="!item.active"><img src="/assets/icons/list/plus.svg"></span>
+                               <span> {{item.question}}</span>
+                            </h2>
+                            <div class="answer" [class.show-answer]="item.active" [ngStyle]="{'height':item.active?item.height+'px':0+'px'}">
+                            <div  >
+                                <p>{{item.answer}}</p>
+                            </div>
+                            <div *ngIf="item.items.length>0" >
+                                 <div *ngFor="let data of item.items">
+                                     {{data}}
+                                 </div>
+                                </div>
+                        </div>
+                        </li>
+                      
+                    </ul>
+                     
+           </div>
+        </div>
+        </div>
+        </div>
+    </app-main-layout>
+    

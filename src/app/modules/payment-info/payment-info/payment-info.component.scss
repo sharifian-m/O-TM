@@ -1,0 +1,48 @@
+figure{
+    display: flex;
+    justify-content: center;
+}
+img{
+    width: 100px;
+    height: auto;
+}
+.header{
+    text-align: center;
+    margin: 10px auto;
+}
+ h3{
+    font-size: 17px;
+}
+.header span{
+    color: rgb(21, 219, 110);
+    
+}
+.content{
+    box-shadow: 0px 0px 4px #ccc;
+    width: 300px;
+    margin: auto;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 8px;
+}
+.content .amount{
+    font-size: 22px;
+    color: rgb(21, 219, 110);
+
+}
+button.return{
+    border-radius: 13px;
+    background-color: rgb(21, 219, 110);
+    color: rgb(243, 243, 243);
+    display: flex;
+    justify-content: center;
+    border: none;
+    padding: 8px;
+    margin:10px  auto;
+    cursor: pointer;
+
+}
+.payed{
+   color: rgb(21, 219, 110);
+
+}

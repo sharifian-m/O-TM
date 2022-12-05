@@ -1,0 +1,53 @@
+<app-main-layout>
+  <div class="rtl">
+    <div class="container py-3">
+      <form [formGroup]="searchGroup">
+        <div class="row">
+          <div class="search-brand">
+            <input type="text" class="form-control" formControlName="searchInput" placeholder="جستجو در بین برندها">
+            <img src="/assets/icons/header/search.svg" (click)="searchBrand()">
+          </div>
+
+        </div>
+      </form>
+    </div>
+    <div class="container my-3">
+      <div *ngIf="!brandList.length" style="       display: flex;
+    height: 300px;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}">
+
+        <i class="fas fa-exclamation-triangle fa-lg my-2" style="color: red"></i>
+        <h4 style="color: #780d0d87;text-align: center ; font-family: 'byekan-bold' !important;"> نتیجه ای یافت
+          نشد </h4>
+
+      </div>
+      <div class="row">
+
+
+        <!--                    (click)="brandDetail(item.id)"-->
+        <a [routerLink]="'/brand/brand-detail/'+item.id" class="brand-item "
+           *ngFor="let item of brandList | paginate: { itemsPerPage: 30,currentPage: q,totalItems: totalCount}">
+          <figure class="  {{item.isWaitingForProduct ? 'opacity0' :'opacity1'}}"><img
+            src="{{item.imageUrl?item.imageUrl:'assets/images/default.png'}}">
+
+          </figure>
+          <span class="  {{item.isWaitingForProduct ? 'opacity0' :'opacity1'}}">{{item.title}}</span>
+          <span *ngIf="item.isWaitingForProduct" class="is-waiting-for-product"> در حال بار گذاری محصولات</span>
+        </a>
+
+      </div>
+      <pagination-controls *ngIf="totalCount" class="d-flex justify-content-center"
+                           (pageChange)="pageChanged($event)"
+                           directionLinks="true"
+                           autoHide="true"
+                           responsive="true"
+                           previousLabel="صفحه قبل"
+                           nextLabel="صفحه بعد"></pagination-controls>
+
+    </div>
+  </div>
+</app-main-layout>

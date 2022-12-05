@@ -1,0 +1,40 @@
+div{
+    width:90%;
+    margin: 0 auto;
+    height: 45px;
+    border-radius: 9px;
+       background-image: linear-gradient(to left, #C84545, #fa6666);
+
+        &:hover{
+            background-image: linear-gradient(to left,#C84545 ,#C84545);
+        }
+
+    span{
+        color: #fff;
+        font-family: 'byekan-medium';
+        margin-right: 10px;
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    div{
+        width:95%;
+        margin: 0 auto;
+        height: 45px;
+       
+           background-image: linear-gradient(to left, #C84545, #fa6666);
+    
+            &:hover{
+                background-image: linear-gradient(to left,#C84545 ,#C84545);
+            }
+    img{
+        width:20px;
+        height: 20px;
+    }
+        span{
+                    
+            font-size: 12px;
+        }
+    } 
+}

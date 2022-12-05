@@ -1,0 +1,138 @@
+
+.otamin-nav .has-megamenu:hover .menu {
+  display: block;
+
+}
+.otamin-nav .menu {
+  z-index: 99999;
+}
+.otamin-nav ul {
+  z-index: 999999;
+}
+.otamin-nav ul li a {
+  font-size: 14px;
+  line-height: 2;
+  margin-left: 10px;
+  padding: 4px;
+  color: #434443;
+  font-weight: 500;
+
+  &:hover {
+    font-weight: 700;
+    color: #FE3E3E;
+  }
+}
+@media screen and (min-width:768px) and (max-width:768px) {
+  .otamin-nav ul li a {
+  font-size: 11px;
+  line-height: 2;
+  margin-left: 10px;
+  padding: 2px;
+  color: #434443;
+  font-weight: 500;
+
+  &:hover {
+    color: #FE3E3E;
+  }
+}
+
+}
+.otamin-nav .menu {
+   z-index: 99999;
+  display: none;
+  position: absolute;
+  top: 55%;
+  right: 3%;
+  z-index: 10000;
+  width: 95%;
+  height: 70vh;
+
+  li a {
+    font-size: 12px;
+    line-height: 2;
+    margin-left: 10px;
+    padding: 4px;
+    color: #4e4c4c;
+    font-weight: 800;
+  
+  }
+
+ li a:hover {
+  font-size: 13px;
+    font-weight: 800;
+    color: #FE3E3E;
+  }
+
+  .category {
+   li{
+    z-index: 99999;
+   }
+    .cat-levele-1 {
+      span img {
+        width: 10px;
+        height: 10px;
+       
+      }
+    }
+
+    li {
+      cursor: pointer;
+      &:hover {
+        background-color: #ebebeb;
+      }
+    }
+  }
+
+}
+.otamin-nav .menu .content-mega-menu {
+    width: 100%;
+    height: 70vh;
+
+    .sub-menu a {
+      cursor: pointer;
+      color: rgb(138, 138, 138);
+      &:hover{
+        color: #FE3E3E;
+      }
+    }
+    .menu-header a {
+      text-decoration: none;
+      color: rgb(32, 32, 32);
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+  
+      &:hover {
+        font-size: 12px;
+        font-weight: 800;
+        color:#c70505;
+      }
+    }
+  }
+
+
+  span.pipe-line {
+    color: #c70505;
+    border-style: solid;
+    border-width: thin;
+    height: 12px;
+  }
+  li.has-megamenu:hover img.hamberger-menu {
+    filter: grayscale(100%) brightness(40%) sepia(100%) hue-rotate(-50deg) saturate(600%) contrast(2.8);
+
+  }
+  .cooperatet{
+    position: relative;
+    .cooperateDropdown{
+      cursor: pointer;
+    }
+    .items {
+      position: absolute;
+      top:20px;
+      right: 40px;
+      border: 1px solid #EBEBEB;
+      border-radius: 9px;
+      z-index: 99999;
+      width: 120px;
+    }
+  }

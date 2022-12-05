@@ -1,0 +1,192 @@
+
+<app-main-layout>
+  <div class="container p-1">
+<div class="row py-2 d-flex justify-content-center align-items-start">
+
+  <div class="col-md-3">
+    <!-- --------------------search product---------------------------------- -->
+    <div class="card">
+      <div class="card-header">
+        جستجوی محصول
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <input type="text" name="title" [(ngModel)]="productName" class="form-control"
+                 placeholder="نام محصول را وارد کنید">
+        </div>
+        <div class="d-flex justify-content-end">
+          <button class="btn-filter" (click)="filterByTitle()">اعمال فیلتر</button>
+        </div>
+      </div>
+    </div>
+    <!-- ------------------------category------------------------------------ -->
+  <div class="card mt-2">
+    <div class="card-header d-flex justify-content-between">
+      <span>  دسته بندی</span>
+      <i class="fas {{showDivCategory ? 'fa-chevron-up':'fa-chevron-down'}} " (click)="toggleCategories() "></i>
+
+    </div>
+    <div class="card-body" *ngIf="showDivCategory">
+      <ul >
+        <li *ngFor="let item of categories" (click)="changeCategory(item)">
+          {{item.categoryTitle}}
+
+        </li>
+
+      </ul>
+    </div>
+  </div>
+   <!-- ------------------------brands------------------------------------ -->
+   <div class="card category my-2 ">
+    <div class="card-header d-flex justify-content-between">
+      <span>  برند ها</span>
+      <i class="fas {{showDivBrands ? 'fa-chevron-up':'fa-chevron-down'}} " (click)="toggleBrands() "></i>
+
+    </div>
+    <div class="card-body" *ngIf="showDivBrands">
+  
+      <ul>
+
+        <li *ngFor="let item of brands">
+          <input type="checkbox" [(ngModel)]="item.isChecked" (change)="changeBrand(item)">
+          <span>
+          {{item.title}}
+            </span>
+        </li>
+      </ul>
+
+    </div>
+   </div>
+   
+   <!-- ------------------------price range------------------------------------ -->
+   <div class="card  my-2 ">
+    <div class="card-header">
+      <span>محدوده قیمت</span>
+    </div>
+    <div class="card-body">
+      <ngx-slider (valueChange)="changeFromPrice($event)" (highValueChange)="changeToPrice($event)"
+                  [(value)]="value" [(highValue)]="highValue" [options]="options"></ngx-slider>
+      <div class="bg-gray my-2 d-flex justify-content-between" *ngIf="priceFrom && priceTo ">
+                   <span>
+                       <span>از</span>
+
+                       <span> {{ (priceFrom.toLocaleString('fa-IR'))|getNumberWithComma }} </span>
+                       <span class="d-block text-center">تومان</span>
+                   </span>
+        <span>
+                    <span> تا </span>
+
+                    <span> {{ getNumberWithComma(priceTo.toLocaleString('fa-IR'))|getNumberWithComma }} </span>
+                    <span class="d-block text-center">تومان</span>
+
+                </span>
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn-filter" (click)="filterProduct()" >اعمال فیلتر</button>
+      </div>
+    </div>
+   </div>
+  <!-- -------------------------least order------------------------------------ -->
+  <div class="card my-2">
+    <div class="card-body ">
+      <div class="form-group">
+        <span>حداقل سفارش</span>
+        <input type="text" class="form-control" placeholder="حداقل سفارش">
+      </div>
+      <div class="d-flex justify-content-end">
+        <button class="btn-filter" (click)="filterProduct()" >اعمال فیلتر</button>
+      </div>
+    </div>
+  </div>
+  </div>
+   <!-- -------------------------col-9------------------------------------ -->
+  <div class=" col-md-9 product-list  ">
+   
+    <div *ngIf="!filterResult.length" class=" d-flex justify-content-center align-items-center">
+      <i class="fas fa-exclamation-triangle fa-lg my-2" style="color: red"></i>
+      <h4 style="color: #780d0d87;text-align: center ; font-family: 'byekan-bold' !important;"> نتیجه ای یافت
+        نشد </h4>
+    </div>
+    <div *ngIf="filterResult.length" class=" d-flex justify-content-center align-items-center" >
+<ul class=" d-flex justify-content-center align-items-center flex-wrap">
+<li  class="px-1" *ngFor="let item of filterResult | paginate: { itemsPerPage: 40,currentPage: q,totalItems : totalItems}"
+class="col-md-3">
+<a class="stop-selling-parent " *ngIf="!routeBySearch" [routerLink]="['product-detail/',item.id ,item.title]">
+ <div class="  d-flex justify-content-center align-items-center">
+  <img class="my-2" src="{{item.imageUrl?item.imageUrl:'assets/images/default.png'}}">
+ </div>
+ <span class="selling-stop" *ngIf="item.isSellingStoped">توقف فروش</span>
+                    <div class="info d-flex mx-auto flex-column">
+                      <p class="p-name">{{item.title}}</p>
+                      <span
+                        class="price d-flex justify-content-end align-items-center">{{(item.sellPrice.toLocaleString('fa-IR'))|getNumberWithComma}}
+                        تومان<span *ngIf="item.hasDiscount  && item.discountPercent>0"
+                                   class="text-center show-offer mx-1">  %{{item.discountPercent}} تخفیف  </span></span>
+                      <span *ngIf="item.hasDiscount  && item.discountPercent>0" class="old-price">{{item.oldPrice.toLocaleString('fa-IR')}}
+                        تومان</span>
+                      <span *ngIf="!item.hasDiscount" class="" style="height: 18px"> &nbsp;
+                              </span>
+                      <span
+                        class="price d-flex justify-content-end " *ngIf="item.consumerPrice > 10">قیمت مصرف کننده : {{(item.consumerPrice.toLocaleString('fa-IR'))|getNumberWithComma}}
+                        تومان</span>
+                      <span class="price d-flex justify-content-end" *ngIf="item.consumerPrice < 10">قیمت مصرف کننده : فاقد قیمت</span>
+                      <span class=" text-danger">حداقل سفارش: {{item.minimuneOrderCount.toLocaleString('fa-IR')}}</span>
+                      <span
+                        class=" d-flex my-1 text-danger">حداکثر سفارش: {{item.maximumOrderCount.toLocaleString('fa-IR') }}</span>
+                      <span class=" text-danger">واحد:
+                                   <span> {{findUnitTitel(item.unit)}} </span>
+  
+                                  </span>
+                      <span class="text-danger">تعداد در واحد : {{item.valuePerUnit}}</span>
+                      <app-btn-cart  class=" my-3" (click)="productDetail(item.id,item.title)" [BtnName]="'سفارش دهید'"></app-btn-cart>
+  
+                    </div>
+</a>
+<a *ngIf="routeBySearch" [routerLink]="['../../product-detail/',item.id,item.title]">
+  <figure>
+    <img src="{{item.imageUrl?item.imageUrl:'assets/images/default.png'}}">
+  </figure>
+  <span class="selling-stop" *ngIf="item.isSellingStoped">توقف فروش</span>
+  <div class="info d-flex mx-auto flex-column">
+    <p class="p-name">{{item.title}}</p>
+    <span
+      class="price d-flex justify-content-end align-items-center">{{(item.sellPrice.toLocaleString('fa-IR'))|getNumberWithComma}}
+      تومان<span *ngIf="item.hasDiscount"
+                 class="text-center show-offer mx-1">  %{{item.discountPercent}} تخفیف  </span></span>
+    <span *ngIf="item.hasDiscount" class="old-price">{{item.oldPrice.toLocaleString('fa-IR')}}
+      تومان</span>
+    <span *ngIf="!item.hasDiscount" class="" style="height: 18px"> &nbsp;
+            </span>
+    <span
+      class="price d-flex justify-content-end " *ngIf="item.consumerPrice > 10">قیمت مصرف کننده : {{(item.consumerPrice.toLocaleString('fa-IR'))|getNumberWithComma}}
+      تومان</span>
+    <span class="price d-flex justify-content-end" *ngIf="item.consumerPrice < 10">قیمت مصرف کننده : فاقد قیمت</span>
+    <span class=" text-danger">حداقل سفارش: {{item.minimuneOrderCount.toLocaleString('fa-IR')}}</span>
+    <span
+      class=" d-flex my-1 text-danger">حداکثر سفارش: {{item.maximumOrderCount.toLocaleString('fa-IR') }}</span>
+    <span class=" text-danger">واحد:
+                 <span> {{findUnitTitel(item.unit)}} </span>
+
+                </span>
+    <span class="text-danger">تعداد در واحد : {{item.valuePerUnit}}</span>
+    <app-btn-cart (click)="productDetail(item.id.item.title)" [BtnName]="'سفارش دهید'"></app-btn-cart>
+
+  </div>
+</a>
+</li>
+
+</ul>
+
+    </div>
+    <pagination-controls *ngIf="totalItems" class="d-flex justify-content-center"
+    (pageChange)="pageChanged($event)"
+    previousLabel="صفحه قبل"
+    directionLinks="true"
+    autoHide="true"
+    responsive="true"
+    nextLabel="صفحه بعد"></pagination-controls>
+  </div>
+ </div>
+</div>
+</app-main-layout>
+<!-- ////////////////////////////////////////////////////////////// -->

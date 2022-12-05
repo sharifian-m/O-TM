@@ -1,0 +1,99 @@
+<div class="rtl">
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h2 class="title">فاکتور های پرداخت نشده</h2>
+        <span class="under-line"></span>
+      </div>
+      <p class="my-3 p-2">درصورتی که برای شما فاکتوری صادر بشود در این قسمت میتوانید مشاهده و اقدام به پرداخت
+        نمایید.</p>
+
+
+      <div class="card-body">
+        <table class="table mt-2">
+          <tr>
+            <th>ردیف</th>
+            <th>شماره فاکتور</th>
+
+            <th> تامین کننده</th>
+            <th>وضعیت</th>
+            <th>تاریخ ایجاد</th>
+            <th>تاریخ اعتبار</th>
+            <th>تعداد اقلام</th>
+            <th style="padding-right: 5rem;">عملیات</th>
+          </tr>
+          <tr
+            *ngFor="let item of factors |   paginate: { itemsPerPage: 10,currentPage: q,totalItems: totalCount};let i=index">
+            <td>{{i + 1}}</td>
+            <td>{{item.factorNumber}}</td>
+            <td>
+              <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                   src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+              {{item.supplier.supplierTitle}}
+            </td>
+
+            <!--          <td>{{item.supplier.supplierTitle}} </td>-->
+            <td>{{findTitel(item.factorState)}}</td>
+            <td>{{item.creationDateTimeStr}}</td>
+            <td>{{item.expirationDateTimeStr}}</td>
+            <td>{{item.totalItemsCount}}</td>
+            <td>
+              <!--            <i class="fa fa-eye" (click)="factorDetail(item.id,item.factorNumber)"></i>-->
+<!--              <span class="btn btn-danger " (click)="pay(item)">پرداخت </span>-->
+              <span class="btn btn-danger " (click)="factorDetail(item.id,item.factorNumber)">پرداخت </span>
+              <span class="btn btn-dark mx-1" (click)="cancelFactor(item)">لغو </span>
+              <span class="btn btn-info " (click)="factorDetail(item.id,item.factorNumber)">جزییات </span>
+            </td>
+          </tr>
+          <tr *ngIf="!totalCount">
+            <td colspan="7">
+
+              <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+            </td>
+          </tr>
+
+        </table>
+        <pagination-controls *ngIf="totalCount" class="d-flex justify-content-center"
+                             (pageChange)="pageChanged($event)"
+                             directionLinks="true"
+                             autoHide="true"
+                             responsive="true"
+                             previousLabel="صفحه قبل"
+                             nextLabel="صفحه بعد"></pagination-controls>
+      </div>
+      <div class="card my-2 factor-mobile d-flex flex-row " *ngFor="let item of factors;let i=index">
+        <ul class="d-flex flex-column py-4">
+          <li>شماره فاکتور</li>
+          <li> تاریخ ثبت</li>
+          <li> تامین کننده</li>
+          <li>وضعیت</li>
+          <li> مبلغ کل</li>
+          <li> مبلغ تخفیف</li>
+          <li> مبلغ نهایی</li>
+          <li> تعداد</li>
+          <li> عملیات</li>
+        </ul>
+        <div class="seprate"></div>
+        <ul (click)="factorDetail(item.id,item.factorNumber)" class="d-flex flex-column mx-2 py-4">
+          <li>{{item.factorNumber}}</li>
+          <li>{{item.creationDateTimeStr}}</li>
+          <li>{{item.supplier.supplierTitle}}</li>
+          <li>{{findTitel(item.factorState)}}</li>
+          <li>{{item.totalAmountWithoutDiscount.toLocaleString('fa-IR')}}</li>
+          <li>{{item.totalDiscountPercent.toLocaleString('fa-IR')}}</li>
+          <li>{{item.totalItemAmounts.toLocaleString('fa-IR')}}</li>
+          <li>{{item.totalItemsCount}}</li>
+          <li>
+            <!--                        <button class="btn m-2 btn-info" >جزئیات</button>-->
+            <button class="btn m-2 btn-danger" (click)="pay(item)">پرداخت</button>
+            <button class="btn btn-dark  m-2" (click)="cancelFactor(item)">لغو</button>
+
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+<ngx-spinner></ngx-spinner>

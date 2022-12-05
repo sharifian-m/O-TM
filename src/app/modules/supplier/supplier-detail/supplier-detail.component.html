@@ -1,0 +1,120 @@
+<app-main-layout>
+  <div class="rtl">
+    <div class="bg-white ">
+      <!-- <div class="supplier-img"  >
+
+
+      </div> -->
+      <div class="container pt-4">
+        <div class="row justify-content-center supplier-logo">
+          <figure><img src="{{supplierInfo?.logoUrl}}">
+
+
+          </figure>
+
+        </div>
+      </div>
+      <div class="container supplier-description p-3" *ngIf="supplierInfo">
+        <h2>{{supplierInfo?.supplierTitle}}</h2>
+      </div>
+      <div class="container">
+        <div class="card py-3">
+          <div *ngIf="supplierItems?.length" class="card-header"><h2> محصولات {{supplierInfo?.supplierTitle}}</h2><span
+            class="under-line"></span></div>
+          <div *ngIf="!supplierItems?.length" style="display: flex;
+    flex-direction: column;
+    height: 300px;
+    align-items: center;
+    justify-content: center;">
+            <i class="fas fa-exclamation-triangle fa-lg my-2" style="color: red"></i>
+            <h4 style="color: #780d0d87;text-align: center ; font-family: 'byekan-bold' !important;">برای این برند
+              محصولی وجود ندارد </h4>
+          </div>
+
+          <div *ngIf="supplierItems?.length" class="new-product">
+            <ul style="flex-wrap: wrap;">
+              <li class="col-md-3"
+                  *ngFor="let item of supplierItems | paginate: { itemsPerPage: 16,currentPage: q,totalItems : totalItems}">
+                <!--                    (click)="productDetail(item.id)"-->
+                <a [routerLink]="['../../../product-list/product-detail/',item.itemId, item.title]">
+                  <figure>
+                    <img *ngIf="item.imageUrl" src="{{item.imageUrl}}">
+                    <img *ngIf="!item.imageUrl" src="/assets/images/default.png">
+                    <p class="p-name text-center mb-3" style="text-align: right;">{{item.title}}</p>
+                    <span class="price"
+                          style=" display: flex; flex-direction: row;  align-items: center;height: 34px">{{(item.sellPrice.toLocaleString('fa-IR'))|getNumberWithComma}}
+                      تومان<span
+                        *ngIf="item.hasDiscount  && item.discountPercent>0" class="text-center show-offer mx-1">  %{{item.discountPercent}}
+                        تخفیف  </span></span>
+                    <span *ngIf="item.hasDiscount  && item.discountPercent>0" class="old-price">{{item.oldPrice.toLocaleString('fa-IR')}}
+                      تومان</span>
+                    <span *ngIf="!item.hasDiscount" class="" style="height: 18px"> &nbsp;
+                            </span>
+                    <span
+                      class="d-block consumer-price"
+                      *ngIf="item.consumerPrice > 10">قیمت مصرف کننده : {{(item.consumerPrice.toLocaleString('fa-IR'))|getNumberWithComma}}
+                      تومان</span>
+                    <span class="d-block consumer-price"
+                          *ngIf="item.consumerPrice < 10">قیمت مصرف کننده : فاقد قیمت</span>
+                    <span class="order  ">حداقل سفارش: {{item.minimuneOrderCount.toLocaleString('fa-IR')}}
+                      عدد</span>
+                    <span class="order ">حداکثر سفارش: {{item.maximumOrderCount.toLocaleString('fa-IR')}} عدد</span>
+                    <app-btn-cart (click)="productDetail(item.itemId)" [BtnName]="'سفارش دهید'"></app-btn-cart>
+                  </figure>
+                  <span class="selling-stop" *ngIf="item.isSellingStoped">توقف فروش</span>
+                </a>
+              </li>
+
+
+            </ul>
+            <pagination-controls *ngIf="totalItems" class="d-flex justify-content-center"
+                                 (pageChange)="pageChanged($event)"
+                                 previousLabel="صفحه قبل"
+                                 directionLinks="true"
+                                 autoHide="true"
+                                 responsive="true"
+                                 nextLabel="صفحه بعد"></pagination-controls>
+            <!--                <div class="swiper-button-next"></div>-->
+            <!--                <div class="swiper-button-prev"></div>-->
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div class="card py-3">
+        <div *ngIf="brands?.length" class="card-header"><h2>برند های {{supplierInfo?.supplierTitle}}</h2><span
+          class="under-line"></span></div>
+        <div *ngIf="!brands?.length" style="display: flex;
+    flex-direction: column;
+    height: 300px;
+    align-items: center;
+    justify-content: center;">
+          <i class="fas fa-exclamation-triangle fa-lg my-2" style="color: red"></i>
+          <h4 style="color: #780d0d87;text-align: center ; font-family: 'byekan-bold' !important;">برای این تامین کننده
+            برندی وجود ندارد </h4>
+        </div>
+      </div>
+      <div class="card py-3">
+        <div *ngIf="brands?.length" class="new-product">
+          <ul style="flex-wrap: wrap;">
+            <li class="col-md-3"
+                *ngFor="let item of brands | paginate: { itemsPerPage: 16,currentPage: q,totalItems : totalItems}">
+              <!--                    (click)="productDetail(item.id)"-->
+              <a [routerLink]="'../../../brand/brand-detail/'+item.id">
+                <figure>
+                  <img *ngIf="item.imageUrl" src="{{item.imageUrl}}">
+                  <img *ngIf="!item.imageUrl" src="/assets/images/default.png">
+                  <p class="p-name text-center mb-3" style="text-align: right;">{{item.title}}</p>
+                </figure>
+                <span class="selling-stop" *ngIf="item.isSellingStoped">توقف فروش</span>
+              </a>
+            </li>
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-spinner></ngx-spinner>
+</app-main-layout>

@@ -1,0 +1,83 @@
+<app-main-layout>
+<div>
+<app-login-register-modal (sendIsShow)="closeLogin($event)" [isShowLogin]="isShowLogin" *ngIf="isShowLogin">
+  <div class="close-icon-container"  ><img src="/assets/icons/close-line.svg" (click)="closeAuth()"  class="close-btn"></div>
+
+</app-login-register-modal>
+</div>
+
+<div class="rtl">
+  <div class="container">
+<div id="stepper1" class="bs-stepper">
+  <div class="bs-stepper-header">
+  <div class="step" data-target="#test-l-1">
+    <button class="step-trigger">
+      <span class="bs-stepper-circle">
+        <img src="/assets/icons/cart/1.svg">
+      </span>
+      <span class="bs-stepper-label">سبد خرید</span>
+    </button>
+  </div>
+  <div class="line"></div>
+  <div class="step" data-target="#test-l-2">
+    <button class="step-trigger">
+      <span class="bs-stepper-circle">
+        <img src="/assets/icons/cart/2.svg">
+      </span>
+      <span class="bs-stepper-label">تایید سبد خرید</span>
+    </button>
+  </div>
+  <div class="line"></div>
+  <div class="step" data-target="#test-l-3">
+    <button class="step-trigger">
+      <span class="bs-stepper-circle">
+        <img src="/assets/icons/cart/3.svg">
+      </span>
+      <span class="bs-stepper-label">صدور فاکتور</span>
+    </button>
+  </div>
+  <div class="line"></div>
+
+  <div class="step" data-target="#test-l-4">
+    <button class="step-trigger">
+      <span class="bs-stepper-circle">
+        <img src="/assets/icons/cart/4.svg">
+      </span>
+      <span class="bs-stepper-label">آدرس فروشگاه</span>
+    </button>
+  </div>
+  <div class="line"></div>
+
+  <div class="step" data-target="#test-l-5">
+    <button class="step-trigger">
+      <span class="bs-stepper-circle">
+        <img src="/assets/icons/cart/5.svg">
+      </span>
+      <span class="bs-stepper-label">پرداخت فاکتور</span>
+    </button>
+  </div>
+
+</div>
+<div class="bs-stepper-content">
+  <div id="test-l-1" class="content">
+    <app-cart-list-with-company  (sendData)="setCompanyItem($event)"  (sendStep)="stepControl($event)"></app-cart-list-with-company>
+
+        </div>
+        <div id="test-l-2" class="content">
+          <app-accept-cart-list-with-company #acceptCart  (sendStep)="stepControl($event)"></app-accept-cart-list-with-company>
+        </div>
+        <div id="test-l-3" class="content">
+
+        </div>
+        <div id="test-l-4" class="content">
+          <app-select-company-store (sendStep)="stepControl($event)"></app-select-company-store>
+        </div>
+        <div id="test-l-5" class="content">
+    <app-pay-factor></app-pay-factor>
+        </div>
+</div>
+  </div>
+  </div>
+</div>
+  <ngx-spinner></ngx-spinner>
+</app-main-layout>

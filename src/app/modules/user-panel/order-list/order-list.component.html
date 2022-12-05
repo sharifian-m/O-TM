@@ -1,0 +1,653 @@
+<div class="rtl">
+  <div class="container">
+    <div class="card ">
+      <div class="card-header">
+        <h2 class="title">سفارشات</h2>
+        <span class="under-line"></span>
+      </div>
+
+
+      <div class="card-body">
+        <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs" (navChange)="navChange($event)">
+          <li [ngbNavItem]="1">
+
+            <a ngbNavLink>
+              <span>{{orderCounts[0]?.count}}</span>
+              ایجاد شده
+            </a>
+            <ng-template ngbNavContent>
+              <div class="container py-4">
+
+                <table class="table mt-2">
+                  <tr>
+                    <th>ردیف</th>
+                    <th>شماره فاکتور</th>
+                    <th>تامین کننده</th>
+                    <th>تاریخ سفارش</th>
+                    <th>تعداد اقلام</th>
+                    <th>مبلغ کل</th>
+                    <th>تخفیف</th>
+                    <th>مبلغ نهایی</th>
+                    <th>عملیات</th>
+
+                  </tr>
+                  <tr
+                    *ngFor="let item of order1 |   paginate: { itemsPerPage: 10,currentPage: q1,totalItems: totalCount1};let i=index">
+                    <td>{{i + 1}}</td>
+                    <td>{{item.factorNumber}}</td>
+
+                    <td style="width: 125px;">
+                      <figure>
+                        <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                             src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                        <span>{{item.supplier.supplierTitle}}</span>
+                      </figure>
+                    </td>
+                    <td>{{item.persianOrderDate}}</td>
+                    <td>{{item.itemsInOrder}}</td>
+                    <td>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR')) |getNumberWithComma}} تومان</td>
+                    <td>{{(item.totalDiscount.toLocaleString('fa-IR')) |getNumberWithComma}} تومان</td>
+                    <td>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+
+                    <td style="width: 180px;">
+                      <button class="btn btn-info btn-sm" (click)="orderDetail(item)">
+                        جزئیات
+                      </button>
+                      <button class="btn btn-dark btn-sm" (click)="cancelOrder(item)">
+                        لغو سفارش
+                      </button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!order1.length">
+                    <td colspan="7">
+
+                      <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+                    </td>
+                  </tr>
+
+                </table>
+                <pagination-controls *ngIf="totalCount1" class="d-flex justify-content-center"
+                                     (pageChange)="pageChanged1($event)"
+                                     directionLinks="true"
+                                     autoHide="true"
+                                     responsive="true"
+                                     previousLabel="صفحه قبل"
+                                     nextLabel="صفحه بعد"></pagination-controls>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="2">
+            <a ngbNavLink>
+              <span>{{orderCounts[1]?.count}}</span>
+              در انتظار تایید
+            </a>
+            <ng-template ngbNavContent>
+              <div class="container py-4">
+
+                <table class="table mt-2">
+                  <tr>
+                    <th>ردیف</th>
+                    <th>شماره فاکتور</th>
+                    <th>تامین کننده</th>
+                    <th>تاریخ سفارش</th>
+                    <th>تعداد اقلام</th>
+                    <th>مبلغ کل</th>
+                    <th>تخفیف</th>
+                    <th>مبلغ نهایی</th>
+                    <th>عملیات</th>
+
+                  </tr>
+                  <tr
+                    *ngFor="let item of order2  |   paginate: { itemsPerPage: 10,currentPage: q2,totalItems: totalCount2};let i=index">
+                    <td>{{i + 1}}</td>
+                    <td>{{item.factorNumber}}</td>
+                    <td style="width: 125px;">
+                      <figure>
+                        <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                             src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                        <span>{{item.supplier.supplierTitle}}</span>
+                      </figure>
+                    </td>
+                    <td>{{item.persianOrderDate}}</td>
+                    <td>{{item.itemsInOrder}}</td>
+                    <td>{{getNumberWithComma(item.totalAmountWithoutDiscount.toLocaleString('fa-IR')) }} تومان</td>
+                    <td>{{getNumberWithComma(item.totalDiscount.toLocaleString('fa-IR')) }} تومان</td>
+                    <td>{{getNumberWithComma(item.totalOrderAmount.toLocaleString('fa-IR')) }} تومان</td>
+
+                    <td style="width: 180px;">
+                      <button class="btn btn-info btn-sm" (click)="orderDetail(item)">
+                        جزئیات
+                      </button>
+                      <button class="btn btn-dark btn-sm" (click)="cancelOrder(item)">
+                        لغو سفارش
+                      </button>
+                    </td>
+                  </tr>
+                  <tr *ngIf="!order2.length">
+                    <td colspan="7">
+
+                      <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+                    </td>
+                  </tr>
+                </table>
+                <pagination-controls *ngIf="totalCount2" class="d-flex justify-content-center"
+                                     (pageChange)="pageChanged2($event)"
+                                     directionLinks="true"
+                                     autoHide="true"
+                                     responsive="true"
+                                     previousLabel="صفحه قبل"
+                                     nextLabel="صفحه بعد"></pagination-controls>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="3">
+            <a ngbNavLink>
+              <span>{{orderCounts[2]?.count}}</span>
+              در راه
+            </a>
+            <ng-template ngbNavContent>
+              <div class="container py-4">
+
+                <table class="table mt-2">
+                  <tr>
+                    <th>ردیف</th>
+                    <th>شماره فاکتور</th>
+                    <th>تامین کننده</th>
+                    <th>تاریخ سفارش</th>
+                    <th>تعداد اقلام</th>
+                    <th>مبلغ کل</th>
+                    <th>تخفیف</th>
+                    <th>مبلغ نهایی</th>
+                    <th>عملیات</th>
+
+                  </tr>
+                  <tr
+                    *ngFor="let item of order3 |   paginate: { itemsPerPage: 10,currentPage: q3,totalItems: totalCount3};let i=index">
+                    <td>{{i + 1}}</td>
+                    <td>{{item.factorNumber}}</td>
+
+                    <td style="width: 125px;">
+                      <figure>
+                        <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                             src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                        <span>{{item.supplier.supplierTitle}}</span>
+                      </figure>
+                    </td>
+                    <td>{{item.persianOrderDate}}</td>
+                    <td>{{item.itemsInOrder}}</td>
+                    <td>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+                    <td>{{(item.totalDiscount.toLocaleString('fa-IR')) |getNumberWithComma}} تومان</td>
+                    <td>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+
+                    <td style="width: 180px;">
+                      <button class="btn btn-info btn-sm" (click)="orderDetail(item)">
+                        جزئیات
+                      </button>
+                      <!--                      <button class="btn btn-dark btn-sm" (click)="cancelOrder()">-->
+                      <!--                        لغو سفارش-->
+                      <!--                      </button>-->
+                    </td>
+                  </tr>
+                  <tr *ngIf="!order3.length">
+                    <td colspan="7">
+
+                      <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+                    </td>
+                  </tr>
+                </table>
+                <pagination-controls *ngIf="totalCount3" class="d-flex justify-content-center"
+                                     (pageChange)="pageChanged3($event)"
+                                     directionLinks="true"
+                                     autoHide="true"
+                                     responsive="true"
+                                     previousLabel="صفحه قبل"
+                                     nextLabel="صفحه بعد"></pagination-controls>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="4">
+            <a ngbNavLink>
+              <span>{{orderCounts[3]?.count}}</span>
+              تحویل شده
+            </a>
+            <ng-template ngbNavContent>
+              <div class="container py-4">
+
+                <table class="table mt-2">
+                  <tr>
+                    <th>ردیف</th>
+                    <th>شماره فاکتور</th>
+                    <th>تامین کننده</th>
+                    <th>تاریخ سفارش</th>
+                    <th>تعداد اقلام</th>
+                    <th>مبلغ کل</th>
+                    <th>تخفیف</th>
+                    <th>مبلغ نهایی</th>
+                    <th>عملیات</th>
+
+                  </tr>
+                  <tr
+                    *ngFor="let item of order4 |   paginate: { itemsPerPage: 10,currentPage: q4,totalItems: totalCount4};let i=index">
+                    <td>{{i + 1}}</td>
+                    <td>{{item.factorNumber}}</td>
+
+                    <td style="width: 125px;">
+                      <figure>
+                        <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                             src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                        <span>{{item.supplier.supplierTitle}}</span>
+                      </figure>
+                    </td>
+                    <td>{{item.persianOrderDate}}</td>
+                    <td>{{item.itemsInOrder}}</td>
+                    <td>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+                    <td>{{(item.totalDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+                    <td>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+
+                    <td style="width: 180px;">
+                      <button class="btn btn-info btn-sm" (click)="orderDetail(item)">
+                        جزئیات
+                      </button>
+                      <!--                      <button class="btn btn-dark btn-sm" (click)="cancelOrder()">-->
+                      <!--                        لغو سفارش-->
+                      <!--                      </button>-->
+                    </td>
+                  </tr>
+                  <tr *ngIf="!order4.length">
+                    <td colspan="7">
+
+                      <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+                    </td>
+                  </tr>
+                </table>
+                <pagination-controls *ngIf="totalCount4" class="d-flex justify-content-center"
+                                     (pageChange)="pageChanged4($event)"
+                                     directionLinks="true"
+                                     autoHide="true"
+                                     responsive="true"
+                                     previousLabel="صفحه قبل"
+                                     nextLabel="صفحه بعد"></pagination-controls>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="5">
+            <a ngbNavLink>
+              <span>{{orderCounts[4]?.count}}</span>
+              لغو شده
+            </a>
+            <ng-template ngbNavContent>
+              <div class="container py-4">
+
+                <table class="table mt-2">
+                  <tr>
+                    <th>ردیف</th>
+                    <th>شماره فاکتور</th>
+                    <th>تامین کننده</th>
+                    <th>تاریخ سفارش</th>
+                    <th>تعداد اقلام</th>
+                    <th>مبلغ کل</th>
+                    <th>تخفیف</th>
+                    <th>مبلغ نهایی</th>
+                    <th>عملیات</th>
+
+                  </tr>
+                  <tr
+                    *ngFor="let item of order5 |   paginate: { itemsPerPage: 10,currentPage: q5,totalItems: totalCount5} ;let i=index">
+                    <td>{{i + 1}}</td>
+                    <td>{{item.factorNumber}}</td>
+
+                    <td style="width: 125px;">
+                      <figure>
+                        <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                             src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                        <span>{{item.supplier.supplierTitle}}</span>
+                      </figure>
+                    </td>
+                    <td>{{item.persianOrderDate}}</td>
+                    <td>{{item.itemsInOrder}}</td>
+                    <td>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR')) |getNumberWithComma}} تومان</td>
+                    <td>{{(item.totalDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+                    <td>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+
+                    <td style="width: 180px;">
+                      <button class="btn btn-info btn-sm" (click)="orderDetail(item)">
+                        جزئیات
+                      </button>
+                      <!--                      <button class="btn btn-dark btn-sm" (click)="cancelOrder()">-->
+                      <!--                        لغو سفارش-->
+                      <!--                      </button>-->
+                    </td>
+                  </tr>
+                  <tr *ngIf="!order5.length">
+                    <td colspan="7">
+
+                      <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+                    </td>
+                  </tr>
+                </table>
+                <pagination-controls *ngIf="totalCount5" class="d-flex justify-content-center"
+                                     (pageChange)="pageChanged5($event)"
+                                     directionLinks="true"
+                                     autoHide="true"
+                                     responsive="true"
+                                     previousLabel="صفحه قبل"
+                                     nextLabel="صفحه بعد"></pagination-controls>
+              </div>
+            </ng-template>
+          </li>
+          <li [ngbNavItem]="6">
+            <a ngbNavLink>
+              <span>{{orderCounts[5]?.count}}</span>
+              مرجوعی</a>
+            <ng-template ngbNavContent>
+              <div class="container py-4">
+                <table class="table mt-2">
+                  <tr>
+                    <th>ردیف</th>
+                    <th>شماره فاکتور</th>
+                    <th>تامین کننده</th>
+                    <th>تاریخ سفارش</th>
+                    <th>تعداد اقلام</th>
+                    <th>مبلغ کل</th>
+                    <th>تخفیف</th>
+                    <th>مبلغ نهایی</th>
+                    <th>عملیات</th>
+
+                  </tr>
+                  <tr
+                    *ngFor="let item of order6 |   paginate: { itemsPerPage: 10,currentPage: q5,totalItems: totalCount5} ;let i=index">
+                    <td>{{i + 1}}</td>
+                    <td>{{item.factorNumber}}</td>
+
+                    <td style="width: 125px;">
+                      <figure>
+                        <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                             src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                        <span>{{item.supplier.supplierTitle}}</span>
+                      </figure>
+                    </td>
+                    <td>{{item.persianOrderDate}}</td>
+                    <td>{{item.itemsInOrder}}</td>
+                    <td>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+                    <td>{{(item.totalDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+                    <td>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</td>
+
+                    <td style="width: 180px;">
+                      <button class="btn btn-info btn-sm" (click)="orderDetail(item)">
+                        جزئیات
+                      </button>
+                      <!--                      <button class="btn btn-dark btn-sm" (click)="cancelOrder()">-->
+                      <!--                        لغو سفارش-->
+                      <!--                      </button>-->
+                    </td>
+                  </tr>
+                  <tr *ngIf="!order6.length">
+                    <td colspan="7">
+
+                      <h4 class="text-center no_item">موردی وجود ندارد</h4>
+
+                    </td>
+                  </tr>
+                </table>
+                <pagination-controls *ngIf="totalCount6" class="d-flex justify-content-center"
+                                     (pageChange)="pageChanged6($event)"
+                                     directionLinks="true"
+                                     autoHide="true"
+                                     responsive="true"
+                                     previousLabel="صفحه قبل"
+                                     nextLabel="صفحه بعد"></pagination-controls>
+              </div>
+            </ng-template>
+          </li>
+        </ul>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      </div>
+      <div *ngIf="showOrder1">
+        <div class="card my-2 factor-mobile d-flex flex-row " *ngFor="let item of order1;let i=index">
+          <ul class="d-flex flex-column py-4">
+            <li> شماره سفارش</li>
+            <li> تاریخ ثبت</li>
+            <li> مبلغ کل</li>
+            <li> تعداد</li>
+          </ul>
+          <div class="seprate"></div>
+          <ul class="d-flex flex-column py-4">
+            <li>{{i + 1}}</li>
+            <li>{{item.factorNumber}}</li>
+
+            <li style="width: 125px;">
+              <figure>
+                <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                     src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                <span>{{item.supplier.supplierTitle}}</span>
+              </figure>
+            </li>
+            <li>{{item.persianOrderDate}}</li>
+            <li>{{item.itemsInOrder}}</li>
+            <li>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+            <li>{{(item.totalDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+            <li>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+
+            <li style="width: 180px;">
+              <button class="mx-1 btn btn-info btn-sm" (click)="orderDetail(item)">
+                جزئیات
+              </button>
+              <button class="mx-1 btn btn-dark btn-sm" (click)="cancelOrder(item)">
+                لغو سفارش
+              </button>
+            </li>
+          </ul>
+        </div>
+        <h4 *ngIf="!order1.length" class="text-center no_item pd-4">موردی وجود ندارد</h4>
+      </div>
+      <div *ngIf="showOrder2">
+        <div class="card my-2 factor-mobile d-flex flex-row " *ngFor="let item of order2;let i=index">
+          <ul class="d-flex flex-column py-4">
+            <li> شماره سفارش</li>
+            <li> تاریخ ثبت</li>
+            <li> مبلغ کل</li>
+            <li> تعداد</li>
+          </ul>
+          <div class="seprate"></div>
+          <ul class="d-flex flex-column py-4">
+            <li>{{i + 1}}</li>
+            <li>{{item.factorNumber}}</li>
+
+            <li style="width: 125px;">
+              <figure>
+                <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                     src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                <span>{{item.supplier.supplierTitle}}</span>
+              </figure>
+            </li>
+            <li>{{item.persianOrderDate}}</li>
+            <li>{{item.itemsInOrder}}</li>
+            <li>{{(item.totalOrderAmount.toLocaleString('fa-IR')) }} تومان</li>
+            <li>{{(item.totalDiscount.toLocaleString('fa-IR')) }} تومان</li>
+            <li>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+            <li style="width: 180px;">
+              <button class="mx-1 btn btn-info btn-sm" (click)="orderDetail(item)">
+                جزئیات
+              </button>
+              <button class="mx-1 btn btn-dark btn-sm" (click)="cancelOrder(item)">
+                لغو سفارش
+              </button>
+            </li>
+          </ul>
+        </div>
+        <h4 *ngIf="!order2.length" class="text-center no_item pd-4">موردی وجود ندارد</h4>
+      </div>
+      <div *ngIf="showOrder3">
+        <div class="card my-2 factor-mobile d-flex flex-row " *ngFor="let item of order3;let i=index">
+          <ul class="d-flex flex-column py-4">
+            <li> شماره سفارش</li>
+            <li> تاریخ ثبت</li>
+            <li> مبلغ کل</li>
+            <li> تعداد</li>
+          </ul>
+          <div class="seprate"></div>
+          <ul class="d-flex flex-column py-4">
+            <li>{{i + 1}}</li>
+            <li>{{item.factorNumber}}</li>
+
+            <li style="width: 125px;">
+              <figure>
+                <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                     src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                <span>{{item.supplier.supplierTitle}}</span>
+              </figure>
+            </li>
+            <li>{{item.persianOrderDate}}</li>
+            <li>{{item.itemsInOrder}}</li>
+            <li>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+            <li>{{(item.totalDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+            <li>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+
+            <li style="width: 180px;">
+              <button class="mx-1 btn btn-info btn-sm" (click)="orderDetail(item)">
+                جزئیات
+              </button>
+              <button class="mx-1 btn btn-dark btn-sm" (click)="cancelOrder(item)">
+                لغو سفارش
+              </button>
+            </li>
+          </ul>
+        </div>
+        <h4 *ngIf="!order3.length" class="text-center no_item pd-4">موردی وجود ندارد</h4>
+      </div>
+      <div *ngIf="showOrder4">
+        <div class="card my-2 factor-mobile d-flex flex-row " *ngFor="let item of order4;let i=index">
+          <ul class="d-flex flex-column py-4">
+            <li> شماره سفارش</li>
+            <li> تاریخ ثبت</li>
+            <li> مبلغ کل</li>
+            <li> تعداد</li>
+          </ul>
+          <div class="seprate"></div>
+          <ul class="d-flex flex-column py-4">
+            <li>{{i + 1}}</li>
+            <li>{{item.factorNumber}}</li>
+
+            <li style="width: 125px;">
+              <figure>
+                <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                     src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                <span>{{item.supplier.supplierTitle}}</span>
+              </figure>
+            </li>
+            <li>{{item.persianOrderDate}}</li>
+            <li>{{item.itemsInOrder}}</li>
+            <li>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma}} تومان</li>
+            <li>{{(item.totalDiscount.toLocaleString('fa-IR')) |getNumberWithComma}} تومان</li>
+            <li>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+
+            <li style="width: 180px;">
+              <button class="mx-1 btn btn-info btn-sm" (click)="orderDetail(item)">
+                جزئیات
+              </button>
+              <button class="mx-1 btn btn-dark btn-sm" (click)="cancelOrder(item)">
+                لغو سفارش
+              </button>
+            </li>
+          </ul>
+        </div>
+        <h4 *ngIf="!order4.length" class="text-center no_item pd-4">موردی وجود ندارد</h4>
+      </div>
+      <div *ngIf="showOrder5">
+        <div class="card my-2 factor-mobile d-flex flex-row " *ngFor="let item of order5;let i=index">
+          <ul class="d-flex flex-column py-4">
+            <li> شماره سفارش</li>
+            <li> تاریخ ثبت</li>
+            <li> مبلغ کل</li>
+            <li> تعداد</li>
+          </ul>
+          <div class="seprate"></div>
+          <ul class="d-flex flex-column py-4">
+            <li>{{i + 1}}</li>
+            <li>{{item.factorNumber}}</li>
+
+            <li style="width: 125px;">
+              <figure>
+                <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                     src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                <span>{{item.supplier.supplierTitle}}</span>
+              </figure>
+            </li>
+            <li>{{item.persianOrderDate}}</li>
+            <li>{{item.itemsInOrder}}</li>
+            <li>{{(item.totalOrderAmount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+            <li>{{(item.totalDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+            <li>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+
+            <li style="width: 180px;">
+              <button class="mx-1 btn btn-info btn-sm" (click)="orderDetail(item)">
+                جزئیات
+              </button>
+<!--              <button class="mx-1 btn btn-dark btn-sm" (click)="cancelOrder(item)">-->
+<!--                لغو سفارش-->
+<!--              </button>-->
+            </li>
+          </ul>
+        </div>
+        <h4 *ngIf="!order5.length" class="text-center no_item pd-4">موردی وجود ندارد</h4>
+      </div>
+      <div *ngIf="showOrder6">
+        <div class="card my-2 factor-mobile d-flex flex-row " *ngFor="let item of order6;let i=index">
+          <ul class="d-flex flex-column py-4">
+            <li> شماره سفارش</li>
+            <li> تاریخ ثبت</li>
+            <li> مبلغ کل</li>
+            <li> تعداد</li>
+          </ul>
+          <div class="seprate"></div>
+          <ul class="d-flex flex-column py-4">
+            <li>{{i + 1}}</li>
+            <li>{{item.factorNumber}}</li>
+
+            <li style="width: 125px;">
+              <figure>
+                <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px"
+                     src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                <span>{{item.supplier.supplierTitle}}</span>
+              </figure>
+            </li>
+            <li>{{item.persianOrderDate}}</li>
+            <li>{{item.itemsInOrder}}</li>
+            <li>{{(item.totalOrderAmount.toLocaleString('fa-IR')) }} تومان</li>
+            <li>{{(item.totalDiscount.toLocaleString('fa-IR')) }} تومان</li>
+            <li>{{(item.totalAmountWithoutDiscount.toLocaleString('fa-IR'))|getNumberWithComma }} تومان</li>
+
+            <li style="width: 180px;">
+              <button class="mx-1 btn btn-info btn-sm" (click)="orderDetail(item)">
+                جزئیات
+              </button>
+              <button class="mx-1 btn btn-dark btn-sm" (click)="cancelOrder(item)">
+                لغو سفارش
+              </button>
+            </li>
+          </ul>
+        </div>
+        <h4 *ngIf="!order6.length" class="text-center no_item pd-4">موردی وجود ندارد</h4>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner></ngx-spinner>

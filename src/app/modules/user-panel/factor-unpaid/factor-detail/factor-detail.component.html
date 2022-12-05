@@ -1,0 +1,141 @@
+
+<div class="rtl">
+    <div class="container">
+
+      <div class="row">
+        <div class="card w-100 my-3">
+          <div class="card-header basket">
+            <svg xmlns="http://www.w3.org/2000/svg" width="15.42" height="20.232" viewBox="0 0 15.42 20.232">
+              <path id="check-list" d="M73.751,14.377a.653.653,0,0,0,.655-.653V1.958A1.958,1.958,0,0,0,72.448,0h-11.5a1.958,1.958,0,0,0-1.958,1.958V18.273a1.958,1.958,0,0,0,1.958,1.958H67.9a.653.653,0,0,0,.653-.655c0-.6,0-1.828,0-4.409a.788.788,0,0,1,.788-.788C71.922,14.378,73.15,14.374,73.751,14.377ZM66.821,4.16h4.324a.653.653,0,1,1,0,1.305H66.821a.653.653,0,1,1,0-1.305Zm-1.9,10.781-1.734,1.734a.653.653,0,0,1-.923,0l-.591-.591a.653.653,0,1,1,.923-.923l.13.13,1.272-1.272a.653.653,0,0,1,.923.923Zm0-5.3-1.734,1.734a.653.653,0,0,1-.923,0l-.591-.591a.653.653,0,0,1,.923-.923l.13.13,1.272-1.272a.653.653,0,0,1,.923.923Zm0-5.3L63.183,6.07a.653.653,0,0,1-.923,0l-.591-.591a.653.653,0,0,1,.923-.923l.13.13,1.272-1.272a.653.653,0,1,1,.923.923Zm2.231,11.734h-.326a.653.653,0,1,1,0-1.305h.326a.653.653,0,0,1,0,1.305Zm-.326-5.3a.653.653,0,1,1,0-1.305h4.324a.653.653,0,1,1,0,1.305Zm7.394,5.274-4,4a.653.653,0,0,1-1.114-.461v-4a.652.652,0,0,1,.653-.653h4A.653.653,0,0,1,74.215,16.043Z" transform="translate(-58.988)" fill="#ff4b4b"/>
+            </svg>
+
+            <span class="mx-1">پرداخت فاکتور</span>
+          </div>
+
+          <div class="card-body" *ngFor="let item of factorItems ;let i=index ">
+            <div class="factor-info">
+              <div class="brand-name">
+                <img class="mx-1" style="border-radius: 5px;width: 30px;height: 27px" src="{{item.supplier.logoUrl ? item.supplier.logoUrl: 'assets/images/preview.png'}}">
+
+                <span>{{item.supplier.supplierTitle}}</span>
+                <div class="hr"></div>
+              </div>
+              <span>
+           <span>شماره فاکتور: {{item.factorNumber}}</span>
+       </span>
+              <span>
+        <span>تاریخ ثبت: {{item.creationDateTimeStr}}</span>
+    </span>
+              <span>
+        <span>وضعیت فاکتور : {{findTitel(item.factorState)}}</span>
+    </span>
+            </div>
+            <table>
+
+              <tr>
+                <th>
+                  ردیف
+                </th>
+                <th>
+                  اقلام
+                </th>
+                <th>
+                  تعداد
+                </th>
+                <th>
+                  قیمت هر واحد
+                </th>
+                <th>
+                  مبلغ کل
+                </th>
+                <th>
+                  تخفیف
+                </th>
+                <th>
+                  مبلغ نهایی
+                </th>
+              </tr>
+              <tr *ngFor="let data of item.factorItemsOutputDtos;let i=index ">
+                <td>
+                  {{i+1}}
+                </td>
+                <td>
+                  {{data.itemOutputDto.title}}
+                </td>
+                <td>
+                  {{data.count}}
+                </td>
+                <td>
+                {{(data.itemOutputDto.sellPrice*data.itemOutputDto.valuePerUnit).toLocaleString('fa-IR')}} تومان
+                </td>
+                <td>
+                  {{data.totalAmountWithoutDiscount.toLocaleString('fa-IR')}} تومان
+                </td>
+                <td>
+                  {{ data.totalDiscount.toLocaleString('fa-IR')}} تومان
+                </td>
+                <td>
+                  {{data.totalAmount.toLocaleString('fa-IR')}} تومان
+                </td>
+
+              </tr>
+
+
+            </table>
+            <div class="mobile-item">
+              <ul>
+                <li>
+
+                   <span>
+                     <span> شماره فاکتور</span>
+                     <span>{{item.factorNumber}}</span>
+                   </span>
+                  <span>
+                     <span> تاریخ ثبت</span>
+                     <span> {{item.creationDateTimeStr}}</span>
+                   </span>   <span>
+                     <span>      مبلغ کل</span>
+                     <span>      {{item.totalAmountWithoutDiscount.toLocaleString('fa-IR')}} تومان</span>
+                   </span>   <span>
+                     <span>     تخفیف</span>
+                     <span>   {{ item.totalDiscount.toLocaleString('fa-IR')}} تومان</span>
+                   </span> <span>
+                     <span>     مبلغ نهایی </span>
+                     <span>   {{item.totalItemAmounts.toLocaleString('fa-IR')}} تومان</span>
+                   </span>
+
+
+
+                </li>
+              </ul>
+            </div>
+            <div class="pay-btn" *ngIf="item.factorState === 0">
+              <button class="btn btn-dark" (click)="cancelFactor(item)">لغو فاکتور</button>
+              <button class="btn btn-danger" (click)="pay(item)">پرداخت</button>
+
+            </div>
+            <div class="pay-type">
+              <ul class="d-flex">
+                <li *ngFor="let item of paymentType" class="d-flex" (click)="selectPayType(item)"
+                    [class.disabled]="item.isSupported === false">
+                  <img src="{{item.icon}}">
+                  <span>
+                       {{item.title}}
+                    </span>
+                </li>
+              </ul>
+            </div>
+            <p class="align-items-center" *ngIf="creditSaleDuration !== null"
+               class="creditSaleDuration">{{creditSaleDuration}}</p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+    </div>
+
+</div>
+<ngx-spinner></ngx-spinner>

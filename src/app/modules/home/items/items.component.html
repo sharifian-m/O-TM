@@ -1,0 +1,24 @@
+<div class="item-bg d-flex justify-content-center align-items-center mx-2 mx-lg-0">
+    <a class="d-flex flex-column p-1 justify-content-center align-items-center" [routerLink]="['../product-list/product-detail/', item.id,item.title]">
+    <!-- -----------------------product image ----------------------------------- -->
+    <img *ngIf="item.imageUrl" src="{{item.imageUrl}}" class="img-fluid"
+     onerror="this.src='/assets/images/default.png';" alt="{{item.imageUrl}}" >
+     <img *ngIf="!item.imageUrl" src="/assets/images/default.png" class="img-fluid"  alt="{{item.imageUrl}}">
+    <!-- -----------------------product title ----------------------------------- -->
+    <span class="item-title my-2">{{item.title }}</span>
+    <!-- ----------------------- price ----------------------------------- -->
+    <div class="d-flex justify-content-center align-items-center mb-3">
+ <!-- -----------------------product price ----------------------------------- -->
+ <span  class="item-price">{{((item.sellPrice |roundUp|getNumberWithComma).toLocaleString('fa-IR'))}} 
+                            
+  <span class="toman me-2 ms-1">تومان</span>
+ </span>
+ <!-- -----------------------product price has discount ----------------------------------- -->
+  <span *ngIf="item.hasDiscount  && item.discountPercent>0"  class="discount-badge ms-2 d-flex justify-content-center align-items-center">% {{item.discountPercent}} تخفیف </span>
+  
+    </div>
+    <div class="consumer-price text-center" *ngIf="item.consumerPrice > 10">قیمت مصرف کننده : {{((item.consumerPrice|roundUp|getNumberWithComma ).toLocaleString('fa-IR'))}}  تومان</div>
+    <div class="consumer-price text-center" *ngIf="item.consumerPrice < 10">قیمت مصرف کننده : فاقد قیمت</div>
+
+        </a>
+</div>
